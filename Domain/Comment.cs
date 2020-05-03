@@ -6,6 +6,7 @@ namespace Domain
     public class Comment
     {
         public Guid Id { get; set; }
+        public virtual AnonymousUser Author { get; set; }
         public string AuthorEmail { get; set; }
         public string AuthorDisplayName { get; set; }
         public DateTime PublishedDate { get; set; }

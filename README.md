@@ -3,46 +3,47 @@
 > :octocat:
 
 1. [x] Project initialization
-2. [ ] Entity Framework (Postgresql)
-3. [ ] Create Domain Entities
+2. [x] Entity Framework (Postgresql)
+3. [x] Create Domain Entities
    1. [x]  AppUser
    2. [x]  Post
    3. [x]  Category
    4. [x]  Reaction
    5. [x]  Comment
    6. [x]  Reply
-   7. [ ]  Newsletter
+   7. [x]  Newsletter
    8. [x]  AnonymousUser
-4. [ ] Identity
-5. [ ] Migration
+4. [x] Identity
+5. [x] Migration
 6. [ ] Seeding
-7. [ ] Swagger
-8. [ ] API - Login
-9. [ ] CS - Nav Bar
-10. [ ] Search Box
-11. [ ] CS - Login  
-12. [ ] API - Posts
-13. [ ] CS - Posts
+7. [ ] JWT Token
+8. [ ] Swagger
+9. [ ] API - Login
+10. [ ] CS - Nav Bar
+11. [ ] Search Box
+12. [ ] CS - Login  
+13. [ ] API - Posts
+14. [ ] CS - Posts
     1.  [ ] Time to read
-14. [ ] API - PostDetails
-15. [ ] CS - PostDetails
-16. [ ] API - Replies
-17. [ ] CS - Replies
-18. [ ] API - Reactions (Maybe)
-19. [ ] CS - Reactions (Maybe)
-20. [ ] Recommendations (Maybe)
-21. [ ] API - Newsletter
-22. [ ] CS - Newsletter
-23. [ ] API - Next/Previous Post
+15. [ ] API - PostDetails
+16. [ ] CS - PostDetails
+17. [ ] API - Replies
+18. [ ] CS - Replies
+19. [ ] API - Reactions (Maybe)
+20. [ ] CS - Reactions (Maybe)
+21. [ ] Recommendations (Maybe)
+22. [ ] API - Newsletter
+23. [ ] CS - Newsletter
+24. [ ] API - Next/Previous Post
     1.  [ ] If user filtered by category, filter the n/p post (Maybe)
-24. [ ] CS - Next/Previous Post
-25. [ ] Dark Mode
-26. [ ] Share button on the post
-27. [ ] About me
+25. [ ] CS - Next/Previous Post
+26. [ ] Dark Mode
+27. [ ] Share button on the post
+28. [ ] About me
     1.  [ ] Photo
     2.  [ ] Bio
     3.  [ ] Social Media
-28. [ ] Back Office
-29. [ ] Infinite Scroll
-30. [ ] react-markdown
-31. [ ] Footer
+29. [ ] Back Office
+30. [ ] Infinite Scroll
+31. [ ] react-markdown
+32. [ ] Footer
