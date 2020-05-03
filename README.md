@@ -15,10 +15,18 @@
    8. [x]  AnonymousUser
 4. [x] Identity
 5. [x] Migration
-6. [ ] Seeding
+6. [x] Seeding
+   1. [x]  AppUser
+   2. [x]  Post
+   3. [x]  Category
+   4. [x]  Reaction
+   5. [x]  Comment
+   6. [x]  Reply
+   7. [x]  Newsletter
+   8. [x]  AnonymousUser
 7. [ ] JWT Token
 8. [ ] Swagger
-9. [ ] API - Login
+9.  [ ] API - Login
 10. [ ] CS - Nav Bar
 11. [ ] Search Box
 12. [ ] CS - Login  
@@ -29,8 +37,8 @@
 16. [ ] CS - PostDetails
 17. [ ] API - Replies
 18. [ ] CS - Replies
-19. [ ] API - Reactions (Maybe)
-20. [ ] CS - Reactions (Maybe)
+19. [ ] API - Reactions
+20. [ ] CS - Reactions
 21. [ ] Recommendations (Maybe)
 22. [ ] API - Newsletter
 23. [ ] CS - Newsletter

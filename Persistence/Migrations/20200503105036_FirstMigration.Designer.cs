@@ -10,8 +10,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200503084933_Schema created")]
-    partial class Schemacreated
+    [Migration("20200503105036_FirstMigration")]
+    partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -117,18 +117,16 @@ namespace Persistence.Migrations
                     b.Property<string>("Code")
                         .HasColumnType("text");
 
-                    b.Property<string>("Icon")
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Image")
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<Guid?>("PostId")
-                        .HasColumnType("uuid");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("PostId");
 
                     b.ToTable("Categories");
                 });
@@ -198,6 +196,9 @@ namespace Persistence.Migrations
                     b.Property<string>("AuthorId")
                         .HasColumnType("text");
 
+                    b.Property<Guid?>("CategoryId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Content")
                         .HasColumnType("text");
 
@@ -220,6 +221,8 @@ namespace Persistence.Migrations
 
                     b.HasIndex("AuthorId");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Posts");
                 });
 
@@ -229,7 +232,7 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("AnonymousUserId")
+                    b.Property<Guid?>("AuthorId")
                         .HasColumnType("uuid");
 
                     b.Property<bool>("IsPositive")
@@ -243,7 +246,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AnonymousUserId");
+                    b.HasIndex("AuthorId");
 
                     b.HasIndex("PostId");
 
@@ -265,17 +268,20 @@ namespace Persistence.Migrations
                     b.Property<Guid?>("AuthorId")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("CommentId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Content")
                         .HasColumnType("text");
 
-                    b.Property<Guid?>("ReplyToId")
-                        .HasColumnType("uuid");
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AuthorId");
 
-                    b.HasIndex("ReplyToId");
+                    b.HasIndex("CommentId");
 
                     b.ToTable("Replies");
                 });
@@ -410,13 +416,6 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Domain.Category", b =>
-                {
-                    b.HasOne("Domain.Post", null)
-                        .WithMany("Categories")
-                        .HasForeignKey("PostId");
-                });
-
             modelBuilder.Entity("Domain.Comment", b =>
                 {
                     b.HasOne("Domain.AnonymousUser", "Author")
@@ -433,15 +432,19 @@ namespace Persistence.Migrations
                     b.HasOne("Domain.AppUser", "Author")
                         .WithMany()
                         .HasForeignKey("AuthorId");
+
+                    b.HasOne("Domain.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId");
                 });
 
             modelBuilder.Entity("Domain.Reaction", b =>
                 {
-                    b.HasOne("Domain.AnonymousUser", "AnonymousUser")
+                    b.HasOne("Domain.AnonymousUser", "Author")
                         .WithMany()
-                        .HasForeignKey("AnonymousUserId");
+                        .HasForeignKey("AuthorId");
 
-                    b.HasOne("Domain.Post", "Post")
+                    b.HasOne("Domain.Post", null)
                         .WithMany("Reactions")
                         .HasForeignKey("PostId");
                 });
@@ -452,9 +455,9 @@ namespace Persistence.Migrations
                         .WithMany()
                         .HasForeignKey("AuthorId");
 
-                    b.HasOne("Domain.Comment", "ReplyTo")
+                    b.HasOne("Domain.Comment", null)
                         .WithMany("Replies")
-                        .HasForeignKey("ReplyToId");
+                        .HasForeignKey("CommentId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

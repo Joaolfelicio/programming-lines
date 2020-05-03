@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Domain
 {
@@ -6,7 +7,8 @@ namespace Domain
     {
         public Guid Id { get; set; }
         public string Code { get; set; }
-        public string Icon { get; set; }
+        public string Image { get; set; }
         public string Name { get; set; }
+        public DateTime CreationDate { get; set; }
     }
 }

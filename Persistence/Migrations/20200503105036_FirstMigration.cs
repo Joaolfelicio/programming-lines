@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Persistence.Migrations
 {
-    public partial class Schemacreated : Migration
+    public partial class FirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -60,6 +60,21 @@ namespace Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Code = table.Column<string>(nullable: true),
+                    Image = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    CreationDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -190,6 +205,7 @@ namespace Persistence.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     Slug = table.Column<string>(nullable: true),
                     AuthorId = table.Column<string>(nullable: true),
+                    CategoryId = table.Column<Guid>(nullable: true),
                     Image = table.Column<string>(nullable: true),
                     Title = table.Column<string>(nullable: true),
                     SubTitle = table.Column<string>(nullable: true),
@@ -205,25 +221,10 @@ namespace Persistence.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Categories",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    Code = table.Column<string>(nullable: true),
-                    Icon = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    PostId = table.Column<Guid>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Categories", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Categories_Posts_PostId",
-                        column: x => x.PostId,
-                        principalTable: "Posts",
+                        name: "FK_Posts_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -262,17 +263,17 @@ namespace Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    AnonymousUserId = table.Column<Guid>(nullable: true),
-                    PostId = table.Column<Guid>(nullable: true),
+                    AuthorId = table.Column<Guid>(nullable: true),
                     IsPositive = table.Column<bool>(nullable: false),
-                    ReactionDate = table.Column<DateTime>(nullable: false)
+                    ReactionDate = table.Column<DateTime>(nullable: false),
+                    PostId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Reactions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Reactions_AnonymousUsers_AnonymousUserId",
-                        column: x => x.AnonymousUserId,
+                        name: "FK_Reactions_AnonymousUsers_AuthorId",
+                        column: x => x.AuthorId,
                         principalTable: "AnonymousUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -289,11 +290,12 @@ namespace Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    ReplyToId = table.Column<Guid>(nullable: true),
                     AuthorId = table.Column<Guid>(nullable: true),
                     AuthorEmail = table.Column<string>(nullable: true),
                     AuthorDisplayName = table.Column<string>(nullable: true),
-                    Content = table.Column<string>(nullable: true)
+                    Content = table.Column<string>(nullable: true),
+                    CreationDate = table.Column<DateTime>(nullable: false),
+                    CommentId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -305,8 +307,8 @@ namespace Persistence.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Replies_Comments_ReplyToId",
-                        column: x => x.ReplyToId,
+                        name: "FK_Replies_Comments_CommentId",
+                        column: x => x.CommentId,
                         principalTable: "Comments",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -350,11 +352,6 @@ namespace Persistence.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Categories_PostId",
-                table: "Categories",
-                column: "PostId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Comments_AuthorId",
                 table: "Comments",
                 column: "AuthorId");
@@ -370,9 +367,14 @@ namespace Persistence.Migrations
                 column: "AuthorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reactions_AnonymousUserId",
+                name: "IX_Posts_CategoryId",
+                table: "Posts",
+                column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reactions_AuthorId",
                 table: "Reactions",
-                column: "AnonymousUserId");
+                column: "AuthorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reactions_PostId",
@@ -385,9 +387,9 @@ namespace Persistence.Migrations
                 column: "AuthorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Replies_ReplyToId",
+                name: "IX_Replies_CommentId",
                 table: "Replies",
-                column: "ReplyToId");
+                column: "CommentId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -406,9 +408,6 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
-
-            migrationBuilder.DropTable(
-                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "Newsletters");
@@ -433,6 +432,9 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
         }
     }
 }

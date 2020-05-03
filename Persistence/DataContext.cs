@@ -21,6 +21,18 @@ namespace Persistence
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<Post>()
+                   .HasIndex(u => u.Slug)
+                   .IsUnique();
+
+            builder.Entity<Category>()
+                   .HasIndex(x => x.Code)
+                   .IsUnique();
+
+            builder.Entity<AnonymousUser>()
+                   .HasIndex(x => x.FingerPrint)
+                   .IsUnique();
         }
     }
 }
