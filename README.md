@@ -24,34 +24,35 @@
    6. [x]  Reply
    7. [x]  Newsletter
    8. [x]  AnonymousUser
-7. [ ] JWT Token
-8. [ ] Swagger
-9.  [ ] API - Login
-10. [ ] CS - Nav Bar
-11. [ ] Search Box
-12. [ ] CS - Login  
-13. [ ] API - Posts
-14. [ ] CS - Posts
+7. [x] JWT Token
+8. [x] Swagger
+9. [ ] Swagger Authentication
+10. [x] API - Login
+11. [ ] API - Posts
+12. [ ] API - PostDetails
+13. [ ] API - Reactions
+14. [ ] API - Newsletter
+15. [ ] CS - Nav Bar
+16. [ ] Search Box
+17. [ ] CS - Login  
+18. [ ] CS - Posts
     1.  [ ] Time to read
-15. [ ] API - PostDetails
-16. [ ] CS - PostDetails
-17. [ ] API - Replies
-18. [ ] CS - Replies
-19. [ ] API - Reactions
-20. [ ] CS - Reactions
-21. [ ] Recommendations (Maybe)
-22. [ ] API - Newsletter
-23. [ ] CS - Newsletter
-24. [ ] API - Next/Previous Post
+19. [ ] CS - PostDetails
+20. [ ] API - Replies
+21. [ ] CS - Replies
+22. [ ] CS - Reactions
+23. [ ] Recommendations (Maybe)
+24. [ ] CS - Newsletter
+25. [ ] API - Next/Previous Post
     1.  [ ] If user filtered by category, filter the n/p post (Maybe)
-25. [ ] CS - Next/Previous Post
-26. [ ] Dark Mode
-27. [ ] Share button on the post
-28. [ ] About me
+26. [ ] CS - Next/Previous Post
+27. [ ] Dark Mode
+28. [ ] Share button on the post
+29. [ ] About me
     1.  [ ] Photo
     2.  [ ] Bio
     3.  [ ] Social Media
-29. [ ] Back Office
-30. [ ] Infinite Scroll
-31. [ ] react-markdown
-32. [ ] Footer
+30. [ ] Back Office
+31. [ ] Infinite Scroll
+32. [ ] react-markdown
+33. [ ] Footer
