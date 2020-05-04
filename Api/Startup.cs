@@ -24,6 +24,8 @@ using Persistence;
 using Microsoft.OpenApi.Models;
 using Application.Interface;
 using Infrastructure.Security;
+using Api.Middleware;
+using FluentValidation.AspNetCore;
 
 namespace Api
 {
@@ -49,7 +51,11 @@ namespace Api
 
             services.AddMediatR(typeof(Login.Handler).Assembly);
 
-            services.AddControllers();
+            services.AddControllers()
+                    .AddFluentValidation(cfg =>
+                    {
+                        cfg.RegisterValidatorsFromAssemblyContaining<Login>();
+                    });
 
             services.AddSwaggerGen(c =>
             {
@@ -110,6 +116,8 @@ namespace Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseMiddleware<ErrorHandlingMiddleware>();
+            
             if (env.IsDevelopment())
             {
                 app.UseSwagger();

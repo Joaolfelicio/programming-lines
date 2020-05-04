@@ -14,7 +14,6 @@ namespace Application.User
 {
     public class Login
     {
-
         public class Query : IRequest<User>
         {
             public string Email { get; set; }
