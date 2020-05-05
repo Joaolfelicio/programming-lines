@@ -27,7 +27,7 @@
 7. [x] JWT Token
 8. [x] Swagger
 9. [x] Swagger Authentication
-10. [ ] Middleware Exception
+10. [x] Middleware Exception
 11. [x] API - Login
 12. [ ] API - Posts
 13. [ ] API - PostDetails

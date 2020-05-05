@@ -117,7 +117,7 @@ namespace Api
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseMiddleware<ErrorHandlingMiddleware>();
-            
+
             if (env.IsDevelopment())
             {
                 app.UseSwagger();
@@ -127,10 +127,14 @@ namespace Api
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Programming Lines");
                 });
 
-                app.UseDeveloperExceptionPage();
+                //app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 

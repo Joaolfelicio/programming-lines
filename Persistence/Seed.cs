@@ -59,7 +59,8 @@ namespace Persistence
                             Code = "react",
                             Image = baseCategoryImageUrl + "react",
                             Name = "React",
-                            CreationDate = DateTime.Now
+                            CreationDate = DateTime.Now,
+                            Color = "#61DAFB"
                         },
                         Content = "Lorem anim et labore eiusmod esse. Eiusmod fugiat occaecat elit excepteur. Lorem adipisicing consectetur pariatur magna.",
                         PublishDate = DateTime.Now,
@@ -119,7 +120,8 @@ namespace Persistence
                             Code = "dotnetcore",
                             Image = baseCategoryImageUrl + "dotnetcore",
                             Name = ".NET Core",
-                            CreationDate = DateTime.Now
+                            CreationDate = DateTime.Now,
+                            Color = "#6D409D"
                         },
                         Content = "Lorem anim et labore eiusmod esse. Eiusmod fugiat occaecat elit excepteur. Lorem adipisicing consectetur pariatur magna.",
                         PublishDate = DateTime.Now,
@@ -187,7 +189,7 @@ namespace Persistence
                             {
                                 Author = new AnonymousUser
                                 {
-                                    FingerPrint = "TWU5fHSJEhQ46VbhDSG",
+                                    FingerPrint = "TWU5fHSJEgQ46VbhDSG",
                                     CreationDate = DateTime.Now
                                 },
                                 IsPositive = true,
@@ -213,7 +215,8 @@ namespace Persistence
                             Code = "csharp",
                             Image = baseCategoryImageUrl + "csharp",
                             Name = "C#",
-                            CreationDate = DateTime.Now
+                            CreationDate = DateTime.Now,
+                            Color = "#546E7A"
                         },
                         Content = "Lorem anim et labore eiusmod esse. Eiusmod fugiat occaecat elit excepteur. Lorem adipisicing consectetur pariatur magna.",
                         PublishDate = DateTime.Now,
