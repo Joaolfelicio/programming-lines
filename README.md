@@ -29,31 +29,36 @@
 9. [x] Swagger Authentication
 10. [x] Middleware Exception
 11. [x] API - Login
-12. [ ] API - Posts
-13. [ ] API - PostDetails
-14. [ ] API - Reactions
-15. [ ] API - Newsletter
-16. [ ] CS - Nav Bar
-17. [ ] Search Box
-18. [ ] CS - Login  
-19. [ ] CS - Posts
+12. [x] API - Posts Create
+13. [x] API - Posts Read
+14. [ ] API - Posts Update
+15. [x] API - Posts Delete
+    1.  [ ] Needs to add cascading delete
+16. [ ] API - PostDetails
+17. [ ] API - Reactions
+18. [ ] API - Newsletter
+19. [ ] CS - Nav Bar
+20. [ ] Search Box
+21. [ ] CS - Login  
+22. [ ] CS - Posts
     1.  [ ] Time to read
-20. [ ] CS - PostDetails
-21. [ ] API - Replies
-22. [ ] CS - Replies
-23. [ ] CS - Reactions
-24. [ ] Recommendations (Maybe)
-25. [ ] CS - Newsletter
-26. [ ] API - Next/Previous Post
+23. [ ] CS - PostDetails
+24. [ ] API - Replies
+25. [ ] CS - Replies
+26. [ ] CS - Reactions
+27. [ ] Recommendations (Maybe)
+28. [ ] CS - Newsletter
+29. [ ] API - Next/Previous Post
     1.  [ ] If user filtered by category, filter the n/p post (Maybe)
-27. [ ] CS - Next/Previous Post
-28. [ ] Dark Mode
-29. [ ] Share button on the post
-30. [ ] About me
+30. [ ] CS - Next/Previous Post
+31. [ ] Dark Mode
+32. [ ] Share button on the post
+33. [ ] About me
     1.  [ ] Photo
     2.  [ ] Bio
     3.  [ ] Social Media
-31. [ ] Back Office
-32. [ ] Infinite Scroll
-33. [ ] react-markdown
-34. [ ] Footer
+34. [ ] Back Office
+35. [ ] API - Add predicates
+36. [ ] Infinite Scroll
+37. [ ] react-markdown
+38. [ ] Footer
