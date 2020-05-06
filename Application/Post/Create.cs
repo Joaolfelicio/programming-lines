@@ -48,7 +48,7 @@ namespace Application.Post
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetCurrentusername());
+                var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetCurrentusername(), cancellationToken);
 
                 var slugAlreadyExists = _context.Posts.Any(x => x.Slug == request.Slug);
 
@@ -57,7 +57,7 @@ namespace Application.Post
                     throw new RestException(HttpStatusCode.BadRequest, new { Post = "Slug needs to be unique." });
                 }
 
-                var category = await _context.Categories.FirstOrDefaultAsync(x => x.Code == request.CategoryCode);
+                var category = await _context.Categories.FirstOrDefaultAsync(x => x.Code == request.CategoryCode, cancellationToken);
 
                 if (category == null)
                 {

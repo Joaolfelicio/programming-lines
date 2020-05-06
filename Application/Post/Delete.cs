@@ -14,7 +14,7 @@ namespace Application.Post
     {
         public class Command : IRequest
         {
-            public string Slug { get; set; }
+            public Guid Id { get; set; }
         }
 
         public class Handler : IRequestHandler<Command>
@@ -29,7 +29,7 @@ namespace Application.Post
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                var post = await _context.Posts.FirstOrDefaultAsync(x => x.Slug == request.Slug);
+                var post = await _context.Posts.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
                 if (post == null)
                 {

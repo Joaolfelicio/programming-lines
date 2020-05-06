@@ -1,9 +1,10 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Application.Category.Model;
 using Application.Post.Model;
 using Application.User.Model;
+using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -44,29 +45,23 @@ namespace Application.Post
                         Image = post.Author.Image
                     };
 
-                    var category = new CategoryDto
-                    {
-                        Code = post.Category.Code,
-                        Name = post.Category.Name,
-                        Color = post.Category.Color,
-                        Image = post.Category.Image
-                    };
-
                     var postDto = new PostDto
                     {
+                        Id = post.Id,
                         Slug = post.Slug,
                         Author = author,
-                        Category = category,
+                        Category = post.Category,
                         Content = post.Content,
                         Image = post.Image,
                         PublishDate = post.PublishDate,
                         SubTitle = post.SubTitle,
                         Title = post.Title,
-                        TotalComments = totalComments
+                        TotalComments = totalComments,
+                        Comments = post.Comments,
+                        Reactions = post.Reactions
                     };
                     postsDto.Add(postDto);
                 }
-
                 return postsDto;
             }
         }

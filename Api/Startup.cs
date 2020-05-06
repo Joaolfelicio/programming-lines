@@ -83,6 +83,7 @@ namespace Api
                             new string[] {}
                     }
                 });
+                c.CustomSchemaIds(x => x.FullName);
             });
 
             //! Configure Microsoft.Identity
