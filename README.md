@@ -30,12 +30,16 @@
 10. [x] Middleware Exception
 11. [x] API - Login
 12. [x] API - Posts Create
+    1.  [ ] Add FluentValidator for the slug
 13. [x] API - Posts Read
 14. [x] API - Posts Update
+    1.  [ ] Add FluentValidator for the slug
 15. [x] API - Posts Delete
     1.  [ ] Needs to add cascading delete
 16. [x] API - PostDetails
 17. [ ] API - Reactions
+    1.  [x] Reactions Create
+    2.  [ ] Reactions Update
 18. [ ] API - Newsletter
 19. [ ] API - AnonymousUser
 20. [ ] CS - Nav Bar

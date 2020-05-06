@@ -7,6 +7,8 @@ using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
+using System.Linq;
+using FluentValidation;
 
 namespace Application.Reaction
 {
@@ -16,7 +18,15 @@ namespace Application.Reaction
         {
             public Guid PostId { get; set; }
             public string AuthorFingerPrint { get; set; }
-            public bool IsPositive { get; set; }
+        }
+
+        public class CommandValidator : AbstractValidator<Command>
+        {
+            public CommandValidator()
+            {
+                RuleFor(x => x.PostId).NotEmpty();
+                RuleFor(x => x.AuthorFingerPrint).NotEmpty();
+            }
         }
 
         public class Handler : IRequestHandler<Command>
@@ -43,9 +53,16 @@ namespace Application.Reaction
                     throw new RestException(HttpStatusCode.BadRequest, new { Reaction = "Author was not found" });
                 }
 
-                var reaction = new Domain.Reaction
+                var reaction = post.Reactions.FirstOrDefault(x => x.Author.FingerPrint == request.AuthorFingerPrint);
+
+                if (reaction != null)
                 {
-                    IsPositive = request.IsPositive,
+                    throw new RestException(HttpStatusCode.BadRequest, new { Post = "You already reacted to this post" });
+                }
+
+                reaction = new Domain.Reaction
+                {
+                    IsPositive = true,
                     Author = author,
                     ReactionDate = DateTime.Now
                 };

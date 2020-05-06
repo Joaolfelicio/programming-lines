@@ -18,7 +18,7 @@ namespace Application.Post.Model
         public Category Category { get; set; }
         public UserDto Author { get; set; }
         public ICollection<Comment> Comments { get; set; }
-        public ICollection<Reaction> Reactions { get; set; }
+        public ICollection<Domain.Reaction> Reactions { get; set; }
     }
 
 }
