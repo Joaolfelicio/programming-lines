@@ -8,7 +8,7 @@ namespace Api.Controllers
     public class ReactionController : BaseController
     {
         [HttpPost]
-        public async Task<ActionResult<Unit>> Create(Create.Command command)
+        public async Task<ActionResult<Unit>> Create(React.Command command)
         {
             return await Mediator.Send(command);
         }

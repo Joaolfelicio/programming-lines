@@ -237,36 +237,31 @@ namespace Persistence
                     new Newsletter
                     {
                         DisplayName = "TestName",
-                        Email = "Test@test.com",
-                        IsSubscribed = true,
+                        Email = "test@test.com",
                         SubscriptionDate = DateTime.Now
                     },
                     new Newsletter
                     {
                         DisplayName = "TestName2",
-                        Email = "Test2@test.com",
-                        IsSubscribed = true,
+                        Email = "test2@test.com",
                         SubscriptionDate = DateTime.Now
                     },
                     new Newsletter
                     {
                         DisplayName = "TestName3",
-                        Email = "Test3@test.com",
-                        IsSubscribed = true,
+                        Email = "test3@test.com",
                         SubscriptionDate = DateTime.Now
                     },
                     new Newsletter
                     {
                         DisplayName = "TestName4",
-                        Email = "Test4@test.com",
-                        IsSubscribed = true,
+                        Email = "test4@test.com",
                         SubscriptionDate = DateTime.Now
                     },
                     new Newsletter
                     {
                         DisplayName = "TestName5",
-                        Email = "Test5@test.com",
-                        IsSubscribed = false,
+                        Email = "test5@test.com",
                         SubscriptionDate = DateTime.Now
                     }
                 };

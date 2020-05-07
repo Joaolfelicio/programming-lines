@@ -13,8 +13,8 @@ namespace Api.Controllers
             return await Mediator.Send(query);
         }
 
-        [Authorize]
         [HttpGet("currentUser")]
+        [Authorize]
         public async Task<ActionResult<User>> CurrentUser()
         {
             return await Mediator.Send(new CurrentUser.Query());

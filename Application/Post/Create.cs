@@ -10,6 +10,7 @@ using Domain;
 using Application.Exceptions;
 using System.Net;
 using Microsoft.EntityFrameworkCore;
+using Application.Validators;
 
 namespace Application.Post
 {
@@ -29,10 +30,10 @@ namespace Application.Post
         {
             public CommandValidator()
             {
-                RuleFor(x => x.Title).NotEmpty();
-                RuleFor(x => x.Slug).NotEmpty();
+                RuleFor(x => x.Title).NotEmpty().MinimumLength(6);
+                RuleFor(x => x.Slug).SlugRules();
                 RuleFor(x => x.Content).NotEmpty();
-                RuleFor(x => x.CategoryCode).NotEmpty();
+                RuleFor(x => x.CategoryCode).CategoryCodeRules();
             }
         }
 

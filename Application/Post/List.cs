@@ -51,14 +51,12 @@ namespace Application.Post
                         Slug = post.Slug,
                         Author = author,
                         Category = post.Category,
-                        Content = post.Content,
                         Image = post.Image,
                         PublishDate = post.PublishDate,
                         SubTitle = post.SubTitle,
                         Title = post.Title,
-                        TotalComments = totalComments,
-                        Comments = post.Comments,
-                        Reactions = post.Reactions
+                        CommentsCount = totalComments,
+                        PositiveReactionsCount = post.Reactions.Where(x => x.IsPositive).Count()
                     };
                     postsDto.Add(postDto);
                 }

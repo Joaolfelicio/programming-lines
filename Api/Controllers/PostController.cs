@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
-    public class PostsController : BaseController
+    public class PostController : BaseController
     {
         [HttpGet]
         public async Task<ActionResult<List<PostDto>>> List()
@@ -25,23 +25,23 @@ namespace Api.Controllers
             return await Mediator.Send(command);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{postId}")]
         [Authorize]
-        public async Task<ActionResult<Unit>> Delete(Guid id)
+        public async Task<ActionResult<Unit>> Delete(Guid postId)
         {
-            return await Mediator.Send(new Delete.Command { Id = id });
+            return await Mediator.Send(new Delete.Command { Id = postId });
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{postId}")]
         [Authorize]
-        public async Task<ActionResult<Unit>> Update(Guid id, Update.Command command)
+        public async Task<ActionResult<Unit>> Update(Guid postId, Update.Command command)
         {
-            command.Id = id;
+            command.Id = postId;
             return await Mediator.Send(command);
         }
 
         [HttpGet("{slug}")]
-        public async Task<ActionResult<PostDto>> Details(string slug)
+        public async Task<ActionResult<PostDetailsDto>> Details(string slug)
         {
             return await Mediator.Send(new Details.Query { Slug = slug });
         }

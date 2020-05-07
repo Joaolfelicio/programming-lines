@@ -12,7 +12,7 @@ using FluentValidation;
 
 namespace Application.Reaction
 {
-    public class Create
+    public class React
     {
         public class Command : IRequest
         {
@@ -55,19 +55,22 @@ namespace Application.Reaction
 
                 var reaction = post.Reactions.FirstOrDefault(x => x.Author.FingerPrint == request.AuthorFingerPrint);
 
-                if (reaction != null)
+                // If reaction doesnt exist, create it
+                if (reaction == null)
                 {
-                    throw new RestException(HttpStatusCode.BadRequest, new { Post = "You already reacted to this post" });
+                    reaction = new Domain.Reaction
+                    {
+                        IsPositive = true,
+                        Author = author,
+                        ReactionDate = DateTime.Now
+                    };
+                    post.Reactions.Add(reaction);
                 }
-
-                reaction = new Domain.Reaction
+                //If it exists, update it
+                else
                 {
-                    IsPositive = true,
-                    Author = author,
-                    ReactionDate = DateTime.Now
-                };
-
-                post.Reactions.Add(reaction);
+                    reaction.IsPositive = !reaction.IsPositive;
+                }
 
                 var success = await _context.SaveChangesAsync() > 0;
 
