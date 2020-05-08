@@ -46,10 +46,10 @@
 17. [x] API - Comments
     1.  [x] Test Create
     2.  [x] Test Delete
-18. [x] API - Reply
+18. [x] API - Replyx
     1.  [x] Test Create 
     2.  [x] Test Delete
-19. [ ] CS - Nav Bar
+19. [x] CS - Nav Bar
 20. [ ] Search Box
 21. [ ] CS - Login  
 22. [ ] CS - Posts
