@@ -45,10 +45,17 @@ namespace Application.Comments
                 var anonUser = await _context.AnonymousUsers.FirstOrDefaultAsync(x => x.FingerPrint == request.FingerPrint, cancellationToken);
                 var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetCurrentusername());
 
-                //If user is not an admin and is not the author of the comment
-                if (user == null && comment.Author != anonUser)
+                var post = await _context.Posts.FirstOrDefaultAsync(x => x.Id == request.PostId, cancellationToken);
+
+                //If user is not the author of the post and is not the author of the comment
+                if (user != post.Author && comment.Author != anonUser)
                 {
                     throw new RestException(HttpStatusCode.Unauthorized, new { Comment = "Unauthorized" });
+                }
+
+                if (post == null)
+                {
+                    throw new RestException(HttpStatusCode.BadRequest, new { Comment = "Post not found." });
                 }
 
                 if (comment == null)
@@ -56,14 +63,9 @@ namespace Application.Comments
                     throw new RestException(HttpStatusCode.NotFound, new { Comment = "Not found." });
                 }
 
-                var post = await _context.Posts.FirstOrDefaultAsync(x => x.Id == request.PostId, cancellationToken);
-
-                if (post == null)
-                {
-                    throw new RestException(HttpStatusCode.BadRequest, new { Comment = "Post not found." });
-                }
 
 
+                _context.Replies.RemoveRange(comment.Replies);
                 post.Comments.Remove(comment);
 
                 var success = await _context.SaveChangesAsync() > 0;

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -41,6 +42,10 @@ namespace Application.Post
                     throw new RestException(HttpStatusCode.Unauthorized, "You don't have enough permission to delete this post.");
                 }
 
+                var replies = post.Comments.SelectMany(x => x.Replies);
+                _context.Replies.RemoveRange(replies);
+                _context.Comments.RemoveRange(post.Comments);
+                _context.Reactions.RemoveRange(post.Reactions);
                 _context.Posts.Remove(post);
 
                 var success = await _context.SaveChangesAsync() > 0;

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -44,9 +45,10 @@ namespace Application.Reply
 
                 var anonUser = await _context.AnonymousUsers.FirstOrDefaultAsync(x => x.FingerPrint == request.FingerPrint, cancellationToken);
                 var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetCurrentusername(), cancellationToken);
+                var post = await _context.Posts.FirstOrDefaultAsync(x => x.Comments.Any(x => x.Id == request.CommentId));
 
-                //If user is not an admin and is not the author of the reply
-                if (user == null && reply.Author != anonUser)
+                //If user is not the author of the post and is not the author of the reply
+                if (user != post.Author && reply.Author != anonUser)
                 {
                     throw new RestException(HttpStatusCode.Unauthorized, new { Reply = "Unauthorized" });
                 }

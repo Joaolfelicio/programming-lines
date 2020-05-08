@@ -38,16 +38,17 @@
     4.  [x] API - Post Details
     5.  [x] API - Posts Update
     6.  [x] API - Posts Delete
-        1.  [ ] How to handle nested delete (Cascading?)
+        1.  [x] How to handle nested delete (Cascading?)
 13. [x] API - Reactions
 14. [x] API - Newsletter
 15. [x] API - Category
-    1.  [ ] How to handle nested delete (Cascading?)
 16. [x] API - AnonymousUser
 17. [x] API - Comments
-    1.  [ ] Test Create/Delete
+    1.  [x] Test Create
+    2.  [x] Test Delete
 18. [x] API - Reply
-    1.  [ ] Test Create/Delete
+    1.  [x] Test Create 
+    2.  [x] Test Delete
 19. [ ] CS - Nav Bar
 20. [ ] Search Box
 21. [ ] CS - Login  
