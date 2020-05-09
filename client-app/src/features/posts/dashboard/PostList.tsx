@@ -1,16 +1,22 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import PostListItem from "./PostListItem";
 import { ItemGroup } from "semantic-ui-react";
+import { RootStoreContext } from "../../../app/stores/rootStore";
+import { observer } from "mobx-react-lite";
 
 const PostList = () => {
+  const rootStore = useContext(RootStoreContext);
+  const { postsByDate } = rootStore.postStore;
+
   return (
     <Fragment>
       <ItemGroup>
-        <PostListItem />
-        <PostListItem />
+        {postsByDate.map((post) => (
+          <PostListItem key={post.id} post={post} />
+        ))}
       </ItemGroup>
     </Fragment>
   );
 };
 
-export default PostList;
+export default observer(PostList);

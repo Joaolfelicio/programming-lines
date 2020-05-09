@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './app/layout/App';
 import * as serviceWorker from './serviceWorker';
-import 'semantic-ui-css/semantic.min.css'
-import 'mobx-react-lite/batchingForReactDom'
+import 'semantic-ui-css/semantic.min.css';
+import 'mobx-react-lite/batchingForReactDom';
+import "react-toastify/dist/ReactToastify.min.css";
 
 ReactDOM.render(
     <App />,

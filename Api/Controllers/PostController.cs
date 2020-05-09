@@ -41,7 +41,7 @@ namespace Api.Controllers
         }
 
         [HttpGet("{slug}")]
-        public async Task<ActionResult<PostDetailsDto>> Details(string slug)
+        public async Task<ActionResult<PostDto>> Details(string slug)
         {
             return await Mediator.Send(new Details.Query { Slug = slug });
         }

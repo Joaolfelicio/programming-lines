@@ -26,6 +26,7 @@ using Application.Interface;
 using Infrastructure.Security;
 using Api.Middleware;
 using FluentValidation.AspNetCore;
+using Infrastructure.Generator;
 
 namespace Api
 {
@@ -47,6 +48,18 @@ namespace Api
                 //Add lazy loading, just add virtual key word to the navigation prop
                 options.UseLazyLoadingProxies();
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
+            });
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", policy =>
+                {
+                    policy.AllowAnyHeader()
+                          .AllowAnyMethod()
+                          .WithExposedHeaders("WWW-Authenticate")
+                          .WithOrigins("http://localhost:3000")
+                          .AllowCredentials();
+                });
             });
 
             services.AddMediatR(typeof(Login.Handler).Assembly);
@@ -112,6 +125,7 @@ namespace Api
 
             services.AddScoped<IJwtGenerator, JwtGenerator>();
             services.AddScoped<IUserAccessor, UserAccessor>();
+            services.AddScoped<IPopulateData, PopulateData>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -138,6 +152,8 @@ namespace Api
             //app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("CorsPolicy");
 
             app.UseAuthentication();
             app.UseAuthorization();

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Interface;
 using Application.Post.Model;
 using Application.User.Model;
 using Domain;
@@ -19,8 +20,10 @@ namespace Application.Post
         public class Handler : IRequestHandler<Query, List<PostDto>>
         {
             private readonly DataContext _context;
-            public Handler(DataContext context)
+            private readonly IPopulateData _populateData;
+            public Handler(DataContext context, IPopulateData populateData)
             {
+                _populateData = populateData;
                 _context = context;
             }
 
@@ -55,8 +58,9 @@ namespace Application.Post
                         PublishDate = post.PublishDate,
                         SubTitle = post.SubTitle,
                         Title = post.Title,
-                        CommentsCount = totalComments,
-                        PositiveReactionsCount = post.Reactions.Where(x => x.IsPositive).Count()
+                        Content = post.Content,
+                        Comments = _populateData.PopulateComments(post),
+                        Reactions = _populateData.PopulateReactions(post)
                     };
                     postsDto.Add(postDto);
                 }

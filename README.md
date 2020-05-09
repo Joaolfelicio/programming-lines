@@ -53,7 +53,10 @@
 20. [ ] Search Box
 21. [ ] CS - Login  
 22. [ ] CS - Posts
-    1.  [ ] Time to read
+    1.  [x] Add category on the opposite side of the title
+    2.  [x] Time to read
+    3.  [ ] Use has liked
+    4.  [ ] Add date
 23. [ ] CS - PostDetails
 24. [ ] CS - Replies
 25. [ ] CS - Reactions
@@ -74,6 +77,7 @@
 36. [ ] React-markdown
 37. [ ] Markdown preview
 38. [ ] Footer
+39. [ ] Add post title in the index.tsx title
 
 
 ## STACK

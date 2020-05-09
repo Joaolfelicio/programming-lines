@@ -53,11 +53,22 @@ code {
   justify-content: space-between !important;
 }
 
-.ui.icon.button i{
+.ui.icon.button .icon {
   font-size: 18px;
   margin-top: 5px !important;
 }
 
+
 .ui.icon.button {
-  padding: 15px 10px 10px 10px !important;
+  padding: 12.5px !important;
+}
+
+.posts-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.posts-header h3 {
+  margin-top: 5px !important;
 }
