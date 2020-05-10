@@ -8,16 +8,16 @@ import { ToastContainer } from "react-toastify";
 
 const App = () => {
   const rootStore = useContext(RootStoreContext);
-  const { appLoading, setAppLoading } = rootStore.commonStore;
+  const { appLoading } = rootStore.commonStore;
+  const { setAnonymousUser } = rootStore.userStore;
+  const { isDarkMode } = rootStore.commonStore;
 
   useEffect(() => {
-    // set or get the fingerprint
-    // get localstorage isDarkMode
-    setAppLoading();
-  }, [setAppLoading, appLoading]);
+    setAnonymousUser();
+  }, [setAnonymousUser]);
 
   if (appLoading) {
-    return <LoadingComponent content="Loading app..." />;
+    return <LoadingComponent inverted={isDarkMode} content="Loading app..." />;
   }
 
   return (

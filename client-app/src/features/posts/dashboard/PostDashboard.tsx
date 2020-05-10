@@ -1,12 +1,13 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, Fragment } from "react";
 import { Grid, GridColumn } from "semantic-ui-react";
 import PostList from "./PostList";
 import { RootStoreContext } from "../../../app/stores/rootStore";
+import { observer } from "mobx-react-lite";
+import PostListItemPlaceholder from "./PostListItemPlaceholder";
 
 const PostDashboard = () => {
-
   const rootStore = useContext(RootStoreContext);
-  const { getPosts } = rootStore.postStore;
+  const { getPosts, loadingPosts } = rootStore.postStore;
 
   useEffect(() => {
     getPosts();
@@ -16,10 +17,19 @@ const PostDashboard = () => {
     <Grid style={{ marginTop: "20px" }} container>
       <GridColumn width={3}>Categories and stuff</GridColumn>
       <GridColumn width={13}>
-        <PostList />
+        {loadingPosts ? (
+          <Fragment>
+            <PostListItemPlaceholder /> 
+            <PostListItemPlaceholder /> 
+            <PostListItemPlaceholder />
+            <PostListItemPlaceholder />
+          </Fragment>
+        ) : (
+          <PostList />
+        )}
       </GridColumn>
     </Grid>
   );
 };
 
-export default PostDashboard;
+export default observer(PostDashboard);

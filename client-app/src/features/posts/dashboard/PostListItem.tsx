@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Item, Button, Popup, Grid, Container, Image } from "semantic-ui-react";
 import { toast } from "react-toastify";
 import { IPost } from "../../../app/models/post";
-
+import moment from "moment";
+import { RootStoreContext } from "../../../app/stores/rootStore";
+import { observer } from "mobx-react-lite";
 
 interface IProps {
   post: IPost;
+  reactionTarget: string;
 }
 
-const PostListItem: React.FC<IProps> = ({post}) => {
+const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
   const postUrl = `${window.location.origin}/${post.slug}`;
   let twitterShareUrl = "http://twitter.com/share?text=[TITLE]&url=[URL]";
   let linkedInShareUrl =
@@ -27,8 +30,11 @@ const PostListItem: React.FC<IProps> = ({post}) => {
     return encodeURI(shareUrl.replace("[TITLE]", title).replace("[URL]", url));
   };
 
+  const rootStore = useContext(RootStoreContext);
+  const { reactionLoading, reactToPost } = rootStore.postStore;
+
   return (
-    <Item style={{ marginBottom: "40px" }}>
+    <Item>
       <Item.Image
         className="post-list-image"
         as="a"
@@ -40,31 +46,43 @@ const PostListItem: React.FC<IProps> = ({post}) => {
 
       <Item.Content className="post-content">
         <Container>
-          <Item.Header className="posts-header">
-            <h2 style={{marginBottom: "0px"}}>
-              <a href={postUrl}>{post.title}</a>
-            </h2>
-            <div style={{ display: "flex", alignItems: "flex-start",  }}>
-              <Image
-                href={postUrl}
-                src={post.category.image}
-                alt={post.category.name}
-                style={{ width: "30px" }}
-              />
-
+          <Item.Header>
+            <div className="posts-header">
+              <h2 style={{ marginBottom: "0px" }}>
+                <a href={postUrl}>{post.title}</a>
+              </h2>
+              <div style={{ display: "flex", alignItems: "flex-start" }}>
+                <Image
+                  href={postUrl}
+                  src={post.category.image}
+                  alt={post.category.name}
+                  style={{ width: "30px" }}
+                />
+              </div>
+            </div>
+            <div>
+              <time style={{ fontSize: "11px" }}>
+                {moment().format("MMM Do YYYY")}
+              </time>
             </div>
           </Item.Header>
         </Container>
-        <Item.Description style={{marginTop: "3px"}}>
+        <Item.Description style={{ marginTop: "3px" }}>
           {post.subTitle}
         </Item.Description>
         <Item.Extra className="post-buttons">
           <Button
+            name={post.id}
+            loading={reactionLoading && reactionTarget === post.id}
+            disabled={reactionLoading && reactionTarget === post.id}
             style={{ marginRight: "15px" }}
             size="small"
-            color="red"
+            color={post.hasLiked ? "red" : "grey"}
             icon="heart"
             content={`${post.positiveReactionsCount} Likes`}
+            onClick={() => {
+              reactToPost(post.id);
+            }}
           />
           {post.timeToRead}
           <Popup
@@ -121,4 +139,4 @@ const PostListItem: React.FC<IProps> = ({post}) => {
   );
 };
 
-export default PostListItem;
+export default observer(PostListItem);

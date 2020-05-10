@@ -9,7 +9,7 @@ interface IProps {
 const LoadingComponent: React.FC<IProps> = ({inverted = true, content}) => {
     return (
         <Dimmer active inverted={inverted}>
-            <Loader content={content} />
+            <Loader inverted={inverted} content={content} />
         </Dimmer>
     )
 }

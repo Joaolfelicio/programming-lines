@@ -32,14 +32,14 @@ namespace Application.AnonymousUser
             {
                 _context = context;
             }
-
+//TODO: Fix the return type here
             public async Task<Domain.AnonymousUser> Handle(Command request, CancellationToken cancellationToken)
             {
                 var anonUser = await _context.AnonymousUsers.FirstOrDefaultAsync(x => x.FingerPrint == request.FingerPrint, cancellationToken);
 
                 if(anonUser != null)
                 {
-                    throw new RestException(HttpStatusCode.BadRequest, new {AnonymousUser = "Anonymous User already exists."});
+                    return anonUser;
                 }
 
                 anonUser = new Domain.AnonymousUser
@@ -54,7 +54,7 @@ namespace Application.AnonymousUser
 
                 if (success)
                 {
-                    return new Domain.AnonymousUser();
+                    return anonUser;
                 }
 
                 throw new Exception("Problem saving the changes");

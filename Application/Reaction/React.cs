@@ -9,12 +9,14 @@ using Microsoft.EntityFrameworkCore;
 using Persistence;
 using System.Linq;
 using FluentValidation;
+using Application.Reaction.Model;
+using Application.AnonymousUser.Model;
 
 namespace Application.Reaction
 {
     public class React
     {
-        public class Command : IRequest
+        public class Command : IRequest<ReactionDto>
         {
             public Guid PostId { get; set; }
             public string AuthorFingerPrint { get; set; }
@@ -29,7 +31,7 @@ namespace Application.Reaction
             }
         }
 
-        public class Handler : IRequestHandler<Command>
+        public class Handler : IRequestHandler<Command, ReactionDto>
         {
             private readonly DataContext _context;
             public Handler(DataContext context)
@@ -37,7 +39,7 @@ namespace Application.Reaction
                 _context = context;
             }
 
-            public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<ReactionDto> Handle(Command request, CancellationToken cancellationToken)
             {
                 var post = await _context.Posts.FirstOrDefaultAsync(x => x.Id == request.PostId, cancellationToken);
 
@@ -76,7 +78,17 @@ namespace Application.Reaction
 
                 if (success)
                 {
-                    return Unit.Value;
+                    return new ReactionDto
+                    {
+                        Id = reaction.Id,
+                        IsPositive = reaction.IsPositive,
+                        ReactionDate = reaction.ReactionDate,
+                        Author = new AnonymousUserDto
+                        {
+                            Id = reaction.Author.Id,
+                            CreationDate = reaction.Author.CreationDate
+                        }
+                    };
                 }
 
                 throw new Exception("Problem saving the changes");

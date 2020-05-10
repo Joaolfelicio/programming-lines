@@ -55,29 +55,33 @@
 22. [ ] CS - Posts
     1.  [x] Add category on the opposite side of the title
     2.  [x] Time to read
-    3.  [ ] Use has liked
-    4.  [ ] Add date
+    3.  [x] User has liked
+        1.  [x] If user never liked
+        2.  [x] loading when liking
+    4.  [x] Add date
 23. [ ] CS - PostDetails
 24. [ ] CS - Replies
 25. [ ] CS - Reactions
-26. [ ] Recommendations (Maybe)
-27. [ ] CS - Newsletter
-28. [ ] API - Next/Previous Post
+26. [ ] AnonymousUser
+    1.  [ ] Add cookie
+27. [ ] Recommendations (Maybe)
+28. [ ] CS - Newsletter
+29. [ ] API - Next/Previous Post
     1.  [ ] If user filtered by category, filter the n/p post (Maybe)
-29. [ ] CS - Next/Previous Post
-30. [ ] Dark Mode
-31. [ ] Share button on the post
-32. [ ] About me
+30. [ ] CS - Next/Previous Post
+31. [ ] Dark Mode
+32. [ ] Share button on the post
+33. [ ] About me
     1.  [ ] Photo
     2.  [ ] Bio
     3.  [ ] Social Media
-33. [ ] Back Office
-34. [ ] API - Add predicates
-35. [ ] Infinite Scroll
-36. [ ] React-markdown
-37. [ ] Markdown preview
-38. [ ] Footer
-39. [ ] Add post title in the index.tsx title
+34. [ ] Back Office
+35. [ ] API - Add predicates
+36. [ ] Infinite Scroll
+37. [ ] React-markdown
+38. [ ] Markdown preview
+39. [ ] Footer
+40. [ ] Add post title in the index.tsx title
 
 
 ## STACK

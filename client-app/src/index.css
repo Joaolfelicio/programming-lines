@@ -72,3 +72,8 @@ code {
 .posts-header h3 {
   margin-top: 5px !important;
 }
+
+.search-box input {
+  width: 300px;
+  border-radius: 5px !important;
+}

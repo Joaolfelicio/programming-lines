@@ -1,11 +1,11 @@
 import { IPost } from "../../models/post";
-const readingTime = require('reading-time');
+import { IAnonymousUser } from "../../models/anonymousUser";
+const readingTime = require("reading-time");
 
-export const setPostProps = (post: IPost) => {
+export const setPostProps = (post: IPost, anonUser: IAnonymousUser) => {
   //Need to get the anonymous user first;
-  // post.hasLiked;
+  post.hasLiked = post.reactions.some(x => x.author.id === anonUser?.id && x.isPositive);
 
-  // post.timeToRead;
   post.publishDate = new Date(post.publishDate);
 
   post.comments.forEach((comment) => {
@@ -15,7 +15,7 @@ export const setPostProps = (post: IPost) => {
       reply.publishedDate = new Date(reply.publishedDate);
     });
   });
-  
+
   post.reactions.forEach((reaction) => {
     reaction.reactionDate = new Date(reaction.reactionDate);
   });
@@ -29,8 +29,3 @@ export const setPostProps = (post: IPost) => {
   return post;
 };
 
-// <iframe
-//   src="https://carbon.now.sh/embed/"
-//   style="transform:scale(0.7); width:1024px; height:473px; border:0; overflow:hidden;"
-//   sandbox="allow-scripts allow-same-origin">
-// </iframe>
