@@ -1,5 +1,8 @@
 import { RootStore } from "./rootStore";
-import { observable, action, configure } from "mobx";
+import { observable, action, configure, runInAction } from "mobx";
+import api from "../api/api";
+import { INewsletterEnvelope } from "../models/Requests/newsletterEnvelope";
+import { toast } from "react-toastify";
 
 configure({ enforceActions: "always" });
 
@@ -23,6 +26,21 @@ export default class CommonStore {
   };
 
   @action setActiveNavItem = (active: string) => {
-      this.activeNavItem = active;
+    this.activeNavItem = active;
+  };
+
+  @action subscribeNewsletter = async (displayName: string, email: string) => {
+    const newsletter: INewsletterEnvelope = {
+      displayName: displayName,
+      email: email,
+    };
+    try {
+      console.log(newsletter);
+      await api.Newsletter.subscribe(newsletter);
+      toast.success("Sucessfully subscribed to the newsletter.");
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   };
 }

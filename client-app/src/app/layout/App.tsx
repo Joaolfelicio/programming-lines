@@ -5,6 +5,8 @@ import { observer } from "mobx-react-lite";
 import NavBar from "../../features/nav/NavBar";
 import PostDashboard from "../../features/posts/dashboard/PostDashboard";
 import { ToastContainer } from "react-toastify";
+import Newsletter from "../../features/newsletter/Newsletter";
+
 
 const App = () => {
   const rootStore = useContext(RootStoreContext);
@@ -24,6 +26,7 @@ const App = () => {
     <Fragment>
       <NavBar activeItem="posts" />
       <PostDashboard />
+      <Newsletter />
       <ToastContainer
         position="bottom-right"
         autoClose={2000}

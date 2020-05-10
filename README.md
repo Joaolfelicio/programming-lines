@@ -51,6 +51,7 @@
     2.  [x] Test Delete
 19. [x] CS - Nav Bar
 20. [ ] Search Box
+    1.  [ ] Fix routing
 21. [ ] CS - Login  
 22. [ ] CS - Posts
     1.  [x] Add category on the opposite side of the title
@@ -66,6 +67,11 @@
     1.  [ ] Add cookie
 27. [ ] Recommendations (Maybe)
 28. [ ] CS - Newsletter
+    1.  [x] Post API
+    2.  [x] Display error
+    3.  [x] Display success
+    4.  [ ] Loading button
+    5.  [ ] Clean form on submit
 29. [ ] API - Next/Previous Post
     1.  [ ] If user filtered by category, filter the n/p post (Maybe)
 30. [ ] CS - Next/Previous Post

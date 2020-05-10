@@ -27,7 +27,7 @@ const NavBar: React.FC<IProps> = ({ activeItem }) => {
   const history = useHistory();
 
   return (
-    <Menu style={{ borderRadius: "0px" }} inverted={isDarkMode} borderless>
+    <Menu fixed="top" style={{ borderRadius: "0px" }} inverted={isDarkMode} borderless>
       <Menu.Item style={{ alignItems: "center" }}>
         <img src="/assets/logo.png" alt="Joao Felicio blog logo." />
         <h1 style={{ marginLeft: "15px", marginTop: "0px", fontSize: "20px" }}>

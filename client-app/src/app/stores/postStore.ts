@@ -57,7 +57,7 @@ export default class PostStore {
       }
     });
 
-    this.postsBySearchTerm = postsFiltered!;
+    this.postsBySearchTerm = postsFiltered;
   };
 
   @action reactToPost = async (postId: string) => {
