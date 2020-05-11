@@ -67,6 +67,7 @@ const requests = {
 const Post = {
   list: (): Promise<IPost[]> => requests.get(`/Post`),
   react: (reaction: IReactionEnvelope) => requests.post(`/Reaction`, reaction),
+  detail: (slug: string): Promise<IPost> => requests.get(`/post/${slug}`)
 };
 
 const AnonUser = {

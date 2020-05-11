@@ -44,30 +44,28 @@ const validate = combineValidators({
 
 const Newsletter = () => {
   const rootStore = useContext(RootStoreContext);
-  const { subscribeNewsletter, appLoading } = rootStore.commonStore;
+  const { subscribeNewsletter, isDarkMode } = rootStore.commonStore;
 
-  const handleFinalFormSubmit = (values: any) => {
-    console.log(values);
-    subscribeNewsletter(values.fullName, values.email);
-  };
   return (
-    <Segment raised
+    <Segment
+      inverted={isDarkMode}
+      raised
       clearing
       style={{ width: "45%", maxWidth: 500, margin: "80px auto" }}
     >
       <Header
+        inverted={isDarkMode}
         as="h4"
-        content="Subscribe to the newsletter"
+        content="Subscribe to the Newsletter"
         style={{ textAlign: "center", marginBottom: 25 }}
       />
 
       <FinalForm
-        onSubmit={(values: any) => {
-          console.log(values);
+        onSubmit={(values: any) =>
           subscribeNewsletter(values.fullName, values.email).catch((error) => ({
             [FORM_ERROR]: error,
-          }));
-        }}
+          }))
+        }
         validate={validate}
         render={({
           handleSubmit,
@@ -77,7 +75,7 @@ const Newsletter = () => {
           dirtySinceLastSubmit,
           submitting,
         }) => (
-          <Form onSubmit={handleSubmit} error>
+          <Form inverted={isDarkMode} onSubmit={handleSubmit} error>
             <Field
               placeholder="Full Name..."
               name="fullName"
@@ -97,9 +95,7 @@ const Newsletter = () => {
               </p>
               <Button
                 loading={submitting}
-                disabled={
-                  (invalid && !dirtySinceLastSubmit) || pristine || appLoading
-                }
+                disabled={(invalid && !dirtySinceLastSubmit) || pristine}
                 floated="right"
                 positive
                 type="submit"

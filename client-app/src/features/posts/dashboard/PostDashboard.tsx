@@ -14,7 +14,7 @@ const PostDashboard = () => {
   }, [getPosts]);
 
   return (
-    <Grid style={{ marginTop: "20px" }} container>
+    <Grid container>
       <GridColumn width={3}>Categories and stuff</GridColumn>
       <GridColumn width={13}>
         {loadingPosts ? (

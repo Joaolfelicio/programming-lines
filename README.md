@@ -53,14 +53,14 @@
 20. [ ] Search Box
     1.  [ ] Fix routing
 21. [ ] CS - Login  
-22. [ ] CS - Posts
+22. [x] CS - Posts
     1.  [x] Add category on the opposite side of the title
     2.  [x] Time to read
     3.  [x] User has liked
         1.  [x] If user never liked
         2.  [x] loading when liking
     4.  [x] Add date
-23. [ ] CS - PostDetails
+23. [ ] CS - PostDetails  <---------------------
 24. [ ] CS - Replies
 25. [ ] CS - Reactions
 26. [ ] AnonymousUser
@@ -70,24 +70,26 @@
     1.  [x] Post API
     2.  [x] Display error
     3.  [x] Display success
-    4.  [ ] Loading button
+    4.  [x] Loading button
     5.  [ ] Clean form on submit
-29. [ ] API - Next/Previous Post
+29. [ ] CS - Filters
+30. [ ] CS - NotFound Page
+31. [ ] API - Next/Previous Post
     1.  [ ] If user filtered by category, filter the n/p post (Maybe)
-30. [ ] CS - Next/Previous Post
-31. [ ] Dark Mode
-32. [ ] Share button on the post
-33. [ ] About me
+32. [ ] CS - Next/Previous Post
+33. [ ] Dark Mode
+34. [ ] Share button on the post
+35. [ ] About me
     1.  [ ] Photo
     2.  [ ] Bio
     3.  [ ] Social Media
-34. [ ] Back Office
-35. [ ] API - Add predicates
-36. [ ] Infinite Scroll
-37. [ ] React-markdown
-38. [ ] Markdown preview
-39. [ ] Footer
-40. [ ] Add post title in the index.tsx title
+36. [ ] Back Office
+37. [ ] API - Add predicates
+38. [ ] Infinite Scroll
+39. [ ] React-markdown
+40. [ ] Markdown preview
+41. [ ] Footer
+42. [ ] Add post title in the index.tsx title
 
 
 ## STACK

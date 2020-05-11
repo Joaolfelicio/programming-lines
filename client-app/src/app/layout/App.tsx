@@ -6,9 +6,16 @@ import NavBar from "../../features/nav/NavBar";
 import PostDashboard from "../../features/posts/dashboard/PostDashboard";
 import { ToastContainer } from "react-toastify";
 import Newsletter from "../../features/newsletter/Newsletter";
+import {
+  Route,
+  RouteComponentProps,
+  Switch,
+  withRouter,
+} from "react-router-dom";
+import PostsDetails from "../../features/posts/details/PostsDetails";
+import { Container } from "semantic-ui-react";
 
-
-const App = () => {
+const App: React.FC<RouteComponentProps> = ({ location }) => {
   const rootStore = useContext(RootStoreContext);
   const { appLoading } = rootStore.commonStore;
   const { setAnonymousUser } = rootStore.userStore;
@@ -25,8 +32,13 @@ const App = () => {
   return (
     <Fragment>
       <NavBar activeItem="posts" />
-      <PostDashboard />
-      <Newsletter />
+      <Container style={{ marginTop: "7em" }}>
+        <Switch>
+          <Route exact path="/" component={PostDashboard} />
+          <Route path="/post/:slug" component={PostsDetails} />
+        </Switch>
+        <Newsletter />
+      </Container>
       <ToastContainer
         position="bottom-right"
         autoClose={2000}
@@ -41,4 +53,4 @@ const App = () => {
   );
 };
 
-export default observer(App);
+export default withRouter(observer(App));

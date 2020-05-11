@@ -19,6 +19,7 @@ export default class PostStore {
   @observable reactionLoading = false;
   @observable reactionTarget = "";
   @observable postsBySearchTerm: ISearchPostDto[] | null = null;
+  @observable detailedPost: IPost | null = null;
 
   @action getPosts = async () => {
     this.loadingPosts = true;
@@ -38,6 +39,22 @@ export default class PostStore {
       this.loadingPosts = false;
     }
   };
+
+  @action getDetailedPost = async(slug: string) => {
+    this.loadingPosts = true;
+    try {
+      var detailedPost = await api.Post.detail(slug);
+      runInAction(() => {
+        this.detailedPost = detailedPost;
+        this.loadingPosts = false;
+      })
+    } catch (error) {
+      console.log(error);
+      runInAction(() => {
+        this.loadingPosts = false;
+      })
+    }
+  }
 
   @action setPostsBySearchTerm = (searchTerm: string) => {
     let postsFiltered: ISearchPostDto[] = [];

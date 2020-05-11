@@ -35,7 +35,6 @@ export default class CommonStore {
       email: email,
     };
     try {
-      console.log(newsletter);
       await api.Newsletter.subscribe(newsletter);
       toast.success("Sucessfully subscribed to the newsletter.");
     } catch (error) {
