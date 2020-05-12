@@ -50,46 +50,55 @@
     1.  [x] Test Create 
     2.  [x] Test Delete
 19. [x] CS - Nav Bar
-20. [ ] Search Box
-    1.  [ ] Fix routing
-21. [ ] CS - Login  
-22. [x] CS - Posts
-    1.  [x] Add category on the opposite side of the title
+    1.  [ ] Search Box
+        1.  [x] Fix routing
+        2.  [ ] Blur when user selects a post
+        3.  [ ] Right now if user goes to detailed post and refresh, no results and displayed
+    2.  [ ] Dark Mode
+        1.  [ ] Fix Bug of when interacting with Nav Bar, dark moddle toggle moves.
+        2.  [ ] Store in local storage the preference
+    3.  [ ] Hamburguer for mobile
+20. [ ] CS - Login  
+21. [x] CS - Posts
+    1.  [x] Add category on the opposite side of the title 
     2.  [x] Time to read
     3.  [x] User has liked
         1.  [x] If user never liked
         2.  [x] loading when liking
     4.  [x] Add date
-23. [ ] CS - PostDetails  <---------------------
-24. [ ] CS - Replies
-25. [ ] CS - Reactions
-26. [ ] AnonymousUser
-    1.  [ ] Add cookie
-27. [ ] Recommendations (Maybe)
-28. [ ] CS - Newsletter
+22. [ ] CS - PostDetails 
+    1.  [x] Shouldn't call API if it's in memory (use history.push)
+23. [ ] CS - Replies
+24. [ ] CS - Reactions
+25. [ ] AnonymousUser <---------------------
+    1.  [x] Store in Local Storage AnonUserId  
+    2.  [x] API - Create/Login user receive ID instead of fingerprint 
+    3.  [x] Store fingerprint only in state
+    4.  [ ] I Think there might be a bug related to anonusers and reactions
+26. [ ] Recommendations (Maybe)
+27. [ ] CS - Newsletter
     1.  [x] Post API
     2.  [x] Display error
     3.  [x] Display success
     4.  [x] Loading button
     5.  [ ] Clean form on submit
-29. [ ] CS - Filters
-30. [ ] CS - NotFound Page
-31. [ ] API - Next/Previous Post
+28. [ ] CS - Filters
+29. [ ] CS - NotFound Page
+30. [ ] API - Next/Previous Post
     1.  [ ] If user filtered by category, filter the n/p post (Maybe)
-32. [ ] CS - Next/Previous Post
-33. [ ] Dark Mode
-34. [ ] Share button on the post
-35. [ ] About me
+31. [ ] CS - Next/Previous Post
+32. [ ] Share button on the post
+33. [ ] About me
     1.  [ ] Photo
     2.  [ ] Bio
     3.  [ ] Social Media
-36. [ ] Back Office
-37. [ ] API - Add predicates
-38. [ ] Infinite Scroll
-39. [ ] React-markdown
-40. [ ] Markdown preview
-41. [ ] Footer
-42. [ ] Add post title in the index.tsx title
+34. [ ] Back Office
+35. [ ] API - Add predicates
+36. [ ] Infinite Scroll
+37. [ ] React-markdown
+38. [ ] Markdown preview
+39. [ ] Footer
+40. [ ] Add post title in the index.tsx title
 
 
 ## STACK

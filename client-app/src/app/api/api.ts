@@ -5,6 +5,7 @@ import { IFingeprintEnvelope } from "../models/Requests/fingerprintEnvelope";
 import { IReactionEnvelope } from "../models/Requests/reactionEnvelope";
 import { INewsletterEnvelope } from "../models/Requests/newsletterEnvelope";
 import { toast } from "react-toastify";
+import { IAnonUserIdEnvelope } from "../models/Requests/anonUserIdEnvelope";
 
 // axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 axios.defaults.baseURL = "https://localhost:5001/api";
@@ -27,7 +28,7 @@ axios.interceptors.response.use(undefined, (error) => {
   if (error.message === "Network Error" && !error.response) {
     toast.error("Network Error - Make sure the API is running!");
   }
-  const { status, data, config, headers } = error.response;
+  const { status, headers } = error.response;
 
   if (
     status === 401 &&
@@ -71,9 +72,12 @@ const Post = {
 };
 
 const AnonUser = {
-  get: (fingerprint: IFingeprintEnvelope): Promise<IAnonymousUser> => {
-    return requests.post(`/AnonymousUser`, fingerprint);
+  get: (anonUserIdEnvelope: IAnonUserIdEnvelope): Promise<IAnonymousUser> => {
+    return requests.post(`/AnonymousUser`, anonUserIdEnvelope);
   },
+  create: (anonUserFingerprint: IFingeprintEnvelope): Promise<IAnonymousUser> => {
+    return requests.post(`/AnonymousUser/Create`, anonUserFingerprint);
+  }
 };
 
 const Newsletter = {

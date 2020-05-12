@@ -48,14 +48,14 @@ namespace Application.Reaction
                     throw new RestException(HttpStatusCode.BadRequest, new { Reaction = "Post was not found" });
                 }
 
-                var author = await _context.AnonymousUsers.FirstOrDefaultAsync(x => x.FingerPrint == request.AuthorFingerPrint, cancellationToken);
+                var author = await _context.AnonymousUsers.FirstOrDefaultAsync(x => x.Fingerprint == request.AuthorFingerPrint, cancellationToken);
 
                 if (author == null)
                 {
                     throw new RestException(HttpStatusCode.BadRequest, new { Reaction = "Author was not found" });
                 }
 
-                var reaction = post.Reactions.FirstOrDefault(x => x.Author.FingerPrint == request.AuthorFingerPrint);
+                var reaction = post.Reactions.FirstOrDefault(x => x.Author.Fingerprint == request.AuthorFingerPrint);
 
                 // If reaction doesnt exist, create it
                 if (reaction == null)

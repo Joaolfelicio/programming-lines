@@ -53,7 +53,7 @@ namespace Application.Comments
                     throw new RestException(HttpStatusCode.BadRequest, new { Comment = "Post not found." });
                 }
 
-                var anonUser = await _context.AnonymousUsers.FirstOrDefaultAsync(x => x.FingerPrint == request.FingerPrint);
+                var anonUser = await _context.AnonymousUsers.FirstOrDefaultAsync(x => x.Fingerprint == request.FingerPrint);
                 if (anonUser == null)
                 {
                     throw new RestException(HttpStatusCode.BadRequest, new { Comment = "Anonymous User not found." });

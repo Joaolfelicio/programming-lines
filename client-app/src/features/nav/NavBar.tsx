@@ -4,7 +4,7 @@ import DarkModeToggle from "react-dark-mode-toggle";
 import { RootStoreContext } from "../../app/stores/rootStore";
 import { observer } from "mobx-react-lite";
 import { toJS } from "mobx";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 interface IProps {
   activeItem: string | null;
@@ -28,7 +28,7 @@ const NavBar: React.FC<IProps> = ({ activeItem }) => {
 
   return (
     <Menu fixed="top" style={{ borderRadius: "0px" }} inverted={isDarkMode} borderless>
-      <Menu.Item style={{ alignItems: "center" }}>
+      <Menu.Item as={Link} to="/" style={{ alignItems: "center" }}>
         <img src="/assets/logo.png" alt="Joao Felicio blog logo." />
         <h1 style={{ marginLeft: "15px", marginTop: "0px", fontSize: "20px" }}>
           Programming Lines
@@ -40,10 +40,10 @@ const NavBar: React.FC<IProps> = ({ activeItem }) => {
           results={postsBySearchTerm!}
           loading={loadingPosts}
           fluid
-          //TODO: Fix this
-           onResultSelect={(e, data) => {
-             console.log(toJS(data.result))
-             history.push(`/${data.result.slug}`);
+          onResultSelect={(e, data) => {
+            console.log(toJS(data.result))
+            history.push(`/post/${data.result.slug}`);
+            //TODO: Fix this
              data.value = "";
            }}
           size="small"

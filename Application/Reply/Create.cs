@@ -49,7 +49,7 @@ namespace Application.Reply
                     throw new RestException(HttpStatusCode.BadRequest, new { Reply = "Comment not found." });
                 }
 
-                var anonUser = await _context.AnonymousUsers.FirstOrDefaultAsync(x => x.FingerPrint == request.FingerPrint);
+                var anonUser = await _context.AnonymousUsers.FirstOrDefaultAsync(x => x.Fingerprint == request.FingerPrint);
                 if (anonUser == null)
                 {
                     throw new RestException(HttpStatusCode.BadRequest, new { Reply = "Anonymous User not found." });

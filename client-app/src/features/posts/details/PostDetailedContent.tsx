@@ -1,11 +1,18 @@
 import React from 'react'
+import { IPost } from '../../../app/models/post'
+import { observer } from 'mobx-react-lite'
 
-const PostDetailedContent = () => {
+interface IProps {
+    post: IPost;
+}
+
+const PostDetailedContent: React.FC<IProps> = ({post}) => {
     return (
         <div>
-            Content
+            {post.title}
+            {post.content}
         </div>
     )
 }
 
-export default PostDetailedContent
+export default observer(PostDetailedContent);

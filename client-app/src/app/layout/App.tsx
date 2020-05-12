@@ -18,12 +18,12 @@ import { Container } from "semantic-ui-react";
 const App: React.FC<RouteComponentProps> = ({ location }) => {
   const rootStore = useContext(RootStoreContext);
   const { appLoading } = rootStore.commonStore;
-  const { setAnonymousUser } = rootStore.userStore;
+  const { loginAnonymousUser } = rootStore.userStore;
   const { isDarkMode } = rootStore.commonStore;
 
   useEffect(() => {
-    setAnonymousUser();
-  }, [setAnonymousUser]);
+    loginAnonymousUser();
+  }, [loginAnonymousUser]);
 
   if (appLoading) {
     return <LoadingComponent inverted={isDarkMode} content="Loading app..." />;

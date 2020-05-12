@@ -74,7 +74,7 @@ namespace Persistence
                             {
                                 Author = new AnonymousUser
                                 {
-                                    FingerPrint = "i5iQ3azsn87pMXxvY42u",
+                                    Fingerprint = "i5iQ3azsn87pMXxvY42u",
                                     CreationDate = DateTime.Now
                                 },
                                 AuthorDisplayName = "TestDisplayName",
@@ -87,7 +87,7 @@ namespace Persistence
                                     {
                                         Author = new AnonymousUser
                                         {
-                                            FingerPrint = "r6PhcZnch4J3qDV8r7R",
+                                            Fingerprint = "r6PhcZnch4J3qDV8r7R",
                                             CreationDate = DateTime.Now
                                         },
                                         AuthorDisplayName = "TestReplyName",
@@ -104,7 +104,7 @@ namespace Persistence
                             {
                                 Author = new AnonymousUser
                                 {
-                                    FingerPrint = "TWU5fHSJEhQ46VbhDSG",
+                                    Fingerprint = "TWU5fHSJEhQ46VbhDSG",
                                     CreationDate = DateTime.Now
                                 },
                                 IsPositive = true,
@@ -135,7 +135,7 @@ namespace Persistence
                             {
                                 Author = new AnonymousUser
                                 {
-                                    FingerPrint = "abce",
+                                    Fingerprint = "abce",
                                     CreationDate = DateTime.Now
                                 },
                                 AuthorDisplayName = "TestDisplayName2",
@@ -148,7 +148,7 @@ namespace Persistence
                                     {
                                         Author = new AnonymousUser
                                         {
-                                            FingerPrint = "abc",
+                                            Fingerprint = "abc",
                                             CreationDate = DateTime.Now
                                         },
                                         AuthorDisplayName = "TestReplyName2",
@@ -160,7 +160,7 @@ namespace Persistence
                                     {
                                         Author = new AnonymousUser
                                         {
-                                            FingerPrint = "abc3",
+                                            Fingerprint = "abc3",
                                             CreationDate = DateTime.Now
                                         },
                                         AuthorDisplayName = "TestReplyName3",
@@ -174,7 +174,7 @@ namespace Persistence
                             {
                                 Author = new AnonymousUser
                                 {
-                                    FingerPrint = "abce11",
+                                    Fingerprint = "abce11",
                                     CreationDate = DateTime.Now
                                 },
                                 AuthorDisplayName = "TestDisplayName3",
@@ -189,7 +189,7 @@ namespace Persistence
                             {
                                 Author = new AnonymousUser
                                 {
-                                    FingerPrint = "TWU5fHSJEgQ46VbhDSG",
+                                    Fingerprint = "TWU5fHSJEgQ46VbhDSG",
                                     CreationDate = DateTime.Now
                                 },
                                 IsPositive = true,
@@ -199,7 +199,7 @@ namespace Persistence
                             {
                                 Author = new AnonymousUser
                                 {
-                                    FingerPrint = "13123",
+                                    Fingerprint = "13123",
                                     CreationDate = DateTime.Now
                                 },
                                 IsPositive = true,

@@ -14,14 +14,14 @@ namespace Application.AnonymousUser
     {
         public class Command : IRequest<Domain.AnonymousUser>
         {
-            public string FingerPrint { get; set; }
+            public string Fingerprint { get; set; }
         }
 
         public class CommandValidator : AbstractValidator<Command>
         {
             public CommandValidator()
             {
-                RuleFor(x => x.FingerPrint).NotEmpty();
+                RuleFor(x => x.Fingerprint).NotEmpty();
             }
         }
 
@@ -32,19 +32,19 @@ namespace Application.AnonymousUser
             {
                 _context = context;
             }
-//TODO: Fix the return type here
+            //TODO: Fix the return type here
             public async Task<Domain.AnonymousUser> Handle(Command request, CancellationToken cancellationToken)
             {
-                var anonUser = await _context.AnonymousUsers.FirstOrDefaultAsync(x => x.FingerPrint == request.FingerPrint, cancellationToken);
+                var anonUser = await _context.AnonymousUsers.FirstOrDefaultAsync(x => x.Fingerprint == request.Fingerprint, cancellationToken);
 
-                if(anonUser != null)
+                if (anonUser != null)
                 {
                     return anonUser;
                 }
 
                 anonUser = new Domain.AnonymousUser
                 {
-                    FingerPrint = request.FingerPrint,
+                    Fingerprint = request.Fingerprint,
                     CreationDate = DateTime.Now
                 };
 

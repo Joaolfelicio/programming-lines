@@ -1,5 +1,5 @@
 export interface IAnonymousUser {
     id: string;
-    fingerPrint: string;
+    fingerprint: string;
     creationDate: Date;
 }

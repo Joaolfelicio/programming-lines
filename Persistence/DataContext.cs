@@ -31,7 +31,7 @@ namespace Persistence
                    .IsUnique();
 
             builder.Entity<AnonymousUser>()
-                   .HasIndex(x => x.FingerPrint)
+                   .HasIndex(x => x.Fingerprint)
                    .IsUnique();
 
         }

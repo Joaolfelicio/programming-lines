@@ -22,39 +22,50 @@ export default class PostStore {
   @observable detailedPost: IPost | null = null;
 
   @action getPosts = async () => {
-    this.loadingPosts = true;
-
     try {
-      let posts = await api.Post.list();
-      runInAction(() => {
-        console.log(posts);
-        posts.forEach((post) => {
-          setPostProps(post, this.rootStore.userStore.anonymousUser!);
-          this.postsRegistry.set(post.id, post);
+      if (this.postsRegistry.size === 0) {
+        this.loadingPosts = true;
+        let posts = await api.Post.list();
+
+        runInAction(() => {
+          posts.forEach((post) => {
+            setPostProps(post, this.rootStore.userStore.anonymousUser!);
+            this.postsRegistry.set(post.slug, post);
+            this.loadingPosts = false;
+          });
         });
-        this.loadingPosts = false;
-      });
+      }
     } catch (error) {
       toast.error(error);
-      this.loadingPosts = false;
+      runInAction(() => {
+        this.loadingPosts = false;
+      });
     }
   };
 
-  @action getDetailedPost = async(slug: string) => {
+  @action getDetailedPost = async (slug: string) => {
     this.loadingPosts = true;
     try {
-      var detailedPost = await api.Post.detail(slug);
+      const detailedPostFromMemory = this.postsRegistry.get(slug);
+
+      if (detailedPostFromMemory) {
+        this.detailedPost = detailedPostFromMemory;
+      } else {
+        const detailedPost = await api.Post.detail(slug);
+        runInAction(() => {
+          this.detailedPost = detailedPost;
+        });
+      }
       runInAction(() => {
-        this.detailedPost = detailedPost;
         this.loadingPosts = false;
-      })
+      });
     } catch (error) {
       console.log(error);
       runInAction(() => {
         this.loadingPosts = false;
-      })
+      });
     }
-  }
+  };
 
   @action setPostsBySearchTerm = (searchTerm: string) => {
     let postsFiltered: ISearchPostDto[] = [];
@@ -77,11 +88,11 @@ export default class PostStore {
     this.postsBySearchTerm = postsFiltered;
   };
 
-  @action reactToPost = async (postId: string) => {
+  @action reactToPost = async (postSlug: string, postId: string) => {
     this.reactionLoading = true;
-    this.reactionTarget = postId;
+    this.reactionTarget = postSlug;
 
-    const userFP = this.rootStore.userStore.anonymousUser?.fingerPrint!;
+    const userFP = this.rootStore.userStore.anonymousUser?.fingerprint!;
     const userId = this.rootStore.userStore.anonymousUser?.id;
 
     var reactionEnvelope: IReactionEnvelope = {
@@ -93,9 +104,10 @@ export default class PostStore {
       const reaction = await api.Post.react(reactionEnvelope);
 
       runInAction(() => {
-        const post: IPost = this.postsRegistry.get(postId);
+        const post: IPost = this.postsRegistry.get(postSlug);
         let hasNotReactedBefore = true;
 
+        console.log(post);
         post.reactions = post.reactions.filter((reaction: IReaction) => {
           //If user already reacted before, invert the reaction bool
           if (reaction.author.id === userId) {
@@ -105,7 +117,7 @@ export default class PostStore {
           return reaction;
         });
 
-        //If user never like this post, push him to the reaction array
+        //If user never liked this post, push him to the reaction array
         if (hasNotReactedBefore) {
           post.reactions.push(reaction);
         }
@@ -115,12 +127,14 @@ export default class PostStore {
           ? post.positiveReactionsCount++
           : post.positiveReactionsCount--;
 
-        this.postsRegistry.set(postId, post);
+        this.postsRegistry.set(post.slug, post);
         this.reactionLoading = false;
       });
     } catch (error) {
       console.log(error);
-      this.reactionLoading = false;
+      runInAction(() => {
+        this.reactionLoading = false;
+      });
     }
   };
 

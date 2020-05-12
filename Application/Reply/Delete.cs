@@ -43,7 +43,7 @@ namespace Application.Reply
             {
                 var reply = await _context.Replies.FirstOrDefaultAsync(x => x.Id == request.ReplyId, cancellationToken);
 
-                var anonUser = await _context.AnonymousUsers.FirstOrDefaultAsync(x => x.FingerPrint == request.FingerPrint, cancellationToken);
+                var anonUser = await _context.AnonymousUsers.FirstOrDefaultAsync(x => x.Fingerprint == request.FingerPrint, cancellationToken);
                 var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetCurrentusername(), cancellationToken);
                 var post = await _context.Posts.FirstOrDefaultAsync(x => x.Comments.Any(x => x.Id == request.CommentId));
 

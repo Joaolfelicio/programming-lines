@@ -29,3 +29,4 @@ export const setPostProps = (post: IPost, anonUser: IAnonymousUser) => {
   return post;
 };
 
+

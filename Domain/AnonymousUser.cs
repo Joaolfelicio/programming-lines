@@ -6,7 +6,7 @@ namespace Domain
     public class AnonymousUser
     {
         public Guid Id { get; set; }
-        public string FingerPrint { get; set; }
+        public string Fingerprint { get; set; }
         public DateTime CreationDate { get; set; }
     }
 }

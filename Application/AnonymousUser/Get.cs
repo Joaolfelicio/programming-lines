@@ -1,19 +1,28 @@
-using System.Net;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Application.Exceptions;
+using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace Application.AnonymousUser
 {
-    public class Details
+    public class Get
     {
 
         public class Query : IRequest<Domain.AnonymousUser>
         {
-            public string FingerPrint { get; set; }
+            public Guid AnonUserId { get; set; }
+        }
+
+
+        public class QueryValidator : AbstractValidator<Query>
+        {
+            public QueryValidator()
+            {
+                RuleFor(x => x.AnonUserId).NotEmpty();
+            }
         }
 
         public class Handler : IRequestHandler<Query, Domain.AnonymousUser>
@@ -26,11 +35,11 @@ namespace Application.AnonymousUser
 
             public async Task<Domain.AnonymousUser> Handle(Query request, CancellationToken cancellationToken)
             {
-                var anonUser = await _context.AnonymousUsers.FirstOrDefaultAsync(x => x.Fingerprint == request.FingerPrint);
+                var anonUser = await _context.AnonymousUsers.FirstOrDefaultAsync(x => x.Id == request.AnonUserId, cancellationToken);
 
-                if(anonUser == null)
+                if (anonUser == null)
                 {
-                    throw new RestException(HttpStatusCode.NotFound, new {AnonymousUser = "Not found."});
+                    return null;
                 }
 
                 return anonUser;

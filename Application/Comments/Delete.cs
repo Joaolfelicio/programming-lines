@@ -42,7 +42,7 @@ namespace Application.Comments
             {
                 var comment = await _context.Comments.FirstOrDefaultAsync(x => x.Id == request.CommentId);
 
-                var anonUser = await _context.AnonymousUsers.FirstOrDefaultAsync(x => x.FingerPrint == request.FingerPrint, cancellationToken);
+                var anonUser = await _context.AnonymousUsers.FirstOrDefaultAsync(x => x.Fingerprint == request.FingerPrint, cancellationToken);
                 var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetCurrentusername());
 
                 var post = await _context.Posts.FirstOrDefaultAsync(x => x.Id == request.PostId, cancellationToken);

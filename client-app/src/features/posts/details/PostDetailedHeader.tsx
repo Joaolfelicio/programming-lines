@@ -1,11 +1,17 @@
 import React from 'react'
+import { IPost } from '../../../app/models/post'
+import { observer } from 'mobx-react-lite'
 
-const PostDetailedHeader = () => {
+interface IProps {
+    post: IPost
+}
+
+const PostDetailedHeader: React.FC<IProps> = ({post}) => {
     return (
         <div>
-            Header
+            
         </div>
     )
 }
 
-export default PostDetailedHeader
+export default observer(PostDetailedHeader);

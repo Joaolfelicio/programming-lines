@@ -5,6 +5,7 @@ import { IPost } from "../../../app/models/post";
 import moment from "moment";
 import { RootStoreContext } from "../../../app/stores/rootStore";
 import { observer } from "mobx-react-lite";
+import { Link } from "react-router-dom";
 
 interface IProps {
   post: IPost;
@@ -12,13 +13,14 @@ interface IProps {
 }
 
 const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
-  const postUrl = `${window.location.origin}/${post.slug}`;
+  const internalUrl = `/post/${post.slug}`;
+  const externalUrl = `http://localhost:3000/post/${post.slug}`;
   let twitterShareUrl = "http://twitter.com/share?text=[TITLE]&url=[URL]";
   let linkedInShareUrl =
     "https://www.linkedin.com/sharing/share-offsite/?url=[URL]";
 
-  const copyToClipboard = (postSlug: string) => {
-    navigator.clipboard.writeText(postUrl);
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(externalUrl);
     toast.success("Copied to clipboard.");
   };
 
@@ -37,8 +39,8 @@ const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
     <Item>
       <Item.Image
         className="post-list-image"
-        as="a"
-        href={postUrl}
+        as={Link}
+        to={internalUrl}
         size="medium"
         alt={post.title}
         src={post.image}
@@ -48,12 +50,15 @@ const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
         <Container>
           <Item.Header>
             <div className="posts-header">
-              <h2 style={{ marginBottom: "0px" }}>
-                <a href={postUrl}>{post.title}</a>
-              </h2>
+              <Link to={internalUrl}>
+                <h2 style={{ marginBottom: "0px" }}>{post.title}</h2>
+              </Link>
+
               <div style={{ display: "flex", alignItems: "flex-start" }}>
                 <Image
-                  href={postUrl}
+                  as={Link}
+                  to={post.slug}
+                  href={internalUrl}
                   src={post.category.image}
                   alt={post.category.name}
                   style={{ width: "30px" }}
@@ -72,16 +77,16 @@ const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
         </Item.Description>
         <Item.Extra className="post-buttons">
           <Button
-            name={post.id}
-            loading={reactionLoading && reactionTarget === post.id}
-            disabled={reactionLoading && reactionTarget === post.id}
+            name={post.slug}
+            loading={reactionLoading && reactionTarget === post.slug}
+            disabled={reactionLoading && reactionTarget === post.slug}
             style={{ marginRight: "15px" }}
             size="small"
             color={post.hasLiked ? "red" : "grey"}
             icon="heart"
             content={`${post.positiveReactionsCount} Likes`}
             onClick={() => {
-              reactToPost(post.id);
+              reactToPost(post.slug, post.id);
             }}
           />
           {post.timeToRead}
@@ -104,7 +109,11 @@ const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
               <Grid.Column style={{ padding: "5px" }}>
                 <Button
                   as="a"
-                  href={generateShareUrl(linkedInShareUrl, "", postUrl)}
+                  href={generateShareUrl(
+                    linkedInShareUrl,
+                    post.title,
+                    externalUrl
+                  )}
                   icon="linkedin"
                   color="linkedin"
                   target="_blank"
@@ -115,8 +124,8 @@ const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
                   as="a"
                   href={generateShareUrl(
                     twitterShareUrl,
-                    "This is a title",
-                    postUrl
+                    post.title,
+                    externalUrl
                   )}
                   icon="twitter"
                   color="twitter"
@@ -126,7 +135,7 @@ const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
               <Grid.Column style={{ padding: "5px" }}>
                 <Button
                   as="a"
-                  onClick={() => copyToClipboard("post-slug")}
+                  onClick={copyToClipboard}
                   icon="linkify"
                   color="teal"
                 />
