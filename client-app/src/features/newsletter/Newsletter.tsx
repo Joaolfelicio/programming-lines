@@ -1,10 +1,5 @@
 import React, { useContext } from "react";
-import {
-  Segment,
-  Form,
-  Button,
-  Header,
-} from "semantic-ui-react";
+import { Segment, Form, Button, Header } from "semantic-ui-react";
 import { Form as FinalForm, Field } from "react-final-form";
 import {
   combineValidators,

@@ -12,7 +12,8 @@ const PostDashboard = () => {
   useEffect(() => {
     getPosts();
   }, [getPosts]);
-
+  document.title = "Programming Lines";
+  
   return (
     <Grid container>
       <GridColumn width={3}>Categories and stuff</GridColumn>

@@ -26,7 +26,6 @@ export default class PostStore {
       if (this.postsRegistry.size === 0) {
         this.loadingPosts = true;
         let posts = await api.Post.list();
-
         runInAction(() => {
           posts.forEach((post) => {
             setPostProps(post, this.rootStore.userStore.anonymousUser!);

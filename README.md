@@ -66,15 +66,17 @@
         1.  [x] If user never liked
         2.  [x] loading when liking
     4.  [x] Add date
-22. [ ] CS - PostDetails 
+22. [ ] CS - PostDetails <-------------
     1.  [x] Shouldn't call API if it's in memory (use history.push)
+    2.  [x] Put in the title "Programming Lines - Title of the Post"
+    3.  [ ] Reactions and share
 23. [ ] CS - Replies
 24. [ ] CS - Reactions
-25. [ ] AnonymousUser <---------------------
+25. [ ] AnonymousUser 
     1.  [x] Store in Local Storage AnonUserId  
     2.  [x] API - Create/Login user receive ID instead of fingerprint 
     3.  [x] Store fingerprint only in state
-    4.  [ ] I Think there might be a bug related to anonusers and reactions
+    4.  [x] I Think there might be a bug related to anonusers and reactions (Maybe not)
 26. [ ] Recommendations (Maybe)
 27. [ ] CS - Newsletter
     1.  [x] Post API
@@ -83,22 +85,24 @@
     4.  [x] Loading button
     5.  [ ] Clean form on submit
 28. [ ] CS - Filters
-29. [ ] CS - NotFound Page
-30. [ ] API - Next/Previous Post
+29. [ ] CS - Comments
+    1.  [ ] Allow markdown?
+30. [ ] CS - NotFound Page
+31. [ ] API - Next/Previous Post
     1.  [ ] If user filtered by category, filter the n/p post (Maybe)
-31. [ ] CS - Next/Previous Post
-32. [ ] Share button on the post
-33. [ ] About me
+32. [ ] CS - Next/Previous Post
+33. [ ] Share button on the post
+34. [ ] About me
     1.  [ ] Photo
     2.  [ ] Bio
     3.  [ ] Social Media
-34. [ ] Back Office
-35. [ ] API - Add predicates
-36. [ ] Infinite Scroll
-37. [ ] React-markdown
-38. [ ] Markdown preview
-39. [ ] Footer
-40. [ ] Add post title in the index.tsx title
+35. [ ] Back Office
+36. [ ] API - Add predicates
+37. [ ] Infinite Scroll
+38. [ ] React-markdown
+39. [ ] Markdown preview
+40. [ ] Footer
+41. [ ] Add post title in the index.tsx title
 
 
 ## STACK

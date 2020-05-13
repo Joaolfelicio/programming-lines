@@ -27,7 +27,12 @@ const NavBar: React.FC<IProps> = ({ activeItem }) => {
   const history = useHistory();
 
   return (
-    <Menu fixed="top" style={{ borderRadius: "0px" }} inverted={isDarkMode} borderless>
+    <Menu
+      fixed="top"
+      style={{ borderRadius: "0px" }}
+      inverted={isDarkMode}
+      borderless
+    >
       <Menu.Item as={Link} to="/" style={{ alignItems: "center" }}>
         <img src="/assets/logo.png" alt="Joao Felicio blog logo." />
         <h1 style={{ marginLeft: "15px", marginTop: "0px", fontSize: "20px" }}>
@@ -41,11 +46,11 @@ const NavBar: React.FC<IProps> = ({ activeItem }) => {
           loading={loadingPosts}
           fluid
           onResultSelect={(e, data) => {
-            console.log(toJS(data.result))
+            console.log(toJS(data.result));
             history.push(`/post/${data.result.slug}`);
             //TODO: Fix this
-             data.value = "";
-           }}
+            data.value = "";
+          }}
           size="small"
           placeholder="Search posts..."
           className="search-box"
