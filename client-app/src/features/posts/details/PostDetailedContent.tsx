@@ -1,9 +1,10 @@
-import React from "react";
+import React, { Fragment, useRef } from "react";
 import { IPost } from "../../../app/models/post";
 import { observer } from "mobx-react-lite";
 import ReactMarkdown from "react-markdown";
 import "github-markdown-css";
 import CodeBlock from "../../../app/common/syntaxHighlight/CodeBlock";
+import ScrollProgressRead from "react-scroll-progress-read";
 
 interface IProps {
   post: IPost;
@@ -17,7 +18,7 @@ const PostDetailedContent: React.FC<IProps> = ({ post }) => {
       skipHtml={false}
       escapeHtml={false}
       renderers={{
-        code: CodeBlock
+        code: CodeBlock,
       }}
     />
   );

@@ -26,7 +26,7 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
   }, [loginAnonymousUser]);
 
   if (appLoading) {
-    return <LoadingComponent inverted={isDarkMode} content="Loading app..." />;
+    return <LoadingComponent inverted={isDarkMode} />;
   }
 
   return (

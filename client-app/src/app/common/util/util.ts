@@ -4,7 +4,9 @@ const readingTime = require("reading-time");
 
 export const setPostProps = (post: IPost, anonUser: IAnonymousUser) => {
   //Need to get the anonymous user first;
-  post.hasLiked = post.reactions.some(x => x.author.id === anonUser?.id && x.isPositive);
+  post.hasLiked = post.reactions.some(
+    (x) => x.author.id === anonUser?.id && x.isPositive
+  );
 
   post.publishDate = new Date(post.publishDate);
 
@@ -28,5 +30,4 @@ export const setPostProps = (post: IPost, anonUser: IAnonymousUser) => {
 
   return post;
 };
-
 

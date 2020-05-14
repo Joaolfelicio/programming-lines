@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, Fragment, useState } from "react";
 import PostDetailedContent from "./PostDetailedContent";
 import { RouteComponentProps } from "react-router-dom";
 import { Container } from "semantic-ui-react";
@@ -7,7 +7,7 @@ import { observer } from "mobx-react-lite";
 import PostListItemPlaceholder from "../dashboard/PostListItemPlaceholder";
 import PostDetailedHeader from "./PostDetailedHeader";
 import PostDetailedFooter from "./PostDetailedFooter";
-
+import ScrollProgressRead from "react-scroll-progress-read";
 
 interface DetailParams {
   slug: string;
@@ -18,10 +18,14 @@ const PostsDetails: React.FC<RouteComponentProps<DetailParams>> = ({
 }) => {
   const rootStore = useContext(RootStoreContext);
   const { detailedPost, loadingPosts, getDetailedPost } = rootStore.postStore;
+  const { setDisplayProgressBar } = rootStore.commonStore;
+
+  const [readingProgress, setReadingProgress] = useState(0);
 
   useEffect(() => {
+    setDisplayProgressBar(true);
     getDetailedPost(match.params.slug);
-  }, [getDetailedPost, match.params.slug]);
+  }, [getDetailedPost, match.params.slug, setDisplayProgressBar]);
 
   if (loadingPosts) {
     return <PostListItemPlaceholder />;
@@ -32,14 +36,16 @@ const PostsDetails: React.FC<RouteComponentProps<DetailParams>> = ({
     return <h2>Activity Not Found</h2>;
   }
 
-  document.title = `Programming Lines - ${detailedPost.title}`; 
+  document.title = `Programming Lines - ${detailedPost.title}`;
 
   return (
-    <Container text style={{ width: "80%", maxWidth: "680px" }}>
-      <PostDetailedHeader post={detailedPost!} />
-      <PostDetailedContent post={detailedPost!} />
-      <PostDetailedFooter />
-    </Container>
+    <Fragment>
+      <Container text style={{ width: "80%", maxWidth: "680px" }}>
+        <PostDetailedHeader post={detailedPost!} />
+        <PostDetailedContent post={detailedPost!} />
+        <PostDetailedFooter />
+      </Container>
+    </Fragment>
   );
 };
 

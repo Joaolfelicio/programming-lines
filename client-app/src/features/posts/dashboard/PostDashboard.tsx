@@ -8,20 +8,22 @@ import PostListItemPlaceholder from "./PostListItemPlaceholder";
 const PostDashboard = () => {
   const rootStore = useContext(RootStoreContext);
   const { getPosts, loadingPosts } = rootStore.postStore;
+  const { setDisplayProgressBar } = rootStore.commonStore;
 
   useEffect(() => {
+    setDisplayProgressBar(false);
     getPosts();
   }, [getPosts]);
   document.title = "Programming Lines";
-  
+
   return (
     <Grid container>
       <GridColumn width={3}>Categories and stuff</GridColumn>
       <GridColumn width={13}>
         {loadingPosts ? (
           <Fragment>
-            <PostListItemPlaceholder /> 
-            <PostListItemPlaceholder /> 
+            <PostListItemPlaceholder />
+            <PostListItemPlaceholder />
             <PostListItemPlaceholder />
             <PostListItemPlaceholder />
           </Fragment>

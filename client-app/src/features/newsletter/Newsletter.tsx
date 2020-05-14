@@ -43,7 +43,12 @@ const Newsletter = () => {
       inverted={isDarkMode}
       raised
       clearing
-      style={{ width: "45%", maxWidth: 500, margin: "80px auto" }}
+      style={{
+        width: "45%",
+        maxWidth: 500,
+        minWidth: 420,
+        margin: "80px auto",
+      }}
     >
       <Header
         inverted={isDarkMode}
