@@ -70,6 +70,7 @@
     1.  [x] Shouldn't call API if it's in memory (use history.push)
     2.  [x] Put in the title "Programming Lines - Title of the Post"
     3.  [ ] Reactions and share
+    4.  [ ] Reading Process bar
 23. [ ] CS - Replies
 24. [ ] CS - Reactions
 25. [ ] AnonymousUser 

@@ -34,8 +34,6 @@ export class UserStore {
         //If user has a invalid fingerprint, it will create and return a new anonUser
         let anonymousUser = await api.AnonUser.get(anonUserIdEnvelope);
 
-        console.log("AnonUser.get(anonUserIdEnvelope)", anonymousUser);
-
         if (anonymousUser) {
           runInAction(() => {
             this.anonymousUser = anonymousUser;
@@ -71,7 +69,6 @@ export class UserStore {
         runInAction(() => {
           this.rootStore.commonStore.appLoading = false;
           this.anonymousUser = anonUser;
-          console.log("Created", this.anonymousUser);
         });
         window.localStorage.setItem("AnonUserId", anonUser.id);
       }),
