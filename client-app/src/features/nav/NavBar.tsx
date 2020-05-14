@@ -1,11 +1,10 @@
-import React, { useContext, Fragment, useEffect } from "react";
-import { Menu, Search, Progress } from "semantic-ui-react";
+import React, { useContext, Fragment } from "react";
+import { Menu, Search } from "semantic-ui-react";
 import DarkModeToggle from "react-dark-mode-toggle";
 import { RootStoreContext } from "../../app/stores/rootStore";
 import { observer } from "mobx-react-lite";
 import { toJS } from "mobx";
 import { useHistory, Link } from "react-router-dom";
-import ScrollProgressRead from "react-scroll-progress-read";
 
 interface IProps {
   activeItem: string | null;
@@ -18,7 +17,6 @@ const NavBar: React.FC<IProps> = ({ activeItem }) => {
     isDarkMode,
     activeNavItem,
     setActiveNavItem,
-    displayProgressBar,
   } = rootStore.commonStore;
   const {
     postsBySearchTerm,
@@ -85,16 +83,6 @@ const NavBar: React.FC<IProps> = ({ activeItem }) => {
           </Menu.Item>
         </Menu.Menu>
       </Menu>
-
-      {displayProgressBar && (
-          <Progress
-            style={{ top: 60.96, position: "fixed", margin: 0 }}
-            color="red"
-            inverted={isDarkMode}
-            percent={10}
-            size="tiny"
-          />
-      )}
     </Fragment>
   );
 };

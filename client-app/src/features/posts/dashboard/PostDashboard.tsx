@@ -8,10 +8,8 @@ import PostListItemPlaceholder from "./PostListItemPlaceholder";
 const PostDashboard = () => {
   const rootStore = useContext(RootStoreContext);
   const { getPosts, loadingPosts } = rootStore.postStore;
-  const { setDisplayProgressBar } = rootStore.commonStore;
 
   useEffect(() => {
-    setDisplayProgressBar(false);
     getPosts();
   }, [getPosts]);
   document.title = "Programming Lines";

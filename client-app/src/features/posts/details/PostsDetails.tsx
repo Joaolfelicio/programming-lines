@@ -18,14 +18,10 @@ const PostsDetails: React.FC<RouteComponentProps<DetailParams>> = ({
 }) => {
   const rootStore = useContext(RootStoreContext);
   const { detailedPost, loadingPosts, getDetailedPost } = rootStore.postStore;
-  const { setDisplayProgressBar } = rootStore.commonStore;
-
-  const [readingProgress, setReadingProgress] = useState(0);
 
   useEffect(() => {
-    setDisplayProgressBar(true);
     getDetailedPost(match.params.slug);
-  }, [getDetailedPost, match.params.slug, setDisplayProgressBar]);
+  }, [getDetailedPost, match.params.slug]);
 
   if (loadingPosts) {
     return <PostListItemPlaceholder />;

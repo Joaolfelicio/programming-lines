@@ -16,7 +16,6 @@ export default class CommonStore {
   @observable appLoading = true;
   @observable isDarkMode = true;
   @observable activeNavItem = "posts";
-  @observable displayProgressBar = false;
 
   @action setAppLoading = () => {
     this.appLoading = false;
@@ -26,10 +25,6 @@ export default class CommonStore {
     this.isDarkMode = !this.isDarkMode;
     console.log(this.isDarkMode)
   };
-
-  @action setDisplayProgressBar = (display: boolean) => {
-    this.displayProgressBar = display;
-  }
 
   @action setActiveNavItem = (active: string) => {
     this.activeNavItem = active;
