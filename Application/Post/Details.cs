@@ -62,7 +62,8 @@ namespace Application.Post
                     Category = post.Category,
                     Author = author,
                     Comments = _populateData.PopulateComments(post),
-                    Reactions = _populateData.PopulateReactions(post)
+                    Reactions = _populateData.PopulateReactions(post),
+                    RecommendedPosts = await _populateData.PopulateRecommendPost(post)
                 };
             }
         }

@@ -1,26 +1,29 @@
-import React, { Fragment, useRef } from "react";
+import React from "react";
 import { IPost } from "../../../app/models/post";
 import { observer } from "mobx-react-lite";
 import ReactMarkdown from "react-markdown";
 import "github-markdown-css";
 import CodeBlock from "../../../app/common/syntaxHighlight/CodeBlock";
-import ScrollProgressRead from "react-scroll-progress-read";
+import "./style/postDetailsStyle.css";
 
 interface IProps {
   post: IPost;
 }
 
 const PostDetailedContent: React.FC<IProps> = ({ post }) => {
+
   return (
-    <ReactMarkdown
-      className="markdown-body"
-      source={post.content}
-      skipHtml={false}
-      escapeHtml={false}
-      renderers={{
-        code: CodeBlock,
-      }}
-    />
+
+      <ReactMarkdown
+        className="markdown-body"
+        source={post.content}
+        skipHtml={false}
+        escapeHtml={false}
+        renderers={{
+          code: CodeBlock,
+        }}
+      />
+
   );
 };
 

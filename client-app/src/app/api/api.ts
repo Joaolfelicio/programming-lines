@@ -6,6 +6,7 @@ import { IReactionEnvelope } from "../models/Requests/reactionEnvelope";
 import { INewsletterEnvelope } from "../models/Requests/newsletterEnvelope";
 import { toast } from "react-toastify";
 import { IAnonUserIdEnvelope } from "../models/Requests/anonUserIdEnvelope";
+import { ISearchablePostDto } from "../models/Dto/searchPostDto";
 
 // axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 axios.defaults.baseURL = "https://localhost:5001/api";
@@ -68,7 +69,8 @@ const requests = {
 const Post = {
   list: (): Promise<IPost[]> => requests.get(`/Post`),
   react: (reaction: IReactionEnvelope) => requests.post(`/Reaction`, reaction),
-  detail: (slug: string): Promise<IPost> => requests.get(`/post/${slug}`)
+  detail: (slug: string): Promise<IPost> => requests.get(`/Post/${slug}`),
+  searchableList: (): Promise<ISearchablePostDto[]> => requests.get("/Post/SearchablePosts")
 };
 
 const AnonUser = {

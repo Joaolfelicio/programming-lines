@@ -1,11 +1,18 @@
 import React, { useContext } from "react";
 import { Item, Button, Popup, Grid, Container, Image } from "semantic-ui-react";
-import { toast } from "react-toastify";
 import { IPost } from "../../../app/models/post";
 import moment from "moment";
 import { RootStoreContext } from "../../../app/stores/rootStore";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
+import {
+  copyToClipboard,
+  generateShareUrl,
+  internalUrl,
+  linkedInShareUrl,
+  externalUrl,
+  twitterShareUrl,
+} from "../../../app/common/util/util";
 
 interface IProps {
   post: IPost;
@@ -13,25 +20,6 @@ interface IProps {
 }
 
 const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
-  const internalUrl = `/post/${post.slug}`;
-  const externalUrl = `http://localhost:3000/post/${post.slug}`;
-  let twitterShareUrl = "http://twitter.com/share?text=[TITLE]&url=[URL]";
-  let linkedInShareUrl =
-    "https://www.linkedin.com/sharing/share-offsite/?url=[URL]";
-
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(externalUrl);
-    toast.success("Copied to clipboard.");
-  };
-
-  const generateShareUrl = (
-    shareUrl: string,
-    title: string,
-    url: string
-  ): string => {
-    return encodeURI(shareUrl.replace("[TITLE]", title).replace("[URL]", url));
-  };
-
   const rootStore = useContext(RootStoreContext);
   const { reactionLoading, reactToPost } = rootStore.postStore;
 
@@ -40,9 +28,9 @@ const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
       <Item.Image
         className="post-list-image"
         as={Link}
-        to={internalUrl}
+        to={internalUrl(post.slug)}
         size="medium"
-        alt={post.title}
+        alt={post.title + "."}
         src={post.image}
       />
 
@@ -50,7 +38,7 @@ const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
         <Container>
           <Item.Header>
             <div className="posts-header">
-              <Link to={internalUrl}>
+              <Link to={internalUrl(post.slug)}>
                 <h2 style={{ marginBottom: "0px" }}>{post.title}</h2>
               </Link>
 
@@ -58,7 +46,7 @@ const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
                 <Image
                   as={Link}
                   to={post.slug}
-                  href={internalUrl}
+                  href={internalUrl(post.slug)}
                   src={post.category.image}
                   alt={post.category.name}
                   style={{ width: "30px" }}
@@ -67,7 +55,7 @@ const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
             </div>
             <div>
               <time style={{ fontSize: "11px" }}>
-                {moment().format("MMM Do YYYY")}
+                {moment(post.publishDate).format("MMM Do YYYY")}
               </time>
             </div>
           </Item.Header>
@@ -112,7 +100,7 @@ const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
                   href={generateShareUrl(
                     linkedInShareUrl,
                     post.title,
-                    externalUrl
+                    externalUrl(post.slug)
                   )}
                   icon="linkedin"
                   color="linkedin"
@@ -125,7 +113,7 @@ const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
                   href={generateShareUrl(
                     twitterShareUrl,
                     post.title,
-                    externalUrl
+                    externalUrl(post.slug)
                   )}
                   icon="twitter"
                   color="twitter"
@@ -135,7 +123,7 @@ const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
               <Grid.Column style={{ padding: "5px" }}>
                 <Button
                   as="a"
-                  onClick={copyToClipboard}
+                  onClick={() => copyToClipboard(externalUrl(post.slug))}
                   icon="linkify"
                   color="teal"
                 />

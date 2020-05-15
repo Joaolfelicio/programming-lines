@@ -19,5 +19,6 @@ namespace Application.Post.Model
         public UserDto Author { get; set; }
         public ICollection<CommentDto> Comments { get; set; }
         public ICollection<ReactionDto> Reactions { get; set; }
+        public ICollection<RecommendedPostDto> RecommendedPosts {get; set;}
     }
 }

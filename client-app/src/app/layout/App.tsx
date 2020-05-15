@@ -20,10 +20,12 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
   const { appLoading } = rootStore.commonStore;
   const { loginAnonymousUser } = rootStore.userStore;
   const { isDarkMode } = rootStore.commonStore;
+  const { setSearchablePosts } = rootStore.postStore;
 
   useEffect(() => {
     loginAnonymousUser();
-  }, [loginAnonymousUser]);
+    setSearchablePosts();
+  }, [loginAnonymousUser, setSearchablePosts]);
 
   if (appLoading) {
     return <LoadingComponent inverted={isDarkMode} />;

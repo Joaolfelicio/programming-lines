@@ -30,7 +30,7 @@ const NavBar: React.FC<IProps> = ({ activeItem }) => {
     <Fragment>
       <Menu
         fixed="top"
-        style={{ borderRadius: "0px" }}
+        style={{ borderRadius: "0px", height: 50 }}
         inverted={isDarkMode}
         borderless
       >

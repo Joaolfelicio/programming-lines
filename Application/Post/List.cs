@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -48,6 +49,7 @@ namespace Application.Post
                         Image = post.Author.Image
                     };
 
+
                     var postDto = new PostDto
                     {
                         Id = post.Id,
@@ -60,7 +62,8 @@ namespace Application.Post
                         Title = post.Title,
                         Content = post.Content,
                         Comments = _populateData.PopulateComments(post),
-                        Reactions = _populateData.PopulateReactions(post)
+                        Reactions = _populateData.PopulateReactions(post),
+                        RecommendedPosts = await _populateData.PopulateRecommendPost(post)
                     };
                     postsDto.Add(postDto);
                 }

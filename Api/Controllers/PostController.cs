@@ -45,5 +45,11 @@ namespace Api.Controllers
         {
             return await Mediator.Send(new Details.Query { Slug = slug });
         }
+
+        [HttpGet("SearchablePosts")]
+        public async Task<ActionResult<List<SearchablePostDto>>> ListSearchable()
+        {
+            return await Mediator.Send(new ListSearchable.Query());
+        }
     }
 }

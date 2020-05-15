@@ -7,6 +7,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -76,4 +77,8 @@ code {
 .search-box input {
   width: 300px;
   border-radius: 5px !important;
+}
+
+.post-button-group a {
+  font-size: 1.2rem !important;
 }

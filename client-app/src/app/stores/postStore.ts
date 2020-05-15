@@ -6,7 +6,7 @@ import { setPostProps } from "../common/util/util";
 import { IPost } from "../models/post";
 import { IReactionEnvelope } from "../models/Requests/reactionEnvelope";
 import { IReaction } from "../models/reaction";
-import { ISearchPostDto } from "../models/Dto/searchPostDto";
+import { ISearchablePostDto, ISearchPost } from "../models/Dto/searchPostDto";
 
 export default class PostStore {
   rootStore: RootStore;
@@ -18,7 +18,8 @@ export default class PostStore {
   @observable loadingPosts = false;
   @observable reactionLoading = false;
   @observable reactionTarget = "";
-  @observable postsBySearchTerm: ISearchPostDto[] | null = null;
+  @observable postsBySearchTerm: ISearchPost[] | null = null;
+  @observable searchablePosts: ISearchablePostDto[] | null = null;
   @observable detailedPost: IPost | null = null;
 
   @action getPosts = async () => {
@@ -46,15 +47,16 @@ export default class PostStore {
     this.loadingPosts = true;
     try {
       const detailedPostFromMemory = this.postsRegistry.get(slug);
-
       if (detailedPostFromMemory) {
         this.detailedPost = detailedPostFromMemory;
       } else {
         const detailedPost = await api.Post.detail(slug);
         runInAction(() => {
+          setPostProps(detailedPost, this.rootStore.userStore.anonymousUser!);
           this.detailedPost = detailedPost;
         });
       }
+
       runInAction(() => {
         this.loadingPosts = false;
       });
@@ -66,25 +68,44 @@ export default class PostStore {
     }
   };
 
-  @action setPostsBySearchTerm = (searchTerm: string) => {
-    let postsFiltered: ISearchPostDto[] = [];
-    this.postsByDate.forEach((post) => {
-      //If the search terms includes either the post title or the category name
-      if (
-        post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        post.category.name.toLowerCase().includes(searchTerm.toLowerCase())
-      ) {
-        let searchPost: ISearchPostDto = {
-          slug: post.slug,
-          title: post.title,
-          image: post.image,
-          description: post.category.name,
-        };
-        postsFiltered.push(searchPost);
-      }
-    });
+  @action setSearchablePosts = async () => {
+    if (!this.searchablePosts) {
+      var searchablePosts = await api.Post.searchableList();
+      //Order by publish date
+      const orderedPosts = searchablePosts.sort(
+        (a, b) =>
+        new Date(a.publishDate).getTime() - new Date(b.publishDate).getTime()
+        );
+        console.log(orderedPosts);
 
-    this.postsBySearchTerm = postsFiltered;
+      runInAction(() => {
+        this.searchablePosts = orderedPosts;
+      });
+    }
+  };
+
+  @action setPostsBySearchTerm = (searchTerm: string) => {
+    let postsFiltered: ISearchPost[] = [];
+
+    if (this.searchablePosts) {
+      this.searchablePosts.forEach((post) => {
+        //If the search terms includes either the post title or the category name
+        if (
+          post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          post.description.toLowerCase().includes(searchTerm.toLowerCase())
+        ) {
+          const postMapped: ISearchPost = {
+            slug: post.slug,
+            title: post.title,
+            description: post.description,
+            image: post.image
+          }
+
+          postsFiltered.push(postMapped);
+        }
+        this.postsBySearchTerm = postsFiltered;
+      });
+    }
   };
 
   @action reactToPost = async (postSlug: string, postId: string) => {
@@ -103,10 +124,14 @@ export default class PostStore {
       const reaction = await api.Post.react(reactionEnvelope);
 
       runInAction(() => {
-        const post: IPost = this.postsRegistry.get(postSlug);
+        //If posts is not in the registry, user haven't loaded the posts lists,
+        //   so he is in the detailed page, he is reacting to the post that he has selected
+        let post: IPost = this.postsRegistry.get(postSlug)
+          ? this.postsRegistry.get(postSlug)
+          : this.detailedPost!;
+
         let hasNotReactedBefore = true;
 
-        console.log(post);
         post.reactions = post.reactions.filter((reaction: IReaction) => {
           //If user already reacted before, invert the reaction bool
           if (reaction.author.id === userId) {

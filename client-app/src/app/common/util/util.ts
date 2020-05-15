@@ -1,5 +1,6 @@
 import { IPost } from "../../models/post";
 import { IAnonymousUser } from "../../models/anonymousUser";
+import { toast } from "react-toastify";
 const readingTime = require("reading-time");
 
 export const setPostProps = (post: IPost, anonUser: IAnonymousUser) => {
@@ -31,3 +32,21 @@ export const setPostProps = (post: IPost, anonUser: IAnonymousUser) => {
   return post;
 };
 
+export const copyToClipboard = (externalUrl: string) => {
+  navigator.clipboard.writeText(externalUrl);
+  toast.success("Copied to clipboard.");
+};
+
+export const generateShareUrl = (
+  shareUrl: string,
+  title: string,
+  url: string
+): string => {
+  return encodeURI(shareUrl.replace("[TITLE]", title).replace("[URL]", url));
+};
+
+export const internalUrl = (slug:string) => `/post/${slug}`;
+export const externalUrl = (slug:string) => `http://localhost:3000/post/${slug}`;
+export const twitterShareUrl = "http://twitter.com/share?text=[TITLE]&url=[URL]";
+export const linkedInShareUrl =
+  "https://www.linkedin.com/sharing/share-offsite/?url=[URL]";

@@ -17,6 +17,7 @@ export default class CommonStore {
   @observable isDarkMode = true;
   @observable activeNavItem = "posts";
 
+
   @action setAppLoading = () => {
     this.appLoading = false;
   };

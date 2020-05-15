@@ -51,9 +51,10 @@
         2.  [ ] Blur when user selects a post
         3.  [ ] Right now if user goes to detailed post and refresh, no results and displayed
     2.  [ ] Dark Mode
-        1.  [ ] Fix Bug of when interacting with Nav Bar, dark moddle toggle moves.
+        1.  [x] Fix Bug of when interacting with Nav Bar, dark moddle toggle moves.
         2.  [ ] Store in local storage the preference
     3.  [ ] Hamburguer for mobile
+    4.  [ ] If user is in detailed page, change "Programming lines" to h2
 20. [ ] CS - Login  
 21. [x] CS - Posts
     1.  [x] Add category on the opposite side of the title 
@@ -62,11 +63,15 @@
         1.  [x] If user never liked
         2.  [x] loading when liking
     4.  [x] Add date
-22. [ ] CS - PostDetails <-------------
+    5.  [ ] Container it posts list should be bigger on bigger devices
+    6.  [ ] Fix Posts order by date <----------------------
+22. [ ] CS - PostDetails
     1.  [x] Shouldn't call API if it's in memory (use history.push)
     2.  [x] Put in the title "Programming Lines - Title of the Post"
-    3.  [ ] Reactions and share
+    3.  [x] Reactions and share
     4.  [ ] Reading Process bar
+    5.  [ ] Placeholder
+    6.  [ ] Category Button on click filter
 23. [ ] CS - Replies
 24. [ ] CS - Reactions
 25. [ ] AnonymousUser 

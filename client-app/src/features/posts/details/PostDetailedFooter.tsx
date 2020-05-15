@@ -1,14 +1,19 @@
-import React, { Fragment } from 'react'
-import PostDetailedComments from './PostDetailedComments'
-import PostDetailedRecommendations from './PostDetailedRecommendations'
+import React, { Fragment } from "react";
+import { IPost } from "../../../app/models/post";
+import RecommendPostList from "./RecommendPostList";
 
-const PostDetailedFooter = () => {
-    return (
-        <Fragment> 
-            <PostDetailedRecommendations />
-            <PostDetailedComments />
-        </Fragment>
-    )
+interface IProps {
+  post: IPost;
 }
 
-export default PostDetailedFooter
+const PostDetailedFooter: React.FC<IProps> = ({ post }) => {
+  return (
+    <Fragment>
+      {post.recommendedPosts && post.recommendedPosts.length > 0 && (
+        <RecommendPostList recommendedPosts={post.recommendedPosts} />
+      )}
+    </Fragment>
+  );
+};
+
+export default PostDetailedFooter;

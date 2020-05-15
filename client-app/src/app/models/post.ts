@@ -18,4 +18,15 @@ export interface IPost {
     author: IAuthor;
     comments: IComment[];
     reactions: IReaction[];
+    recommendedPosts: IPostRecommend[];
+}
+
+export interface IPostRecommend {
+    id: string;
+    slug: string;
+    image: string;
+    title: string;
+    content: string;
+    publishDate: Date;
+    category: ICategory;
 }
