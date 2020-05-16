@@ -87,11 +87,12 @@
     3.  [x] Display success
     4.  [x] Loading button
     5.  [ ] Clean form on submit
-28. [ ] CS - Filters
+28. [ ] CS - Filters <-----------------------------------
     1.  [ ] Recent
     2.  [ ] Oldest
     3.  [ ] Popular
     4.  [ ] Categories (Display all categories)
+    5.  [ ] On Mobile put the filters inside the hamburger sidebar
 29. [ ] ~~CS - Comments~~
     1.  [ ] ~~Allow markdown?~~
 30. [x] CS - NotFound Page
@@ -109,4 +110,5 @@
 39. [ ] Footer
 40. [x] Add post title in the index.tsx title
 41. [ ] Responsiveness
+42. [ ] SEO
 

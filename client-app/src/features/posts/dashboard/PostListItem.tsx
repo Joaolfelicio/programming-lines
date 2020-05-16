@@ -32,6 +32,7 @@ const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
         size="medium"
         alt={post.title + "."}
         src={post.image}
+        style={{height: "100%"}}
       />
 
       <Item.Content className="post-content">
