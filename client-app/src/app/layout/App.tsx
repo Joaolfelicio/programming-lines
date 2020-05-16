@@ -14,6 +14,7 @@ import {
 } from "react-router-dom";
 import PostsDetails from "../../features/posts/details/PostsDetails";
 import { Container } from "semantic-ui-react";
+import NotFound from "./NotFound";
 
 const App: React.FC<RouteComponentProps> = ({ location }) => {
   const rootStore = useContext(RootStoreContext);
@@ -38,6 +39,7 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
         <Switch>
           <Route exact path="/" component={PostDashboard} />
           <Route path="/post/:slug" component={PostsDetails} />
+          <Route component={NotFound} />
         </Switch>
         <Newsletter />
       </Container>

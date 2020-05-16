@@ -1,5 +1,5 @@
 import { RootStore } from "./rootStore";
-import { observable, action, configure } from "mobx";
+import { observable, action, configure, reaction } from "mobx";
 import api from "../api/api";
 import { INewsletterEnvelope } from "../models/Requests/newsletterEnvelope";
 import { toast } from "react-toastify";
@@ -11,10 +11,17 @@ export default class CommonStore {
 
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
+
+    reaction(
+      () => this.isDarkMode,
+      (isDarkMode) => {
+        localStorage.setItem("DarkMode", isDarkMode.toString());
+      }
+    )
   }
 
   @observable appLoading = true;
-  @observable isDarkMode = true;
+  @observable isDarkMode = localStorage.getItem("DarkMode") ? (localStorage.getItem("DarkMode") === "true" ) : true;
   @observable activeNavItem = "posts";
 
 
@@ -24,7 +31,6 @@ export default class CommonStore {
 
   @action setIsDarkMode = () => {
     this.isDarkMode = !this.isDarkMode;
-    console.log(this.isDarkMode)
   };
 
   @action setActiveNavItem = (active: string) => {

@@ -26,6 +26,7 @@
     "fingerprintjs2": "^2.1.0",
     "github-markdown-css": "^4.0.0",
     "highlight.js": "^10.0.3",
+    "lodash.orderby": "^4.6.0",
     "mobx": "^5.15.4",
     "mobx-react-lite": "^2.0.6",
     "moment": "^2.25.3",

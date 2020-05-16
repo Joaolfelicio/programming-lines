@@ -52,7 +52,8 @@
         3.  [ ] Right now if user goes to detailed post and refresh, no results and displayed
     2.  [ ] Dark Mode
         1.  [x] Fix Bug of when interacting with Nav Bar, dark moddle toggle moves.
-        2.  [ ] Store in local storage the preference
+        2.  [x] Store in local storage the preference
+        3.  [ ] Style Everywhere
     3.  [ ] Hamburguer for mobile
     4.  [ ] If user is in detailed page, change "Programming lines" to h2
 20. [ ] CS - Login  
@@ -64,7 +65,7 @@
         2.  [x] loading when liking
     4.  [x] Add date
     5.  [ ] Container it posts list should be bigger on bigger devices
-    6.  [ ] Fix Posts order by date <----------------------
+    6.  [x] Fix Posts order by date
 22. [ ] CS - PostDetails
     1.  [x] Shouldn't call API if it's in memory (use history.push)
     2.  [x] Put in the title "Programming Lines - Title of the Post"
@@ -72,14 +73,14 @@
     4.  [ ] Reading Process bar
     5.  [ ] Placeholder
     6.  [ ] Category Button on click filter
-23. [ ] CS - Replies
-24. [ ] CS - Reactions
-25. [ ] AnonymousUser 
+23. [ ] ~~CS - Replies (Maybe)~~
+24. [x] CS - Reactions
+25. [x] AnonymousUser 
     1.  [x] Store in Local Storage AnonUserId  
     2.  [x] API - Create/Login user receive ID instead of fingerprint 
     3.  [x] Store fingerprint only in state
     4.  [x] I Think there might be a bug related to anonusers and reactions (Maybe not)
-26. [ ] Recommendations (Maybe)
+26. [x] Recommendations
 27. [ ] CS - Newsletter
     1.  [x] Post API
     2.  [x] Display error
@@ -87,22 +88,25 @@
     4.  [x] Loading button
     5.  [ ] Clean form on submit
 28. [ ] CS - Filters
-29. [ ] CS - Comments
-    1.  [ ] Allow markdown?
-30. [ ] CS - NotFound Page
-31. [ ] API - Next/Previous Post
-    1.  [ ] If user filtered by category, filter the n/p post (Maybe)
-32. [ ] CS - Next/Previous Post
-33. [ ] Share button on the post
-34. [ ] About me
+    1.  [ ] Recent
+    2.  [ ] Oldest
+    3.  [ ] Popular
+    4.  [ ] Categories (Display all categories)
+29. [ ] ~~CS - Comments~~
+    1.  [ ] ~~Allow markdown?~~
+30. [x] CS - NotFound Page
+31. [x] CS - Next/Previous Post (Changed to recommended post)
+32. [x] Share button on the post
+33. [ ] About me
     1.  [ ] Photo
     2.  [ ] Bio
     3.  [ ] Social Media
-35. [ ] Back Office
-36. [ ] API - Add predicates
-37. [ ] Infinite Scroll
-38. [ ] React-markdown
-39. [ ] Markdown preview
-40. [ ] Footer
-41. [ ] Add post title in the index.tsx title
+34. [ ] Back Office
+35. [ ] API - Add predicates
+36. [ ] Infinite Scroll
+37. [x] React-markdown
+38. [ ] Markdown preview
+39. [ ] Footer
+40. [x] Add post title in the index.tsx title
+41. [ ] Responsiveness
 

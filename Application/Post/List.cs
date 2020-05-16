@@ -30,7 +30,7 @@ namespace Application.Post
 
             public async Task<List<PostDto>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var posts = await _context.Posts.ToListAsync(cancellationToken);
+                var posts = await _context.Posts.OrderByDescending(x => x.PublishDate).ToListAsync(cancellationToken);
                 var postsDto = new List<PostDto>();
 
                 foreach (var post in posts)

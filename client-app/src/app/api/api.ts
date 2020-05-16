@@ -7,6 +7,7 @@ import { INewsletterEnvelope } from "../models/Requests/newsletterEnvelope";
 import { toast } from "react-toastify";
 import { IAnonUserIdEnvelope } from "../models/Requests/anonUserIdEnvelope";
 import { ISearchablePostDto } from "../models/Dto/searchPostDto";
+import { history } from "../../index";
 
 // axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 axios.defaults.baseURL = "https://localhost:5001/api";
@@ -30,6 +31,10 @@ axios.interceptors.response.use(undefined, (error) => {
     toast.error("Network Error - Make sure the API is running!");
   }
   const { status, headers } = error.response;
+
+  if (status === 404) {
+    history.push("/NotFound");
+  }
 
   if (
     status === 401 &&

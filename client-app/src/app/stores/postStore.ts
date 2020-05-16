@@ -7,6 +7,7 @@ import { IPost } from "../models/post";
 import { IReactionEnvelope } from "../models/Requests/reactionEnvelope";
 import { IReaction } from "../models/reaction";
 import { ISearchablePostDto, ISearchPost } from "../models/Dto/searchPostDto";
+var orderBy = require('lodash.orderby');
 
 export default class PostStore {
   rootStore: RootStore;
@@ -70,13 +71,9 @@ export default class PostStore {
 
   @action setSearchablePosts = async () => {
     if (!this.searchablePosts) {
-      var searchablePosts = await api.Post.searchableList();
-      //Order by publish date
-      const orderedPosts = searchablePosts.sort(
-        (a, b) =>
-        new Date(a.publishDate).getTime() - new Date(b.publishDate).getTime()
-        );
-        console.log(orderedPosts);
+      let searchablePosts: ISearchablePostDto[] = await api.Post.searchableList();
+      const orderedPosts = orderBy(searchablePosts, ["publishDate"], ["desc"]);
+
 
       runInAction(() => {
         this.searchablePosts = orderedPosts;
@@ -98,8 +95,8 @@ export default class PostStore {
             slug: post.slug,
             title: post.title,
             description: post.description,
-            image: post.image
-          }
+            image: post.image,
+          };
 
           postsFiltered.push(postMapped);
         }
@@ -164,8 +161,6 @@ export default class PostStore {
 
   @computed get postsByDate(): IPost[] {
     const posts = Array.from(this.postsRegistry.values());
-    return posts.sort(
-      (a, b) => a.publishDate.getTime() - b.publishDate.getTime()
-    );
+    return orderBy(posts, ["publishDate"], ["desc"]); 
   }
 }

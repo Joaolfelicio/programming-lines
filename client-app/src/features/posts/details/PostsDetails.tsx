@@ -28,11 +28,14 @@ const PostsDetails: React.FC<RouteComponentProps<DetailParams>> = ({
   }
 
   if (!detailedPost) {
-    //TODO: Return to the 404 page
+    document.title = `Programming Lines`;
     return <h2>Activity Not Found</h2>;
-  }
+  } else {
+    document.title = `${detailedPost.title} - Programming Lines`;
 
-  document.title = `${detailedPost.title} - Programming Lines`;
+  }
+  
+
 
   return (
     <Fragment>
