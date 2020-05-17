@@ -7,7 +7,7 @@ import { IPost } from "../models/post";
 import { IReactionEnvelope } from "../models/Requests/reactionEnvelope";
 import { IReaction } from "../models/reaction";
 import { ISearchablePostDto, ISearchPost } from "../models/Dto/searchPostDto";
-var orderBy = require('lodash.orderby');
+const orderBy = require('lodash.orderby');
 
 export default class PostStore {
   rootStore: RootStore;

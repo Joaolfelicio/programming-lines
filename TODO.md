@@ -55,7 +55,7 @@
         2.  [x] Store in local storage the preference
         3.  [ ] Style Everywhere
     3.  [ ] Hamburguer for mobile
-    4.  [ ] If user is in detailed page, change "Programming lines" to h2
+    4.  [x] If user is in detailed page, change "Programming lines" to h2
 20. [ ] CS - Login  
 21. [x] CS - Posts
     1.  [x] Add category on the opposite side of the title 
@@ -87,27 +87,27 @@
     3.  [x] Display success
     4.  [x] Loading button
     5.  [ ] Clean form on submit
-28. [ ] CS - Filters <-----------------------------------
-    1.  [ ] Recent
-    2.  [ ] Oldest
-    3.  [ ] Popular
-    4.  [ ] Categories (Display all categories)
-    5.  [ ] On Mobile put the filters inside the hamburger sidebar
+28. [ ] CS - Filters
+    1.  [x] Recent
+    2.  [x] Popular
+    3.  [x] Categories (Display all categories)
+    4.  [ ] On Mobile put the filters inside the hamburger sidebar
+    5.  [ ] Filter posts
 29. [ ] ~~CS - Comments~~
     1.  [ ] ~~Allow markdown?~~
 30. [x] CS - NotFound Page
 31. [x] CS - Next/Previous Post (Changed to recommended post)
 32. [x] Share button on the post
-33. [ ] About me
+33. [ ] About me <-----------------------------
     1.  [ ] Photo
     2.  [ ] Bio
     3.  [ ] Social Media
 34. [ ] Back Office
 35. [ ] API - Add predicates
-36. [ ] Infinite Scroll
+36. [ ] Infinite Scroll <-----------------------------------
 37. [x] React-markdown
 38. [ ] Markdown preview
-39. [ ] Footer
+39. [ ] Footer <-----------------------------
 40. [x] Add post title in the index.tsx title
 41. [ ] Responsiveness
 42. [ ] SEO

@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { IAnonUserIdEnvelope } from "../models/Requests/anonUserIdEnvelope";
 import { ISearchablePostDto } from "../models/Dto/searchPostDto";
 import { history } from "../../index";
+import { ICategory } from "../models/category";
 
 // axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 axios.defaults.baseURL = "https://localhost:5001/api";
@@ -92,8 +93,15 @@ const Newsletter = {
     requests.post(`/Newsletter`, newsletter),
 };
 
+const Category = {
+  list: (): Promise<ICategory[]> => {
+    return requests.get(`/Category`);
+  }
+}
+
 export default {
   Post,
   AnonUser,
-  Newsletter
+  Newsletter,
+  Category
 };

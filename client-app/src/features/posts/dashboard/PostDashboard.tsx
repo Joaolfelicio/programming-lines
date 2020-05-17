@@ -4,6 +4,7 @@ import PostList from "./PostList";
 import { RootStoreContext } from "../../../app/stores/rootStore";
 import { observer } from "mobx-react-lite";
 import PostListItemPlaceholder from "./PostListItemPlaceholder";
+import PostFilters from "./PostFilters";
 
 const PostDashboard = () => {
   const rootStore = useContext(RootStoreContext);
@@ -16,7 +17,9 @@ const PostDashboard = () => {
 
   return (
     <Grid container>
-      <GridColumn width={3}>Categories and stuff</GridColumn>
+      <GridColumn style={{position: "relative"}} width={3}>
+        <PostFilters />
+      </GridColumn>
       <GridColumn width={13}>
         {loadingPosts ? (
           <Fragment>

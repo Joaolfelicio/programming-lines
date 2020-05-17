@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, Fragment } from "react";
 import { RootStoreContext } from "../stores/rootStore";
-import LoadingComponent from "./LoadingComponent";
+import LoadingComponent from "./AppLoadingComponent";
 import { observer } from "mobx-react-lite";
 import NavBar from "../../features/nav/NavBar";
 import PostDashboard from "../../features/posts/dashboard/PostDashboard";
@@ -16,7 +16,7 @@ import PostsDetails from "../../features/posts/details/PostsDetails";
 import { Container } from "semantic-ui-react";
 import NotFound from "./NotFound";
 
-const App: React.FC<RouteComponentProps> = ({ location }) => {
+const App: React.FC<RouteComponentProps> = () => {
   const rootStore = useContext(RootStoreContext);
   const { appLoading } = rootStore.commonStore;
   const { loginAnonymousUser } = rootStore.userStore;

@@ -21,26 +21,33 @@ const NavBar: React.FC<IProps> = ({ activeItem }) => {
   const {
     postsBySearchTerm,
     setPostsBySearchTerm,
-    loadingPosts,
+    loadingPosts
   } = rootStore.postStore;
 
   const history = useHistory();
+
+  const headerStyle = {
+    marginLeft: "15px",
+    marginTop: "0px",
+    fontSize: "20px",
+  };
 
   return (
     <Fragment>
       <Menu
         fixed="top"
-        style={{ borderRadius: "0px", height: 50 }}
+        style={{ borderRadius: "0px", height: 50}}
         inverted={isDarkMode}
         borderless
       >
         <Menu.Item as={Link} to="/" style={{ alignItems: "center" }}>
-          <img src="/assets/logo.png" alt="Joao Felicio blog logo." />
-          <h1
-            style={{ marginLeft: "15px", marginTop: "0px", fontSize: "20px" }}
-          >
-            Programming Lines
-          </h1>
+          <img src="/assets/logo.png" alt="Programming blog logo." />
+          {/* If we are seeing a detailed post, the blog name should be h2, if we are in the homepage the blog post should be h1 */}
+          {history.location.pathname.includes("/post/") ? (
+            <h2 style={headerStyle}>Programming Lines</h2>
+          ) : (
+            <h1 style={headerStyle}>Programming Lines</h1>
+          )}
         </Menu.Item>
 
         <Menu.Item position="right">

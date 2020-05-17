@@ -32,7 +32,6 @@ const PostsDetails: React.FC<RouteComponentProps<DetailParams>> = ({
     return <h2>Activity Not Found</h2>;
   } else {
     document.title = `${detailedPost.title} - Programming Lines`;
-
   }
   
 

@@ -22,6 +22,7 @@ interface IProps {
 const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
   const rootStore = useContext(RootStoreContext);
   const { reactionLoading, reactToPost } = rootStore.postStore;
+  const { setActiveFilter} = rootStore.commonStore;
 
   return (
     <Item>
@@ -50,6 +51,7 @@ const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
                   href={internalUrl(post.slug)}
                   src={post.category.image}
                   alt={post.category.name}
+                  onClick={() => setActiveFilter(post.category.code)}
                   style={{ width: "30px" }}
                 />
               </div>

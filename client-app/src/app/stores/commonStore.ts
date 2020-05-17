@@ -23,7 +23,11 @@ export default class CommonStore {
   @observable appLoading = true;
   @observable isDarkMode = localStorage.getItem("DarkMode") ? (localStorage.getItem("DarkMode") === "true" ) : true;
   @observable activeNavItem = "posts";
+  @observable activeFilter = "Recent";
 
+  @action setActiveFilter = (filter: string) => {
+    this.activeFilter = filter;
+  }
 
   @action setAppLoading = () => {
     this.appLoading = false;

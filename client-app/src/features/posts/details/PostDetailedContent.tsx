@@ -13,7 +13,6 @@ interface IProps {
 const PostDetailedContent: React.FC<IProps> = ({ post }) => {
 
   return (
-
       <ReactMarkdown
         className="markdown-body"
         source={post.content}
@@ -23,7 +22,6 @@ const PostDetailedContent: React.FC<IProps> = ({ post }) => {
           code: CodeBlock,
         }}
       />
-
   );
 };
 
