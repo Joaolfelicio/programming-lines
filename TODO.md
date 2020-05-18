@@ -91,8 +91,11 @@
     1.  [x] Recent
     2.  [x] Popular
     3.  [x] Categories (Display all categories)
-    4.  [ ] On Mobile put the filters inside the hamburger sidebar
-    5.  [ ] Filter posts
+    4.  [x] API Side
+    5.  [ ] CS Side
+    6.  [ ] On Mobile put the filters inside the hamburger sidebar
+    7.  [ ] Filter posts
+    8.  [ ] Change styling between active and hover
 29. [ ] ~~CS - Comments~~
     1.  [ ] ~~Allow markdown?~~
 30. [x] CS - NotFound Page

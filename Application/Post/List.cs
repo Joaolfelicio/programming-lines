@@ -15,10 +15,31 @@ namespace Application.Post
 {
     public class List
     {
+        public class PostEnvelope
+        {
+            public List<PostDto> Posts { get; set; }
+            public int PostsCount { get; set; }
+        }
 
-        public class Query : IRequest<List<PostDto>> { }
+        public class Query : IRequest<PostEnvelope>
+        {
+            public int? Limit { get; set; }
+            public int? Offset { get; set; }
+            public string? CategoryCode { get; set; }
+            public string? Filter { get; set; }
+            public string Order { get; set; }
 
-        public class Handler : IRequestHandler<Query, List<PostDto>>
+            public Query(int? limit, int? offset, string? categoryCode, string? filter, string order)
+            {
+                Limit = limit;
+                Offset = offset;
+                CategoryCode = categoryCode;
+                Filter = filter;
+                Order = order;
+            }
+        }
+
+        public class Handler : IRequestHandler<Query, PostEnvelope>
         {
             private readonly DataContext _context;
             private readonly IPopulateData _populateData;
@@ -28,9 +49,43 @@ namespace Application.Post
                 _context = context;
             }
 
-            public async Task<List<PostDto>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<PostEnvelope> Handle(Query request, CancellationToken cancellationToken)
             {
-                var posts = await _context.Posts.OrderByDescending(x => x.PublishDate).ToListAsync(cancellationToken);
+                IQueryable<Domain.Post> queryable;
+
+                //Filter by publish date order
+                if (request.Order == "descending")
+                {
+                    queryable = _context.Posts
+                                        .OrderBy(x => x.PublishDate)
+                                        .AsQueryable();
+                }
+                else
+                {
+                    queryable = _context.Posts
+                                        .OrderByDescending(x => x.PublishDate)
+                                        .AsQueryable();
+                }
+
+                //Filter by "filter type"
+                if (request.Filter == "popular")
+                {
+                    queryable = _context.Posts
+                                        .OrderByDescending(x => x.Reactions.Where(y => y.IsPositive).Count());
+                }
+
+                //Filter by category
+                if (!String.IsNullOrWhiteSpace(request.CategoryCode))
+                {
+                    queryable = queryable.Where(x => x.Category.Code == request.CategoryCode);
+                }
+
+                // Get only a number of posts
+                var posts = await queryable.Skip(request.Offset ?? 0)
+                                           .Take(request.Limit ?? 3)
+                                           .ToListAsync(cancellationToken);
+
+
                 var postsDto = new List<PostDto>();
 
                 foreach (var post in posts)
@@ -49,7 +104,6 @@ namespace Application.Post
                         Image = post.Author.Image
                     };
 
-
                     var postDto = new PostDto
                     {
                         Id = post.Id,
@@ -67,7 +121,12 @@ namespace Application.Post
                     };
                     postsDto.Add(postDto);
                 }
-                return postsDto;
+
+                return new PostEnvelope
+                {
+                    Posts = postsDto,
+                    PostsCount = posts.Count()
+                };
             }
         }
 

@@ -10,6 +10,7 @@ import {
   copyToClipboard,
 } from "../../../app/common/util/util";
 import { observer } from "mobx-react-lite";
+import { history } from "../../../";
 
 interface IProps {
   post: IPost;
@@ -18,6 +19,7 @@ interface IProps {
 const PostDetailedInfo: React.FC<IProps> = ({ post }) => {
   const rootStore = useContext(RootStoreContext);
   const { reactionLoading, reactToPost } = rootStore.postStore;
+  const { setActiveFilter } = rootStore.commonStore;
 
   return (
     <Fragment>
@@ -25,7 +27,10 @@ const PostDetailedInfo: React.FC<IProps> = ({ post }) => {
       <Label
         image
         size="big"
-        onClick={() => console.log(`Filter on ${post.category.code}`)}
+        onClick={() => {
+          setActiveFilter(post.category.code);
+          history.push("/");
+        }}
         style={{
           marginBottom: 20,
           cursor: "pointer",
@@ -34,7 +39,11 @@ const PostDetailedInfo: React.FC<IProps> = ({ post }) => {
           marginLeft: 0,
         }}
       >
-        <img src={post.category.image} alt={post.category.name} style={{ padding: "3px 5px" }} />
+        <img
+          src={post.category.image}
+          alt={post.category.name}
+          style={{ padding: "3px 5px" }}
+        />
         {post.category.name.toUpperCase()}
       </Label>
       <div style={{ marginTop: 20 }}>

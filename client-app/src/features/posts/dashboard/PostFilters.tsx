@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { Menu, Loader, Placeholder } from "semantic-ui-react";
+import { Menu } from "semantic-ui-react";
 import PostFiltersCategory from "./PostFiltersCategory";
 import { RootStoreContext } from "../../../app/stores/rootStore";
 import { observer } from "mobx-react-lite";
@@ -30,7 +30,13 @@ const PostFilters = () => {
       <Menu.Item
         name="Popular"
         active={activeFilter === "Popular"}
-        onClick={() => setActiveFilter("Popular")}
+        onClick={() => {
+          if (activeFilter === "Popular") {
+            setActiveFilter("Recent");
+          } else {
+            setActiveFilter("Popular");
+          }
+        }}
         style={{ padding: "11px 13px" }}
       />
       <Menu.Header

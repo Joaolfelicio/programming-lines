@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, Fragment } from "react";
+import React, { useContext, Fragment } from "react";
 import { RootStoreContext } from "../../../app/stores/rootStore";
 import { observer } from "mobx-react-lite";
 import { Menu, Image } from "semantic-ui-react";
@@ -14,7 +14,13 @@ const PostFiltersCategory = () => {
         <Menu.Item
           key={category.code}
           active={activeFilter === category.code}
-          onClick={() => setActiveFilter(category.code)}
+          onClick={() => {
+            if (activeFilter === category.code) {
+              setActiveFilter("Recent");
+            } else {
+              setActiveFilter(category.code);
+            }
+          }}
           style={{ display: "flex", alignItems: "center" }}
         >
           <Image src={category.image} style={{ width: 21, height: 20 }} />
