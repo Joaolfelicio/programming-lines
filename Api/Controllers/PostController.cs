@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace Api.Controllers
     public class PostController : BaseController
     {
         [HttpGet]
-        public async Task<ActionResult<List.PostEnvelope>> List(int? limit, int? offset, string? categoryCode, string? filter, string order)
+        public async Task<ActionResult<List.PostEnvelope>> List(int? limit, int? offset, string? categoryCode, string? filter, string? order)
         {
             return await Mediator.Send(new List.Query(limit, offset, categoryCode, filter, order));
         }

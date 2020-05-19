@@ -30,3 +30,8 @@ export interface IPostRecommend {
     publishDate: Date;
     category: ICategory;
 }
+
+export interface IPostsEnvelope {
+    posts: IPost[];
+    postsCount: number;
+}

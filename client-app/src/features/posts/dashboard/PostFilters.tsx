@@ -9,6 +9,7 @@ const PostFilters = () => {
   const rootContext = useContext(RootStoreContext);
   const { isDarkMode, activeFilter, setActiveFilter } = rootContext.commonStore;
   const { loadingCategories, getCategories } = rootContext.categoryStore;
+  const { setPredicate } = rootContext.postStore;
 
   useEffect(() => {
     getCategories();
@@ -24,7 +25,10 @@ const PostFilters = () => {
       <Menu.Item
         name="Recent"
         active={activeFilter === "Recent"}
-        onClick={() => setActiveFilter("Recent")}
+        onClick={() => {
+          setActiveFilter("Recent");
+          setPredicate("order", "descending")
+        }}
         style={{ padding: "11px 13px" }}
       />
       <Menu.Item
@@ -34,6 +38,7 @@ const PostFilters = () => {
           if (activeFilter === "Popular") {
             setActiveFilter("Recent");
           } else {
+            setPredicate("filter", "popular")
             setActiveFilter("Popular");
           }
         }}

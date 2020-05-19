@@ -87,15 +87,18 @@
     3.  [x] Display success
     4.  [x] Loading button
     5.  [ ] Clean form on submit
-28. [ ] CS - Filters
+28. [ ] CS - Filters <-------------
     1.  [x] Recent
     2.  [x] Popular
     3.  [x] Categories (Display all categories)
     4.  [x] API Side
-    5.  [ ] CS Side
+    5.  [x] CS Side
     6.  [ ] On Mobile put the filters inside the hamburger sidebar
-    7.  [ ] Filter posts
+    7.  [x] Filter posts
     8.  [ ] Change styling between active and hover
+    9.  [ ] Filer on category icon click
+    10. [ ] Filter on category label inside post
+    11. [ ] Fix the filter by reactions and then by date on "Popular"
 29. [ ] ~~CS - Comments~~
     1.  [ ] ~~Allow markdown?~~
 30. [x] CS - NotFound Page

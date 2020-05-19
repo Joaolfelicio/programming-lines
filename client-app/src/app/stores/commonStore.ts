@@ -9,6 +9,8 @@ configure({ enforceActions: "always" });
 export default class CommonStore {
   rootStore: RootStore;
 
+
+
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
 
@@ -16,6 +18,16 @@ export default class CommonStore {
       () => this.isDarkMode,
       (isDarkMode) => {
         localStorage.setItem("DarkMode", isDarkMode.toString());
+      }
+    )
+
+    //If the user deselects any filter
+    reaction(
+      () => this.activeFilter,
+      (activeFilter) => {
+        if(activeFilter == "Recent") {
+          this.rootStore.postStore.setPredicate("all", "recent");
+        }
       }
     )
   }

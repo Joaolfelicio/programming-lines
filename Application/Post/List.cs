@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace Application.Post
             public string? Filter { get; set; }
             public string Order { get; set; }
 
-            public Query(int? limit, int? offset, string? categoryCode, string? filter, string order)
+            public Query(int? limit, int? offset, string? categoryCode, string? filter, string? order)
             {
                 Limit = limit;
                 Offset = offset;

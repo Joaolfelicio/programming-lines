@@ -6,15 +6,15 @@ import { observer } from "mobx-react-lite";
 
 const PostList = () => {
   const rootStore = useContext(RootStoreContext);
-  const { postsByDate, reactionTarget } = rootStore.postStore;
+  const { orderPosts, reactionTarget } = rootStore.postStore;
 
   return (
     <Fragment>
       <ItemGroup>
-        {postsByDate.map((post, index) => (
+        {orderPosts.map((post, index) => (
           <Fragment key={post.id}>
             <PostListItem reactionTarget={reactionTarget} post={post} />
-            {postsByDate.length - 1 > index && (
+            {orderPosts.length - 1 > index && (
               <Divider style={{ marginBottom: "20px", marginTop: "20px " }} />
             )}
           </Fragment>

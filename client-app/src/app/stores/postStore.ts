@@ -1,5 +1,12 @@
 import { RootStore } from "./rootStore";
-import { observable, action, runInAction, computed } from "mobx";
+import {
+  observable,
+  action,
+  runInAction,
+  computed,
+  reaction,
+  toJS,
+} from "mobx";
 import api from "../api/api";
 import { toast } from "react-toastify";
 import { setPostProps } from "../common/util/util";
@@ -7,12 +14,23 @@ import { IPost } from "../models/post";
 import { IReactionEnvelope } from "../models/Requests/reactionEnvelope";
 import { IReaction } from "../models/reaction";
 import { ISearchablePostDto, ISearchPost } from "../models/Dto/searchPostDto";
-const orderBy = require('lodash.orderby');
+const orderBy = require("lodash.orderby");
+
+const LIMIT = 4;
 
 export default class PostStore {
   rootStore: RootStore;
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
+
+    reaction(
+      () => this.predicate.keys(),
+      () => {
+        this.page = 0;
+        this.postsRegistry.clear();
+        this.getPosts();
+      }
+    );
   }
 
   @observable postsRegistry = new Map();
@@ -22,18 +40,48 @@ export default class PostStore {
   @observable postsBySearchTerm: ISearchPost[] | null = null;
   @observable searchablePosts: ISearchablePostDto[] | null = null;
   @observable detailedPost: IPost | null = null;
+  @observable postsCount = 0;
+  @observable page = 0;
+  @observable predicate = new Map();
+
+  @action setPredicate = (predicate: string, value: string) => {
+    this.predicate.clear();
+    if (predicate !== "all") {
+      this.predicate.set(predicate, value);
+    }
+  };
+
+  @computed get totalPages() {
+    return Math.ceil(this.postsCount / LIMIT);
+  }
+
+  @action setPage = (page: number) => {
+    this.page = page;
+  };
+
+  @computed get axiosParams() {
+    const params = new URLSearchParams();
+    params.append("limit", String(LIMIT));
+    params.append("offset", `${this.page ? this.page * LIMIT : 0}`);
+    this.predicate.forEach((value, key) => {
+      params.append(key, value);
+    });
+    return params;
+  }
 
   @action getPosts = async () => {
     try {
       if (this.postsRegistry.size === 0) {
         this.loadingPosts = true;
-        let posts = await api.Post.list();
+        const postsEnvelope = await api.Post.list(this.axiosParams);
+        let { posts, postsCount } = postsEnvelope;
         runInAction(() => {
-          posts.forEach((post) => {
+          posts.forEach((post: IPost) => {
             setPostProps(post, this.rootStore.userStore.anonymousUser!);
             this.postsRegistry.set(post.slug, post);
             this.loadingPosts = false;
           });
+          this.postsCount = postsCount;
         });
       }
     } catch (error) {
@@ -73,7 +121,6 @@ export default class PostStore {
     if (!this.searchablePosts) {
       let searchablePosts: ISearchablePostDto[] = await api.Post.searchableList();
       const orderedPosts = orderBy(searchablePosts, ["publishDate"], ["desc"]);
-
 
       runInAction(() => {
         this.searchablePosts = orderedPosts;
@@ -159,8 +206,14 @@ export default class PostStore {
     }
   };
 
-  @computed get postsByDate(): IPost[] {
+  @computed get orderPosts(): IPost[] {
     const posts = Array.from(this.postsRegistry.values());
-    return orderBy(posts, ["publishDate"], ["desc"]); 
+    if (this.predicate.get("filter") === "popular") {
+      //Order by reactions and then by publish date
+      return orderBy(posts, ["reactions", "publishDate"], ["desc", "asc"]);
+
+    } else {
+      return orderBy(posts, ["publishDate"], ["desc"]);
+    }
   }
 }

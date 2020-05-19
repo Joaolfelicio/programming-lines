@@ -17,11 +17,13 @@ const NavBar: React.FC<IProps> = ({ activeItem }) => {
     isDarkMode,
     activeNavItem,
     setActiveNavItem,
+    setActiveFilter,
   } = rootStore.commonStore;
   const {
     postsBySearchTerm,
     setPostsBySearchTerm,
-    loadingPosts
+    loadingPosts,
+    setPredicate,
   } = rootStore.postStore;
 
   const history = useHistory();
@@ -36,11 +38,19 @@ const NavBar: React.FC<IProps> = ({ activeItem }) => {
     <Fragment>
       <Menu
         fixed="top"
-        style={{ borderRadius: "0px", height: 50}}
+        style={{ borderRadius: "0px", height: 50 }}
         inverted={isDarkMode}
         borderless
       >
-        <Menu.Item as={Link} to="/" style={{ alignItems: "center" }}>
+        <Menu.Item
+          as={Link}
+          to="/"
+          onClick={() => {
+            setActiveFilter("Recent");
+            setPredicate("all", "recent");
+          }}
+          style={{ alignItems: "center" }}
+        >
           <img src="/assets/logo.png" alt="Programming blog logo." />
           {/* If we are seeing a detailed post, the blog name should be h2, if we are in the homepage the blog post should be h1 */}
           {history.location.pathname.includes("/post/") ? (

@@ -7,6 +7,7 @@ const PostFiltersCategory = () => {
   const rootContext = useContext(RootStoreContext);
   const { categoryByOrder } = rootContext.categoryStore;
   const { activeFilter, setActiveFilter } = rootContext.commonStore;
+  const { setPredicate } = rootContext.postStore;
 
   return (
     <Fragment>
@@ -19,6 +20,7 @@ const PostFiltersCategory = () => {
               setActiveFilter("Recent");
             } else {
               setActiveFilter(category.code);
+              setPredicate("categoryCode", category.code);
             }
           }}
           style={{ display: "flex", alignItems: "center" }}
