@@ -21,8 +21,8 @@ interface IProps {
 
 const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
   const rootStore = useContext(RootStoreContext);
-  const { reactionLoading, reactToPost } = rootStore.postStore;
-  const { setActiveFilter} = rootStore.commonStore;
+  const { reactionLoading, reactToPost, setPredicate } = rootStore.postStore;
+  const { setActiveFilter } = rootStore.commonStore;
 
   return (
     <Item>
@@ -33,26 +33,26 @@ const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
         size="medium"
         alt={post.title + "."}
         src={post.image}
-        style={{height: "100%"}}
+        style={{ height: "100%" }}
       />
 
       <Item.Content className="post-content">
         <Container>
           <Item.Header>
             <div className="posts-header">
-              <Link to={internalUrl(post.slug)}>
+              <Link to={internalUrl(post.slug)} style={{width: "90%"}}>
                 <h2 style={{ marginBottom: "0px" }}>{post.title}</h2>
               </Link>
 
-              <div style={{ display: "flex", alignItems: "flex-start" }}>
+              <div style={{ display: "flex", alignItems: "flex-start", width: "10%" }}>
                 <Image
-                  as={Link}
-                  to={post.slug}
-                  href={internalUrl(post.slug)}
                   src={post.category.image}
                   alt={post.category.name}
-                  onClick={() => setActiveFilter(post.category.code)}
-                  style={{ width: "30px" }}
+                  onClick={() => {
+                    setActiveFilter(post.category.code);
+                    setPredicate("categoryCode", post.category.code);
+                  }}
+                  style={{ width: 21, height: 20, cursor: "Pointer" }}
                 />
               </div>
             </div>

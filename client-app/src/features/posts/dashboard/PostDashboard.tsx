@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, Fragment } from "react";
-import { Grid, GridColumn } from "semantic-ui-react";
+import { Grid, GridColumn, Pagination } from "semantic-ui-react";
 import PostList from "./PostList";
 import { RootStoreContext } from "../../../app/stores/rootStore";
 import { observer } from "mobx-react-lite";
@@ -8,7 +8,14 @@ import PostFilters from "./PostFilters";
 
 const PostDashboard = () => {
   const rootStore = useContext(RootStoreContext);
-  const { getPosts, loadingPosts } = rootStore.postStore;
+  const {
+    getPosts,
+    loadingPosts,
+    totalPages,
+    setPage,
+    setChangingPage,
+    page
+  } = rootStore.postStore;
 
   useEffect(() => {
     getPosts();
@@ -17,7 +24,7 @@ const PostDashboard = () => {
 
   return (
     <Grid container>
-      <GridColumn style={{position: "relative"}} width={3}>
+      <GridColumn style={{ position: "relative" }} width={3}>
         <PostFilters />
       </GridColumn>
       <GridColumn width={13}>
@@ -31,6 +38,23 @@ const PostDashboard = () => {
         ) : (
           <PostList />
         )}
+        <Pagination
+          defaultActivePage={1}
+          floated="right"
+          ellipsisItem={undefined}
+          pointing
+          secondary
+          activePage={page + 1}
+          totalPages={totalPages}
+          className="pagination"
+          onPageChange={(e, { activePage }) => {
+            setChangingPage(true);
+            setPage((activePage! as number) - 1);
+            getPosts();
+            setChangingPage(false);
+          }}
+          style={{ marginTop: 35 }}
+        />
       </GridColumn>
     </Grid>
   );

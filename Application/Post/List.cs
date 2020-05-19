@@ -126,7 +126,7 @@ namespace Application.Post
                 return new PostEnvelope
                 {
                     Posts = postsDto,
-                    PostsCount = posts.Count()
+                    PostsCount = queryable.Count()
                 };
             }
         }

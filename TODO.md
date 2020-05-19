@@ -66,6 +66,7 @@
     4.  [x] Add date
     5.  [ ] Container it posts list should be bigger on bigger devices
     6.  [x] Fix Posts order by date
+    7.  [ ] Image of the posts should always be the same size
 22. [ ] CS - PostDetails
     1.  [x] Shouldn't call API if it's in memory (use history.push)
     2.  [x] Put in the title "Programming Lines - Title of the Post"
@@ -81,6 +82,7 @@
     3.  [x] Store fingerprint only in state
     4.  [x] I Think there might be a bug related to anonusers and reactions (Maybe not)
 26. [x] Recommendations
+    1.  [ ] Card should always be the same size
 27. [ ] CS - Newsletter
     1.  [x] Post API
     2.  [x] Display error
@@ -96,9 +98,9 @@
     6.  [ ] On Mobile put the filters inside the hamburger sidebar
     7.  [x] Filter posts
     8.  [ ] Change styling between active and hover
-    9.  [ ] Filer on category icon click
-    10. [ ] Filter on category label inside post
-    11. [ ] Fix the filter by reactions and then by date on "Popular"
+    9.  [x] Filer on category icon click
+    10. [x] Filter on category label inside post
+    11. [ ] Fix the filter by reactions and then by date on "Popular" <==
 29. [ ] ~~CS - Comments~~
     1.  [ ] ~~Allow markdown?~~
 30. [x] CS - NotFound Page
@@ -110,7 +112,11 @@
     3.  [ ] Social Media
 34. [ ] Back Office
 35. [ ] API - Add predicates
-36. [ ] Infinite Scroll <-----------------------------------
+36. [ ] Pagination <-----------------------------------
+    1.  [x] Fix the pagination bug
+        1.  [x] Click on "Recents" page 3 and then filter by "React", active page disappears
+    2.  [ ] Click "Popular", then "Recent", instead of only 1 element, got 2
+    3.  [ ] Lots of bugs
 37. [x] React-markdown
 38. [ ] Markdown preview
 39. [ ] Footer <-----------------------------

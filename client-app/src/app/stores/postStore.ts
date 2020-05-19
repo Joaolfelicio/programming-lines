@@ -4,8 +4,7 @@ import {
   action,
   runInAction,
   computed,
-  reaction,
-  toJS,
+  reaction
 } from "mobx";
 import api from "../api/api";
 import { toast } from "react-toastify";
@@ -16,7 +15,7 @@ import { IReaction } from "../models/reaction";
 import { ISearchablePostDto, ISearchPost } from "../models/Dto/searchPostDto";
 const orderBy = require("lodash.orderby");
 
-const LIMIT = 4;
+const LIMIT = 1;
 
 export default class PostStore {
   rootStore: RootStore;
@@ -43,6 +42,11 @@ export default class PostStore {
   @observable postsCount = 0;
   @observable page = 0;
   @observable predicate = new Map();
+  @observable changingPage = false;
+
+  @action setChangingPage = (changingPage: boolean) => {
+    this.changingPage = changingPage;
+  }
 
   @action setPredicate = (predicate: string, value: string) => {
     this.predicate.clear();
@@ -71,7 +75,8 @@ export default class PostStore {
 
   @action getPosts = async () => {
     try {
-      if (this.postsRegistry.size === 0) {
+      if (this.postsRegistry.size === 0 || this.changingPage) {
+        this.postsRegistry.clear();
         this.loadingPosts = true;
         const postsEnvelope = await api.Post.list(this.axiosParams);
         let { posts, postsCount } = postsEnvelope;

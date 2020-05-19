@@ -18,7 +18,7 @@ interface IProps {
 
 const PostDetailedInfo: React.FC<IProps> = ({ post }) => {
   const rootStore = useContext(RootStoreContext);
-  const { reactionLoading, reactToPost } = rootStore.postStore;
+  const { reactionLoading, reactToPost, setPredicate } = rootStore.postStore;
   const { setActiveFilter } = rootStore.commonStore;
 
   return (
@@ -29,6 +29,7 @@ const PostDetailedInfo: React.FC<IProps> = ({ post }) => {
         size="big"
         onClick={() => {
           setActiveFilter(post.category.code);
+          setPredicate("categoryCode", post.category.code);
           history.push("/");
         }}
         style={{
