@@ -55,7 +55,7 @@ namespace Application.Post
                 IQueryable<Domain.Post> queryable;
 
                 //Filter by publish date order
-                if (request.Order == "descending")
+                if (request.Order == "ascending")
                 {
                     queryable = _context.Posts
                                         .OrderBy(x => x.PublishDate)
@@ -69,10 +69,13 @@ namespace Application.Post
                 }
 
                 //Filter by "filter type"
+                //If popular, filter by more positive reactions and then by publish date
                 if (request.Filter == "popular")
                 {
-                    queryable = _context.Posts
-                                        .OrderByDescending(x => x.Reactions.Where(y => y.IsPositive).Count());
+                    queryable = queryable
+                                        .OrderByDescending(x => x.Reactions.Where(y => y.IsPositive).Count())
+                                        .ThenByDescending(x => x.PublishDate)
+                                        .AsQueryable();
                 }
 
                 //Filter by category

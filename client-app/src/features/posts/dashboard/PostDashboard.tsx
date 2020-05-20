@@ -39,7 +39,6 @@ const PostDashboard = () => {
           <PostList />
         )}
         <Pagination
-          defaultActivePage={1}
           floated="right"
           ellipsisItem={undefined}
           pointing

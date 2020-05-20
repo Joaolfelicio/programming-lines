@@ -15,7 +15,7 @@ import { IReaction } from "../models/reaction";
 import { ISearchablePostDto, ISearchPost } from "../models/Dto/searchPostDto";
 const orderBy = require("lodash.orderby");
 
-const LIMIT = 1;
+const LIMIT = 5;
 
 export default class PostStore {
   rootStore: RootStore;
@@ -46,7 +46,7 @@ export default class PostStore {
 
   @action setChangingPage = (changingPage: boolean) => {
     this.changingPage = changingPage;
-  }
+  };
 
   @action setPredicate = (predicate: string, value: string) => {
     this.predicate.clear();
@@ -213,10 +213,19 @@ export default class PostStore {
 
   @computed get orderPosts(): IPost[] {
     const posts = Array.from(this.postsRegistry.values());
-    if (this.predicate.get("filter") === "popular") {
-      //Order by reactions and then by publish date
-      return orderBy(posts, ["reactions", "publishDate"], ["desc", "asc"]);
 
+    if (this.predicate.get("filter") === "popular") {
+      //Order by positive reactions and then by publish date
+      return orderBy(
+        posts,
+        [
+          function (post: IPost) {
+            return post.reactions.filter((x) => x.isPositive);
+          },
+          "publishDate",
+        ],
+        ["desc", "desc"]
+      );
     } else {
       return orderBy(posts, ["publishDate"], ["desc"]);
     }

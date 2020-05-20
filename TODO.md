@@ -66,6 +66,7 @@
     4.  [x] Add date
     5.  [ ] Container it posts list should be bigger on bigger devices
     6.  [x] Fix Posts order by date
+        1.  [x] Do I really need to pass a querystring for the publish date order?
     7.  [ ] Image of the posts should always be the same size
 22. [ ] CS - PostDetails
     1.  [x] Shouldn't call API if it's in memory (use history.push)
@@ -100,7 +101,7 @@
     8.  [ ] Change styling between active and hover
     9.  [x] Filer on category icon click
     10. [x] Filter on category label inside post
-    11. [ ] Fix the filter by reactions and then by date on "Popular" <==
+    11. [x] Fix the filter by reactions and then by date on "Popular"
 29. [ ] ~~CS - Comments~~
     1.  [ ] ~~Allow markdown?~~
 30. [x] CS - NotFound Page
@@ -112,11 +113,11 @@
     3.  [ ] Social Media
 34. [ ] Back Office
 35. [ ] API - Add predicates
-36. [ ] Pagination <-----------------------------------
+36. [x] Pagination
     1.  [x] Fix the pagination bug
         1.  [x] Click on "Recents" page 3 and then filter by "React", active page disappears
-    2.  [ ] Click "Popular", then "Recent", instead of only 1 element, got 2
-    3.  [ ] Lots of bugs
+    2.  [x] Click "Popular", then "Recent", instead of only 1 element, got 2
+    3.  [x] Lots of bugs
 37. [x] React-markdown
 38. [ ] Markdown preview
 39. [ ] Footer <-----------------------------

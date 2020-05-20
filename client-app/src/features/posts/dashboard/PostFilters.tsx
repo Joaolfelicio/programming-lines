@@ -27,7 +27,7 @@ const PostFilters = () => {
         active={activeFilter === "Recent"}
         onClick={() => {
           setActiveFilter("Recent");
-          setPredicate("order", "descending")
+          setPredicate("order", "descending");
         }}
         style={{ padding: "11px 13px" }}
       />
@@ -38,7 +38,7 @@ const PostFilters = () => {
           if (activeFilter === "Popular") {
             setActiveFilter("Recent");
           } else {
-            setPredicate("filter", "popular")
+            setPredicate("filter", "popular");
             setActiveFilter("Popular");
           }
         }}
