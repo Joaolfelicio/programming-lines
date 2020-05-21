@@ -46,9 +46,9 @@
     1.  [x] Test Create 
     2.  [x] Test Delete
 19. [x] CS - Nav Bar
-    1.  [ ] Search Box
+    1.  [ ] Search Box <--------------
         1.  [x] Fix routing
-        2.  [ ] Blur when user selects a post
+        2.  [ ] Blur when user selects a post 
         3.  [ ] Right now if user goes to detailed post and refresh, no results and displayed
     2.  [ ] Dark Mode
         1.  [x] Fix Bug of when interacting with Nav Bar, dark moddle toggle moves.
@@ -74,7 +74,8 @@
     3.  [x] Reactions and share
     4.  [ ] Reading Process bar
     5.  [ ] Placeholder
-    6.  [ ] Category Button on click filter
+    6.  [x] Category Button on click filter
+    7.  [ ] Fix linkedin icon hover
 23. [ ] ~~CS - Replies (Maybe)~~
 24. [x] CS - Reactions
 25. [x] AnonymousUser 
@@ -89,8 +90,8 @@
     2.  [x] Display error
     3.  [x] Display success
     4.  [x] Loading button
-    5.  [ ] Clean form on submit
-28. [ ] CS - Filters <-------------
+    5.  [ ] Clean form on submit <------------
+28. [ ] CS - Filters
     1.  [x] Recent
     2.  [x] Popular
     3.  [x] Categories (Display all categories)
@@ -107,12 +108,12 @@
 30. [x] CS - NotFound Page
 31. [x] CS - Next/Previous Post (Changed to recommended post)
 32. [x] Share button on the post
-33. [ ] About me <-----------------------------
-    1.  [ ] Photo
-    2.  [ ] Bio
-    3.  [ ] Social Media
+33. [x] About me
+    1.  [x] Photo
+    2.  [x] Bio
+    3.  [x] Social Media
 34. [ ] Back Office
-35. [ ] API - Add predicates
+35. [x] API - Add predicates
 36. [x] Pagination
     1.  [x] Fix the pagination bug
         1.  [x] Click on "Recents" page 3 and then filter by "React", active page disappears

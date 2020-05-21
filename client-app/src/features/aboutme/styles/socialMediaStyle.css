@@ -1,0 +1,48 @@
+.social-media {
+  font-size: 2em;
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 auto;
+  height: 50px;
+  line-height: 0;
+}
+
+
+.icon-button i {
+  color: white;
+  border-radius: 2.6rem;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.3rem;
+  height: 2.6rem;
+  line-height: 2.6rem;
+  position: relative;
+  text-align: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 2.6rem;
+}
+
+.linkedin i {
+  background-color: #0e76a8;
+}
+
+.github i {
+  background-color: #333;
+}
+
+.mail i {
+  background-color: #57b68b;
+}
+
+/* Hover Transition */
+.mail i:hover,
+.github i:hover,
+.linkedin i:hover {
+  background-color: black;
+  transition: 0.3s ease-in;
+}

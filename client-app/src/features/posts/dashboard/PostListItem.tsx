@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, Fragment } from "react";
 import { Item, Button, Popup, Grid, Container, Image } from "semantic-ui-react";
 import { IPost } from "../../../app/models/post";
 import moment from "moment";
@@ -37,7 +37,7 @@ const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
       />
 
       <Item.Content className="post-content">
-        <Container>
+        <Fragment>
           <Item.Header>
             <div className="posts-header">
               <Link to={internalUrl(post.slug)} style={{width: "90%"}}>
@@ -62,7 +62,7 @@ const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
               </time>
             </div>
           </Item.Header>
-        </Container>
+        </Fragment>
         <Item.Description style={{ marginTop: "3px" }}>
           {post.subTitle}
         </Item.Description>

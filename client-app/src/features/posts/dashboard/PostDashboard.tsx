@@ -41,6 +41,8 @@ const PostDashboard = () => {
         <Pagination
           floated="right"
           ellipsisItem={undefined}
+          lastItem={totalPages >= 4 ?  undefined : null}
+          firstItem={totalPages >= 4 ?  undefined : null}
           pointing
           secondary
           activePage={page + 1}

@@ -25,7 +25,7 @@ export default class CommonStore {
     reaction(
       () => this.activeFilter,
       (activeFilter) => {
-        if(activeFilter == "Recent") {
+        if(activeFilter === "Recent") {
           this.rootStore.postStore.setPredicate("all", "recent");
         }
       }

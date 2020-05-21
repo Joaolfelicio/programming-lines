@@ -15,6 +15,7 @@ import {
 import PostsDetails from "../../features/posts/details/PostsDetails";
 import { Container } from "semantic-ui-react";
 import NotFound from "./NotFound";
+import AboutMeComponent from "../../features/aboutme/AboutMeComponent";
 
 const App: React.FC<RouteComponentProps> = () => {
   const rootStore = useContext(RootStoreContext);
@@ -34,10 +35,11 @@ const App: React.FC<RouteComponentProps> = () => {
 
   return (
     <Fragment>
-      <NavBar activeItem="posts" />
+      <NavBar/>
       <Container style={{ marginTop: "7em" }}>
         <Switch>
           <Route exact path="/" component={PostDashboard} />
+          <Route path="/aboutme" component={AboutMeComponent} />
           <Route path="/post/:slug" component={PostsDetails} />
           <Route component={NotFound} />
         </Switch>

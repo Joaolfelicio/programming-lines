@@ -6,11 +6,7 @@ import { observer } from "mobx-react-lite";
 import { toJS } from "mobx";
 import { useHistory, Link } from "react-router-dom";
 
-interface IProps {
-  activeItem: string | null;
-}
-
-const NavBar: React.FC<IProps> = ({ activeItem }) => {
+const NavBar = () => {
   const rootStore = useContext(RootStoreContext);
   const {
     setIsDarkMode,
@@ -48,15 +44,16 @@ const NavBar: React.FC<IProps> = ({ activeItem }) => {
           onClick={() => {
             setActiveFilter("Recent");
             setPredicate("all", "recent");
+            setActiveNavItem("posts")
           }}
           style={{ alignItems: "center" }}
         >
           <img src="/assets/logo.png" alt="Programming blog logo." />
           {/* If we are seeing a detailed post, the blog name should be h2, if we are in the homepage the blog post should be h1 */}
-          {history.location.pathname.includes("/post/") ? (
-            <h2 style={headerStyle}>Programming Lines</h2>
-          ) : (
+          {history.location.pathname === "/" ? (
             <h1 style={headerStyle}>Programming Lines</h1>
+          ) : (
+            <h2 style={headerStyle}>Programming Lines</h2>
           )}
         </Menu.Item>
 
@@ -82,11 +79,15 @@ const NavBar: React.FC<IProps> = ({ activeItem }) => {
 
         <Menu.Menu position="right">
           <Menu.Item
+            as={Link}
+            to="/"
             name="Posts"
             active={activeNavItem === "posts"}
             onClick={() => setActiveNavItem("posts")}
           />
           <Menu.Item
+            as={Link}
+            to="/aboutme"
             name="About me"
             active={activeNavItem === "aboutme"}
             onClick={() => setActiveNavItem("aboutme")}

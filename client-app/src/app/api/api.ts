@@ -31,6 +31,7 @@ axios.interceptors.response.use(undefined, (error) => {
   if (error.message === "Network Error" && !error.response) {
     toast.error("Network Error - Make sure the API is running!");
   }
+
   const { status, headers } = error.response;
 
   if (status === 404) {
@@ -73,19 +74,23 @@ const requests = {
 };
 
 const Post = {
-  list: (params: URLSearchParams): Promise<IPostsEnvelope> => axios.get("/Post", {params: params}).then(responseBody),
+  list: (params: URLSearchParams): Promise<IPostsEnvelope> =>
+    axios.get("/Post", { params: params }).then(responseBody),
   react: (reaction: IReactionEnvelope) => requests.post(`/Reaction`, reaction),
   detail: (slug: string): Promise<IPost> => requests.get(`/Post/${slug}`),
-  searchableList: (): Promise<ISearchablePostDto[]> => requests.get("/Post/SearchablePosts")
+  searchableList: (): Promise<ISearchablePostDto[]> =>
+    requests.get("/Post/SearchablePosts"),
 };
 
 const AnonUser = {
   get: (anonUserIdEnvelope: IAnonUserIdEnvelope): Promise<IAnonymousUser> => {
     return requests.post(`/AnonymousUser`, anonUserIdEnvelope);
   },
-  create: (anonUserFingerprint: IFingeprintEnvelope): Promise<IAnonymousUser> => {
+  create: (
+    anonUserFingerprint: IFingeprintEnvelope
+  ): Promise<IAnonymousUser> => {
     return requests.post(`/AnonymousUser/Create`, anonUserFingerprint);
-  }
+  },
 };
 
 const Newsletter = {
@@ -96,12 +101,12 @@ const Newsletter = {
 const Category = {
   list: (): Promise<ICategory[]> => {
     return requests.get(`/Category`);
-  }
-}
+  },
+};
 
 export default {
   Post,
   AnonUser,
   Newsletter,
-  Category
+  Category,
 };
