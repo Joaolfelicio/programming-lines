@@ -23,7 +23,7 @@ const RecommendPostList: React.FC<IProps> = ({ recommendedPosts }) => {
       <div
         style={{
           display: "flex",
-          alignItems: "center",
+          alignItems: "flex-start",
           justifyContent: "space-between",
           flexWrap: "wrap"
         }}

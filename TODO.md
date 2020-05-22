@@ -46,7 +46,7 @@
     1.  [x] Test Create 
     2.  [x] Test Delete
 19. [x] CS - Nav Bar
-    1.  [x] Search Box <--------------
+    1.  [x] Search Box
         1.  [x] Fix routing
         2.  [x] Blur when user selects a post 
         3.  [x] Right now if user goes to detailed post and refresh, no results and displayed

@@ -25,23 +25,22 @@ const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
   const { setActiveFilter } = rootStore.commonStore;
 
   return (
-    <Item>
+    <Item style={{height: 165}}>
       <Item.Image
         className="post-list-image"
         as={Link}
         to={internalUrl(post.slug)}
         size="medium"
-        alt={post.title + "."}
+        alt={post.title}
         src={post.image}
-        style={{ height: "100%" }}
       />
 
       <Item.Content className="post-content">
         <Fragment>
           <Item.Header>
             <div className="posts-header">
-              <Link to={internalUrl(post.slug)} style={{width: "90%"}}>
-                <h2 style={{ marginBottom: "0px" }}>{post.title}</h2>
+              <Link to={internalUrl(post.slug)} style={{width: "87%"}}>
+                <h2 style={{ marginBottom: "0px", fontSize: 20 }}>{post.title}</h2>
               </Link>
 
               <div style={{ display: "flex", alignItems: "flex-start", width: "10%" }}>
@@ -63,7 +62,7 @@ const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
             </div>
           </Item.Header>
         </Fragment>
-        <Item.Description style={{ marginTop: "3px" }}>
+        <Item.Description>
           {post.subTitle}
         </Item.Description>
         <Item.Extra className="post-buttons">

@@ -7,7 +7,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -38,6 +37,7 @@ code {
 .post-list-image img {
   /* width: 85% !important; */
   margin-right: 20px !important;
+  height: 165px !important;
 }
 
 .post-buttons button {
@@ -54,11 +54,14 @@ code {
   justify-content: space-between !important;
 }
 
+.ui.items>.item>.content {
+  flex: initial !important;
+}
+
 .ui.icon.button .icon {
   font-size: 18px;
   margin-top: 5px !important;
 }
-
 
 .ui.icon.button {
   padding: 12.5px !important;
@@ -68,7 +71,7 @@ code {
   display: flex !important;
   justify-content: space-between !important;
   align-items: center !important;
-width: 100%;
+  width: 100%;
 }
 
 .posts-header h3 {
