@@ -32,7 +32,7 @@ axios.interceptors.response.use(undefined, (error) => {
     toast.error("Network Error - Make sure the API is running!");
   }
 
-  const { status, headers } = error.response;
+  const { status, headers, config, data } = error.response;
 
   if (status === 404) {
     history.push("/NotFound");
@@ -46,7 +46,16 @@ axios.interceptors.response.use(undefined, (error) => {
     )
   ) {
     window.localStorage.removeItem("jwt");
+    history.push("/");
     toast.info("Your session has expired, please login again");
+  }
+
+  if (
+    status === 400 &&
+    config.method === "get" &&
+    data.errors.hasOwnProperty("id")
+  ) {
+    history.push("/NotFound");
   }
 
   if (status === 500) {

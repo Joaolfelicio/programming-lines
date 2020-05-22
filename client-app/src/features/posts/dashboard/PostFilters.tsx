@@ -28,6 +28,7 @@ const PostFilters = () => {
         onClick={() => {
           setActiveFilter("Recent");
           setPredicate("order", "descending");
+          window.scrollTo(0, 0);
         }}
         style={{ padding: "11px 13px" }}
       />
@@ -41,6 +42,7 @@ const PostFilters = () => {
             setPredicate("filter", "popular");
             setActiveFilter("Popular");
           }
+          window.scrollTo(0, 0);
         }}
         style={{ padding: "11px 13px" }}
       />

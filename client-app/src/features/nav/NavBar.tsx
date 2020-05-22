@@ -1,12 +1,12 @@
-import React, { useContext, Fragment } from "react";
+import React, { useContext, Fragment, useState } from "react";
 import { Menu, Search } from "semantic-ui-react";
 import DarkModeToggle from "react-dark-mode-toggle";
 import { RootStoreContext } from "../../app/stores/rootStore";
 import { observer } from "mobx-react-lite";
-import { toJS } from "mobx";
 import { useHistory, Link } from "react-router-dom";
 
 const NavBar = () => {
+  const history = useHistory();
   const rootStore = useContext(RootStoreContext);
   const {
     setIsDarkMode,
@@ -22,7 +22,7 @@ const NavBar = () => {
     setPredicate,
   } = rootStore.postStore;
 
-  const history = useHistory();
+  const [searchInput, setSearchInput] = useState("");
 
   const headerStyle = {
     marginLeft: "15px",
@@ -44,7 +44,8 @@ const NavBar = () => {
           onClick={() => {
             setActiveFilter("Recent");
             setPredicate("all", "recent");
-            setActiveNavItem("posts")
+            setActiveNavItem("posts");
+            window.scrollTo(0, 0);
           }}
           style={{ alignItems: "center" }}
         >
@@ -59,20 +60,22 @@ const NavBar = () => {
 
         <Menu.Item position="right">
           <Search
+            id="searchBox"
             results={postsBySearchTerm!}
             loading={loadingPosts}
             fluid
             onResultSelect={(e, data) => {
-              console.log(toJS(data.result));
               history.push(`/post/${data.result.slug}`);
-              //TODO: Fix this
-              data.value = "";
+              setSearchInput("");
+              document.getElementById("searchBox")!.blur();
             }}
+            value={searchInput}
             size="small"
             placeholder="Search posts..."
             className="search-box"
             onSearchChange={(e, data) => {
               setPostsBySearchTerm(data.value!);
+              setSearchInput(data.value!);
             }}
           />
         </Menu.Item>

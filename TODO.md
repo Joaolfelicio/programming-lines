@@ -46,10 +46,10 @@
     1.  [x] Test Create 
     2.  [x] Test Delete
 19. [x] CS - Nav Bar
-    1.  [ ] Search Box <--------------
+    1.  [x] Search Box <--------------
         1.  [x] Fix routing
-        2.  [ ] Blur when user selects a post 
-        3.  [ ] Right now if user goes to detailed post and refresh, no results and displayed
+        2.  [x] Blur when user selects a post 
+        3.  [x] Right now if user goes to detailed post and refresh, no results and displayed
     2.  [ ] Dark Mode
         1.  [x] Fix Bug of when interacting with Nav Bar, dark moddle toggle moves.
         2.  [x] Store in local storage the preference
@@ -84,13 +84,13 @@
     3.  [x] Store fingerprint only in state
     4.  [x] I Think there might be a bug related to anonusers and reactions (Maybe not)
 26. [x] Recommendations
-    1.  [ ] Card should always be the same size
+    1.  [ ] Card should always be the same size <------------
 27. [ ] CS - Newsletter
     1.  [x] Post API
     2.  [x] Display error
     3.  [x] Display success
     4.  [x] Loading button
-    5.  [ ] Clean form on submit <------------
+    5.  [x] Clean form on submit
 28. [ ] CS - Filters
     1.  [x] Recent
     2.  [x] Popular

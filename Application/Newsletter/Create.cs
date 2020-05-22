@@ -40,7 +40,7 @@ namespace Application.Newsletter
 
                 if(subscriberNewsletter != null )
                 {
-                    throw new RestException(HttpStatusCode.BadRequest, new {Newsletter = "You are already subscribed to the newsletter"});
+                    throw new RestException(HttpStatusCode.BadRequest, new {Newsletter = "You are already subscribed to the newsletter."});
                 }
 
                 subscriberNewsletter = new Domain.Newsletter

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useRef } from "react";
 import { Segment, Form, Button, Header } from "semantic-ui-react";
 import { Form as FinalForm, Field } from "react-final-form";
 import {
@@ -38,6 +38,8 @@ const Newsletter = () => {
   const rootStore = useContext(RootStoreContext);
   const { subscribeNewsletter, isDarkMode } = rootStore.commonStore;
 
+  const [state, setstate] = useState<any>();
+
   return (
     <Segment
       inverted={isDarkMode}
@@ -58,10 +60,12 @@ const Newsletter = () => {
       />
 
       <FinalForm
-        onSubmit={(values: any) =>
-          subscribeNewsletter(values.fullName, values.email).catch((error) => ({
-            [FORM_ERROR]: error,
-          }))
+        onSubmit={(values: any, form: any) =>
+          subscribeNewsletter(values.fullName, values.email)
+            .then(() => setTimeout(form.reset))
+            .catch((error: any) => ({
+              [FORM_ERROR]: error,
+            }))
         }
         validate={validate}
         render={({
@@ -80,7 +84,7 @@ const Newsletter = () => {
             />
 
             <Field placeholder="Email..." name="email" component={TextInput} />
-
+            {console.log(submitError)}
             {submitError && !dirtySinceLastSubmit && (
               <ErrorMessage error={submitError} />
             )}

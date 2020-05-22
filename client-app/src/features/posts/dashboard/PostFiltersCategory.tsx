@@ -22,6 +22,7 @@ const PostFiltersCategory = () => {
               setActiveFilter(category.code);
               setPredicate("categoryCode", category.code);
             }
+            window.scrollTo(0, 0);
           }}
           style={{ display: "flex", alignItems: "center" }}
         >
