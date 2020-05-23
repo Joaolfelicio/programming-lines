@@ -3,18 +3,12 @@ import { Menu, Search } from "semantic-ui-react";
 import DarkModeToggle from "react-dark-mode-toggle";
 import { RootStoreContext } from "../../app/stores/rootStore";
 import { observer } from "mobx-react-lite";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, Link, useLocation } from "react-router-dom";
 
 const NavBar = () => {
   const history = useHistory();
   const rootStore = useContext(RootStoreContext);
-  const {
-    setIsDarkMode,
-    isDarkMode,
-    activeNavItem,
-    setActiveNavItem,
-    setActiveFilter,
-  } = rootStore.commonStore;
+  const { setIsDarkMode, isDarkMode, setActiveFilter } = rootStore.commonStore;
   const {
     postsBySearchTerm,
     setPostsBySearchTerm,
@@ -30,6 +24,8 @@ const NavBar = () => {
     fontSize: "20px",
   };
 
+  const location = useLocation();
+
   return (
     <Fragment>
       <Menu
@@ -44,7 +40,6 @@ const NavBar = () => {
           onClick={() => {
             setActiveFilter("Recent");
             setPredicate("all", "recent");
-            setActiveNavItem("posts");
             window.scrollTo(0, 0);
           }}
           style={{ alignItems: "center" }}
@@ -85,15 +80,15 @@ const NavBar = () => {
             as={Link}
             to="/"
             name="Posts"
-            active={activeNavItem === "posts"}
-            onClick={() => setActiveNavItem("posts")}
+            active={
+              location.pathname.includes("/post") || location.pathname === "/"
+            }
           />
           <Menu.Item
             as={Link}
             to="/aboutme"
             name="About me"
-            active={activeNavItem === "aboutme"}
-            onClick={() => setActiveNavItem("aboutme")}
+            active={location.pathname.includes("/aboutme")}
           />
           <Menu.Item>
             <DarkModeToggle

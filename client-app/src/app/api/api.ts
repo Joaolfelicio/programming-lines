@@ -9,6 +9,7 @@ import { IAnonUserIdEnvelope } from "../models/Requests/anonUserIdEnvelope";
 import { ISearchablePostDto } from "../models/Dto/searchPostDto";
 import { history } from "../../index";
 import { ICategory } from "../models/category";
+import { IUserFormValues, IAdminUser } from "../models/adminUser";
 
 // axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 axios.defaults.baseURL = "https://localhost:5001/api";
@@ -102,6 +103,10 @@ const AnonUser = {
   },
 };
 
+const AdminUser = {
+  login: (user: IUserFormValues): Promise<IAdminUser> => requests.post("/user/login", user),
+}
+
 const Newsletter = {
   subscribe: (newsletter: INewsletterEnvelope) =>
     requests.post(`/Newsletter`, newsletter),
@@ -118,4 +123,5 @@ export default {
   AnonUser,
   Newsletter,
   Category,
+  AdminUser
 };

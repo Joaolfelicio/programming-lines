@@ -1,5 +1,5 @@
-import React, { useContext, useState, useRef } from "react";
-import { Segment, Form, Button, Header } from "semantic-ui-react";
+import React, { useContext, useState } from "react";
+import { Segment, Form, Button, Header, Divider } from "semantic-ui-react";
 import { Form as FinalForm, Field } from "react-final-form";
 import {
   combineValidators,
@@ -38,8 +38,6 @@ const Newsletter = () => {
   const rootStore = useContext(RootStoreContext);
   const { subscribeNewsletter, isDarkMode } = rootStore.commonStore;
 
-  const [state, setstate] = useState<any>();
-
   return (
     <Segment
       inverted={isDarkMode}
@@ -49,7 +47,7 @@ const Newsletter = () => {
         width: "45%",
         maxWidth: 500,
         minWidth: 420,
-        margin: "80px auto",
+        margin: "80px auto 10px auto",
       }}
     >
       <Header
@@ -84,7 +82,6 @@ const Newsletter = () => {
             />
 
             <Field placeholder="Email..." name="email" component={TextInput} />
-            {console.log(submitError)}
             {submitError && !dirtySinceLastSubmit && (
               <ErrorMessage error={submitError} />
             )}
@@ -107,6 +104,30 @@ const Newsletter = () => {
           </Form>
         )}
       />
+      <Divider inverted={isDarkMode} />
+      <p>
+        Created by{" "}
+        <a
+          href="https://github.com/Joaolfelicio"
+          target="_blank"
+          style={{ fontWeight: 800 }}
+          rel="noopener noreferrer"
+        >
+          Joao Felicio.
+        </a>
+      </p>
+      <p>
+        You can find the source code in
+        <a
+          href="https://github.com/Joaolfelicio/programming-lines"
+          target="_blank"
+          style={{ fontWeight: 800 }}
+          rel="noopener noreferrer"
+        >
+          {" "}
+          GitHub.
+        </a>
+      </p>
     </Segment>
   );
 };

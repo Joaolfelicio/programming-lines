@@ -1,33 +1,28 @@
-import React, { useContext, useEffect, Fragment } from "react";
+import React, { useContext, Fragment } from "react";
 import { observer } from "mobx-react-lite";
 import { RootStoreContext } from "../../app/stores/rootStore";
 import SocialMedia from "./SocialMedia";
 
 const AboutMeComponent = () => {
   const rootStore = useContext(RootStoreContext);
-  const { setActiveNavItem, isDarkMode } = rootStore.commonStore;
-
-  useEffect(() => {
-    setActiveNavItem("aboutme");
-  }, [setActiveNavItem]);
+  const { isDarkMode } = rootStore.commonStore;
 
   document.title = `Programming Lines - Joao Felicio`;
 
   return (
-    <Fragment>
+    <Fragment>      
       <div
         style={{
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
           width: "90%",
-          margin: "0 auto",
+          margin: "0 auto 25vh auto",
           fontSize: 20,
         }}
       >
         <div style={{ lineHeight: 3, width: "47%" }}>
           <h3 style={{ fontSize: 22 }}>
-            Hi there!
             <span
               role="img"
               aria-label="hand waving, hello"
@@ -37,9 +32,7 @@ const AboutMeComponent = () => {
             </span>
           </h3>
           <p style={{ display: "inline" }}>My name is </p>
-          <h1 style={{ display: "inline", fontSize: 24 }}>
-            Joao Felicio
-          </h1>.
+          <h1 style={{ display: "inline", fontSize: 24 }}>Joao Felicio</h1>.
           <p style={{ wordSpacing: 2 }}>
             I am a passionate <strong>Software Engineer</strong>, open source
             lover, technology enthusiast and problem solver.

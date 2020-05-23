@@ -16,6 +16,7 @@ import PostsDetails from "../../features/posts/details/PostsDetails";
 import { Container } from "semantic-ui-react";
 import NotFound from "./NotFound";
 import AboutMeComponent from "../../features/aboutme/AboutMeComponent";
+import AdminLogin from "../../features/admin/AdminLogin";
 
 const App: React.FC<RouteComponentProps> = () => {
   const rootStore = useContext(RootStoreContext);
@@ -41,9 +42,10 @@ const App: React.FC<RouteComponentProps> = () => {
           <Route exact path="/" component={PostDashboard} />
           <Route path="/aboutme" component={AboutMeComponent} />
           <Route path="/post/:slug" component={PostsDetails} />
+          <Route path="/admin" component={AdminLogin} />
           <Route component={NotFound} />
         </Switch>
-        <Newsletter />
+        <Route exact path={["/", "/post/:slug", "/aboutme"]}  component={Newsletter} />
       </Container>
       <ToastContainer
         position="bottom-right"

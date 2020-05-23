@@ -84,7 +84,7 @@
     3.  [x] Store fingerprint only in state
     4.  [x] I Think there might be a bug related to anonusers and reactions (Maybe not)
 26. [x] Recommendations
-    1.  [ ] Card should always be the same size <------------
+    1.  [x] Card should always be the same size <------------
 27. [ ] CS - Newsletter
     1.  [x] Post API
     2.  [x] Display error
@@ -120,9 +120,19 @@
     2.  [x] Click "Popular", then "Recent", instead of only 1 element, got 2
     3.  [x] Lots of bugs
 37. [x] React-markdown
-38. [ ] Markdown preview
-39. [ ] Footer <-----------------------------
-40. [x] Add post title in the index.tsx title
-41. [ ] Responsiveness
-42. [ ] SEO
+38. [ ] BACKOFFICE
+39. [ ] BO - Posts
+    1.  [ ] Create
+        1.  [ ] Markdown preview
+    2.  [ ] Delete
+    3.  [ ] Update
+40. [ ] BO - Categories
+    1.  [ ] Create
+    2.  [ ] Delete
+    3.  [ ] Update
+41. [ ] Footer <-----------------------------
+42. [x] Add post title in the index.tsx title
+43. [ ] Responsiveness
+    1.  [ ] react-media
+44. [ ] SEO
 

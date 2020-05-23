@@ -1,11 +1,13 @@
 /* eslint-disable */
 import { RootStore } from "./rootStore";
-import { action, observable, runInAction } from "mobx";
+import { action, observable, runInAction, computed } from "mobx";
 import { IAnonymousUser } from "../models/anonymousUser";
 import { IFingeprintEnvelope } from "../models/Requests/fingerprintEnvelope";
 import api from "../api/api";
 import Fingerprint2 from "fingerprintjs2";
 import { IAnonUserIdEnvelope } from "../models/Requests/anonUserIdEnvelope";
+import { IAdminUser, IUserFormValues } from "../models/adminUser";
+import { history } from "../..";
 
 export class UserStore {
   rootStore: RootStore;
@@ -15,6 +17,7 @@ export class UserStore {
   }
 
   @observable anonymousUser: IAnonymousUser | null = null;
+  @observable adminUser: IAdminUser | null = null;
 
   @action loginAnonymousUser = async () => {
     let storageAnonUserId = window.localStorage.getItem("AnonUserId");
@@ -75,4 +78,21 @@ export class UserStore {
         250;
     });
   };
+
+  @action loginAdminUser = async (adminUser: IUserFormValues) => {
+    try {
+      const user = await api.AdminUser.login(adminUser);
+      runInAction(() => {
+        this.adminUser = user;
+        this.rootStore.commonStore.setToken(user.token);
+      });
+      history.push("/admin/dashboard");
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  @computed get isAdminLoggedIn() {
+    return !!this.adminUser;
+  }
 }

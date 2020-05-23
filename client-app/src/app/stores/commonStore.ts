@@ -9,8 +9,6 @@ configure({ enforceActions: "always" });
 export default class CommonStore {
   rootStore: RootStore;
 
-
-
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
 
@@ -19,27 +17,41 @@ export default class CommonStore {
       (isDarkMode) => {
         localStorage.setItem("DarkMode", isDarkMode.toString());
       }
-    )
+    );
 
     //If the user deselects any filter
     reaction(
       () => this.activeFilter,
       (activeFilter) => {
-        if(activeFilter === "Recent") {
+        if (activeFilter === "Recent") {
           this.rootStore.postStore.setPredicate("all", "recent");
         }
       }
-    )
+    );
+
+    // Update token value
+    reaction(
+      () => this.token,
+      (token) => {
+        if (token) {
+          window.localStorage.setItem("jwt", token);
+        } else {
+          window.localStorage.removeItem("jwt");
+        }
+      }
+    );
   }
 
   @observable appLoading = true;
-  @observable isDarkMode = localStorage.getItem("DarkMode") ? (localStorage.getItem("DarkMode") === "true" ) : true;
-  @observable activeNavItem = "posts";
+  @observable isDarkMode = localStorage.getItem("DarkMode")
+    ? localStorage.getItem("DarkMode") === "true"
+    : true;
   @observable activeFilter = "Recent";
+  @observable token: string | null = window.localStorage.getItem("jwt");
 
   @action setActiveFilter = (filter: string) => {
     this.activeFilter = filter;
-  }
+  };
 
   @action setAppLoading = () => {
     this.appLoading = false;
@@ -47,10 +59,6 @@ export default class CommonStore {
 
   @action setIsDarkMode = () => {
     this.isDarkMode = !this.isDarkMode;
-  };
-
-  @action setActiveNavItem = (active: string) => {
-    this.activeNavItem = active;
   };
 
   @action subscribeNewsletter = async (displayName: string, email: string) => {
@@ -66,4 +74,8 @@ export default class CommonStore {
       throw error;
     }
   };
+
+  @action setToken(token: string | null) {
+    this.token = token;
+  }
 }

@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.min.css";
 import { Router } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import ScrollToTop from "./app/layout/ScrollToTop";
+import "normalize.css";
 
 export const history = createBrowserHistory();
 

@@ -5,6 +5,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: absolute;
+  top: 0 !important;
+  width: 100%;
 }
 
 code {
@@ -52,6 +55,7 @@ code {
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-between !important;
+  width: 100% !important;
 }
 
 .ui.items>.item>.content {
