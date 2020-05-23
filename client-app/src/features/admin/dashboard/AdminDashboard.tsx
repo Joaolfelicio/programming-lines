@@ -9,7 +9,7 @@ const AdminDashboard = () => {
 
   return (
     <Fragment>
-      <Menu pointing secondary style={{ width: 730, margin: "0 auto" }}>
+      <Menu pointing secondary style={{ width: 730, margin: "10px auto" }}>
         <Menu.Item
           name="Posts"
           active={activeAdminDashboard === "Posts"}

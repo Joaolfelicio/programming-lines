@@ -3,7 +3,7 @@ import { Segment } from 'semantic-ui-react'
 
 const NewsletterList = () => {
     return (
-        <Segment> 
+        <Segment raised> 
             ALL NEWSLETTER
         </Segment>
     )

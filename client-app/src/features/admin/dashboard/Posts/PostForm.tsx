@@ -12,6 +12,7 @@ import {
 } from "revalidate";
 import { observer } from "mobx-react-lite";
 import ReactMarkdown from "react-markdown";
+import CodeBlock from "../../../../app/common/syntaxHighlight/CodeBlock";
 
 const PostForm = () => {
   const [post, setPost] = useState(new IPostFormValues());
@@ -38,7 +39,7 @@ const PostForm = () => {
   });
 
   return (
-    <Segment clearing>
+    <Segment clearing raised>
       <Header
         content="Create a new post"
         size="huge"
@@ -76,7 +77,7 @@ const PostForm = () => {
                     name="date"
                     component={DateInput}
                   /> */}
-            <Menu tabular style={{marginBottom: 0}}>
+            <Menu tabular style={{ marginBottom: 0 }}>
               <Menu.Item
                 name="Write"
                 active={!isContentPreview}
@@ -90,15 +91,24 @@ const PostForm = () => {
             </Menu>
 
             {isContentPreview ? (
-              <ReactMarkdown escapeHtml={false} skipHtml={false} source="# TEST" />) : 
-              (<Field
-              placeholder="Content"
-              value={post.content}
-              name="content"
-              component={TextAreaInput}
-              rows={20}
-              OnChange={(e: any) => console.log(e)}
-            />
+              <ReactMarkdown
+                className="markdown-body"
+                source={"# Test \n ## TEST \n ### haha \n Another one \n ```javascript \n var test = 'hello there friends' \n console.log(test) \n ```"}
+                skipHtml={false}
+                escapeHtml={false}
+                renderers={{
+                  code: CodeBlock,
+                }}
+              />
+            ) : (
+              <Field
+                placeholder="Content"
+                value={post.content}
+                name="content"
+                component={TextAreaInput}
+                rows={20}
+                OnChange={(e: any) => console.log(e)}
+              />
             )}
 
             {/* TODO: FETCH THE AVAILABLES CATEGORIES AND PUT IT IN A SELECT */}

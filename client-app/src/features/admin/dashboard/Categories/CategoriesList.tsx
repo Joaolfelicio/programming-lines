@@ -3,7 +3,7 @@ import { Segment } from 'semantic-ui-react'
 
 const CategoriesList = () => {
     return (
-        <Segment>
+        <Segment raised>
             ALL CATEGORIES
         </Segment>
     )

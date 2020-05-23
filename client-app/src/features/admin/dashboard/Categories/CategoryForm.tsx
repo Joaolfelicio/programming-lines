@@ -3,7 +3,7 @@ import { Segment } from 'semantic-ui-react'
 
 const CategoryForm = () => {
     return (
-        <Segment>
+        <Segment raised>
             CREATE NEW CATEGORY
         </Segment>
     )
