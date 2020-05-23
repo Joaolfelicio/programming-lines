@@ -15,6 +15,7 @@ const NavBar = () => {
     loadingPosts,
     setPredicate,
   } = rootStore.postStore;
+  const { adminUser } = rootStore.userStore;
 
   const [searchInput, setSearchInput] = useState("");
 
@@ -90,6 +91,14 @@ const NavBar = () => {
             name="About me"
             active={location.pathname.includes("/aboutme")}
           />
+          {adminUser && (
+            <Menu.Item
+              as={Link}
+              to="/admin/dashboard"
+              name="Admin"
+              active={location.pathname.includes("/admin")}
+            />
+          )}
           <Menu.Item>
             <DarkModeToggle
               onChange={setIsDarkMode}

@@ -56,7 +56,7 @@
         3.  [ ] Style Everywhere
     3.  [ ] Hamburguer for mobile
     4.  [x] If user is in detailed page, change "Programming lines" to h2
-20. [ ] CS - Login  
+20. [x] CS - Login  
 21. [x] CS - Posts
     1.  [x] Add category on the opposite side of the title 
     2.  [x] Time to read
@@ -112,25 +112,26 @@
     1.  [x] Photo
     2.  [x] Bio
     3.  [x] Social Media
-34. [ ] Back Office
-35. [x] API - Add predicates
-36. [x] Pagination
+34. [x] API - Add predicates
+35. [x] Pagination
     1.  [x] Fix the pagination bug
         1.  [x] Click on "Recents" page 3 and then filter by "React", active page disappears
     2.  [x] Click "Popular", then "Recent", instead of only 1 element, got 2
     3.  [x] Lots of bugs
-37. [x] React-markdown
-38. [ ] BACKOFFICE
-39. [ ] BO - Posts
+36. [x] React-markdown
+37. [ ] BackOffice
+38. [ ] BO - Posts
     1.  [ ] Create
         1.  [ ] Markdown preview
     2.  [ ] Delete
     3.  [ ] Update
-40. [ ] BO - Categories
+39. [ ] BO - Categories
     1.  [ ] Create
     2.  [ ] Delete
     3.  [ ] Update
-41. [ ] Footer <-----------------------------
+40. [ ] BO - Newsletter
+    1.  [ ] List
+41. [x] Footer <-----------------------------
 42. [x] Add post title in the index.tsx title
 43. [ ] Responsiveness
     1.  [ ] react-media

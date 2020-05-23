@@ -2,6 +2,7 @@ import React, { useContext, Fragment } from "react";
 import { observer } from "mobx-react-lite";
 import { RootStoreContext } from "../../app/stores/rootStore";
 import SocialMedia from "./SocialMedia";
+import { Container } from "semantic-ui-react";
 
 const AboutMeComponent = () => {
   const rootStore = useContext(RootStoreContext);
@@ -23,6 +24,7 @@ const AboutMeComponent = () => {
       >
         <div style={{ lineHeight: 3, width: "47%" }}>
           <h3 style={{ fontSize: 22 }}>
+            Hi there!
             <span
               role="img"
               aria-label="hand waving, hello"

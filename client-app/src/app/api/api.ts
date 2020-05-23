@@ -105,6 +105,7 @@ const AnonUser = {
 
 const AdminUser = {
   login: (user: IUserFormValues): Promise<IAdminUser> => requests.post("/user/login", user),
+  current: (): Promise<IAdminUser> => requests.get("/user/currentUser"),
 }
 
 const Newsletter = {

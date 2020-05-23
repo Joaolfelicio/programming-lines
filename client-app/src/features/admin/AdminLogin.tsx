@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   combineValidators,
   isRequired,
@@ -13,6 +13,8 @@ import { Form, Header, Button, Grid, Segment } from "semantic-ui-react";
 import { Form as FinalForm, Field } from "react-final-form";
 import TextInput from "../../app/common/form/TextInput";
 import ErrorMessage from "../../app/common/form/ErrorMessage";
+import { toJS } from "mobx";
+import { history } from "../..";
 
 const isValidEmail = createValidator(
   (message) => (value) => {
@@ -33,11 +35,17 @@ const validate = combineValidators({
 
 const AdminLogin = () => {
   const rootStore = useContext(RootStoreContext);
-  const { loginAdminUser } = rootStore.userStore;
+  const { loginAdminUser, adminUser } = rootStore.userStore;
   const { isDarkMode } = rootStore.commonStore;
 
+  useEffect(() => {
+    if(adminUser) {
+      history.push("/admin/dashboard");
+    }
+  }, [adminUser]);
+
   return (
-    <Grid textAlign='center' style={{ marginTop: "20vh" }}>
+    <Grid textAlign="center" style={{ marginTop: "20vh" }}>
       <Grid.Column style={{ maxWidth: 450 }}>
         <FinalForm
           onSubmit={(values: IUserFormValues) =>
@@ -55,7 +63,7 @@ const AdminLogin = () => {
             dirtySinceLastSubmit,
           }) => (
             <Segment stacked inverted={isDarkMode}>
-              <Form onSubmit={handleSubmit} error style={{textAlign: "left"}}>
+              <Form onSubmit={handleSubmit} error style={{ textAlign: "left" }}>
                 <Header as="h2" content="Login" textAlign="center" />
                 <Field
                   fluid
@@ -71,9 +79,7 @@ const AdminLogin = () => {
                   fluid
                 />
                 {submitError && !dirtySinceLastSubmit && (
-                  <ErrorMessage
-                    error={submitError}
-                  />
+                  <ErrorMessage error={submitError} />
                 )}
                 <Button
                   disabled={(invalid && !dirtySinceLastSubmit) || pristine}

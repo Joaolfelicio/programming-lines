@@ -92,6 +92,17 @@ export class UserStore {
     }
   };
 
+  @action getUser = async () => {
+    try {
+      const user = await api.AdminUser.current();
+      runInAction(() => {
+        this.adminUser = user;
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   @computed get isAdminLoggedIn() {
     return !!this.adminUser;
   }

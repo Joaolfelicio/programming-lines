@@ -17,18 +17,23 @@ import { Container } from "semantic-ui-react";
 import NotFound from "./NotFound";
 import AboutMeComponent from "../../features/aboutme/AboutMeComponent";
 import AdminLogin from "../../features/admin/AdminLogin";
+import PrivateRoute from "./PrivateRoute";
+import AdminDashboard from "../../features/admin/dashboard/AdminDashboard";
 
 const App: React.FC<RouteComponentProps> = () => {
   const rootStore = useContext(RootStoreContext);
-  const { appLoading } = rootStore.commonStore;
-  const { loginAnonymousUser } = rootStore.userStore;
-  const { isDarkMode } = rootStore.commonStore;
+  const { appLoading, isDarkMode, token } = rootStore.commonStore;
+  const { loginAnonymousUser, getUser } = rootStore.userStore;
   const { setSearchablePosts } = rootStore.postStore;
 
   useEffect(() => {
     loginAnonymousUser();
     setSearchablePosts();
-  }, [loginAnonymousUser, setSearchablePosts]);
+
+    if (token) {
+      getUser();
+    }
+  }, [loginAnonymousUser, setSearchablePosts, token, getUser]);
 
   if (appLoading) {
     return <LoadingComponent inverted={isDarkMode} />;
@@ -36,16 +41,21 @@ const App: React.FC<RouteComponentProps> = () => {
 
   return (
     <Fragment>
-      <NavBar/>
+      <NavBar />
       <Container style={{ marginTop: "7em" }}>
         <Switch>
           <Route exact path="/" component={PostDashboard} />
           <Route path="/aboutme" component={AboutMeComponent} />
           <Route path="/post/:slug" component={PostsDetails} />
-          <Route path="/admin" component={AdminLogin} />
+          <Route exact path="/admin" component={AdminLogin} />
+          <PrivateRoute path="/admin/dashboard" component={AdminDashboard} />
           <Route component={NotFound} />
         </Switch>
-        <Route exact path={["/", "/post/:slug", "/aboutme"]}  component={Newsletter} />
+        <Route
+          exact
+          path={["/", "/post/:slug", "/aboutme"]}
+          component={Newsletter}
+        />
       </Container>
       <ToastContainer
         position="bottom-right"
