@@ -1,4 +1,4 @@
-import React, {Fragment, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { Menu } from "semantic-ui-react";
 import AdminPosts from "./Posts/AdminPosts";
 import AdminCategories from "./Categories/AdminCategories";
@@ -9,7 +9,7 @@ const AdminDashboard = () => {
 
   return (
     <Fragment>
-      <Menu pointing secondary>
+      <Menu pointing secondary style={{ width: 730, margin: "0 auto" }}>
         <Menu.Item
           name="Posts"
           active={activeAdminDashboard === "Posts"}
@@ -27,13 +27,15 @@ const AdminDashboard = () => {
         />
       </Menu>
 
-      {activeAdminDashboard === "Posts" ? (
-        <AdminPosts />
-      ) : activeAdminDashboard === "Categories" ? (
-        <AdminCategories />
-      ) : (
-        <AdminNewsletter />
-      )}
+      <div style={{ width: 730, margin: "0 auto" }}>
+        {activeAdminDashboard === "Posts" ? (
+          <AdminPosts />
+        ) : activeAdminDashboard === "Categories" ? (
+          <AdminCategories />
+        ) : (
+          <AdminNewsletter />
+        )}
+      </div>
     </Fragment>
   );
 };

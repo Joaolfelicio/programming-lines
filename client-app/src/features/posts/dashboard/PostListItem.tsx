@@ -1,5 +1,5 @@
 import React, { useContext, Fragment } from "react";
-import { Item, Button, Popup, Grid, Container, Image } from "semantic-ui-react";
+import { Item, Button, Popup, Grid, Image } from "semantic-ui-react";
 import { IPost } from "../../../app/models/post";
 import moment from "moment";
 import { RootStoreContext } from "../../../app/stores/rootStore";

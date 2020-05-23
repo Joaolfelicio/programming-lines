@@ -36,7 +36,20 @@ export interface IPostsEnvelope {
   postsCount: number;
 }
 
-//TODO
-// export class IPostsFormValues implements IPost {
+export interface IPostsForm {
+    slug: string;
+    title: string;
+    subTitle: string;
+    image: string;
+    content: string;
+    categoryCode: string;
+}
 
-// }
+export class IPostFormValues implements IPostsForm {
+    slug = "";
+    title = "";
+    subTitle = "";
+    image = "";
+    content = "";
+    categoryCode = "";
+}
