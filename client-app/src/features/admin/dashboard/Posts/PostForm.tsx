@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Segment, Form, Button, Header, Menu } from "semantic-ui-react";
+import React, { useState, Fragment, useContext } from "react";
+import { Segment, Form, Button, Header, Menu, Label } from "semantic-ui-react";
 import { Form as FinalForm, Field } from "react-final-form";
 import TextInput from "../../../../app/common/form/TextInput";
 import { IPostFormValues } from "../../../../app/models/post";
@@ -13,8 +13,15 @@ import {
 import { observer } from "mobx-react-lite";
 import ReactMarkdown from "react-markdown";
 import CodeBlock from "../../../../app/common/syntaxHighlight/CodeBlock";
+import { OnChange } from "react-final-form-listeners";
+import { PhotoUploadWidget } from "./ImageUpload/PhotoUploadWidget";
+import { RootStoreContext } from "../../../../app/stores/rootStore";
+const readingTime = require("reading-time");
 
 const PostForm = () => {
+  const rootStore = useContext(RootStoreContext);
+  const {uploadingImage, newPostImageUrl} = rootStore.adminStore;
+
   const [post, setPost] = useState(new IPostFormValues());
   const [loading, setLoading] = useState(false);
   const [isContentPreview, setIsContentPreview] = useState(false);
@@ -22,15 +29,23 @@ const PostForm = () => {
 
   const isValidSlug = createValidator(
     (message) => (value) => {
-      if (value && !/^[a-z]+(?:-[a-z]+)*$/i.test(value)) {
+      if (value && !/^[a-z0-9]+(?:-[a-z0-9]+)*$/i.test(value)) {
         return message;
       }
     },
     "Invalid slug"
   );
 
+  const labelStyle = {
+    fontSize: 18,
+    marginLeft: 3,
+    marginTop: 10,
+  };
+
   const validate = combineValidators({
-    slug: composeValidators(isValidSlug({ message: "Slug needs to be valid" })),
+    slug: composeValidators(
+      isValidSlug({ message: "Slug needs to be valid" })
+    )(),
     title: isRequired("Title"),
     subTitle: isRequired("SubTitle"),
     image: isRequired("Image"),
@@ -38,12 +53,17 @@ const PostForm = () => {
     category: isRequired("Category"),
   });
 
+  const handleUploadImage = (photo: Blob) => {
+    // uploadPhoto(photo).then(() => setAddPhotoMode(false));
+  };
+
+  
   return (
     <Segment clearing raised>
       <Header
-        content="Create a new post"
+        content="New post"
         size="huge"
-        style={{ margin: 10, marginBottom: 30 }}
+        style={{ margin: 10, marginBottom: 10 }}
       />
       <FinalForm
         validate={validate}
@@ -51,32 +71,35 @@ const PostForm = () => {
         onSubmit={() => console.log("hello")}
         render={({ handleSubmit, invalid, pristine, submitting }) => (
           <Form onSubmit={handleSubmit} loading={loading}>
+
+            <label style={labelStyle}>Slug:</label>
             <Field
               placeholder="Slug"
               value={post.slug}
               name="slug"
               component={TextInput}
             />
+
+            <label style={labelStyle}>Title:</label>
             <Field
               placeholder="Title"
               value={post.title}
               name="title"
               component={TextInput}
             />
+
+            <label style={labelStyle}>SubTitle:</label>
             <Field
               placeholder="SubTitle"
               value={post.subTitle}
               name="subTitle"
               component={TextInput}
             />
-            {/* TODO INSERT PHOTO WIDGET HERE */}
-            {/* <Field
-                    placeholder="Date"
-                    value={activity.date}
-                    date={true}
-                    name="date"
-                    component={DateInput}
-                  /> */}
+
+            <label style={labelStyle}>Image:</label>
+            <PhotoUploadWidget uploadPhoto={handleUploadImage} loading={uploadingImage} />
+            {newPostImageUrl && <img src={newPostImageUrl} />}
+
             <Menu tabular style={{ marginBottom: 0 }}>
               <Menu.Item
                 name="Write"
@@ -88,12 +111,14 @@ const PostForm = () => {
                 active={isContentPreview}
                 onClick={() => setIsContentPreview(true)}
               />
+              <Menu.Item name={readingTime(content).text} />
+              <Menu.Item name={`${readingTime(content).words} words`} />
             </Menu>
 
             {isContentPreview ? (
               <ReactMarkdown
-                className="markdown-body"
-                source={"# Test \n ## TEST \n ### haha \n Another one \n ```javascript \n var test = 'hello there friends' \n console.log(test) \n ```"}
+                className="markdown-body admin-preview"
+                source={content}
                 skipHtml={false}
                 escapeHtml={false}
                 renderers={{
@@ -101,16 +126,24 @@ const PostForm = () => {
                 }}
               />
             ) : (
-              <Field
-                placeholder="Content"
-                value={post.content}
-                name="content"
-                component={TextAreaInput}
-                rows={20}
-                OnChange={(e: any) => console.log(e)}
-              />
+              <Fragment>
+                <Field
+                  placeholder="Content"
+                  value={post.content}
+                  name="content"
+                  component={TextAreaInput}
+                  rows={31}
+                  style={{ marginTop: 20, marginBottom: 20 }}
+                />
+                <OnChange name="content">
+                  {(value) => {
+                    setContent(value);
+                  }}
+                </OnChange>
+              </Fragment>
             )}
 
+            <label style={labelStyle}>Category:</label>
             {/* TODO: FETCH THE AVAILABLES CATEGORIES AND PUT IT IN A SELECT */}
             <Field
               placeholder="Category"
@@ -118,6 +151,7 @@ const PostForm = () => {
               name="category"
               component={TextInput}
             />
+            
             <Button
               loading={submitting}
               disabled={loading || invalid || pristine}

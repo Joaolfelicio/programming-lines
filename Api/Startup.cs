@@ -27,6 +27,8 @@ using Infrastructure.Security;
 using Api.Middleware;
 using FluentValidation.AspNetCore;
 using Infrastructure.Generator;
+using Infrastructure.Images;
+using Infrastructure.Images.Model;
 
 namespace Api
 {
@@ -126,6 +128,8 @@ namespace Api
             services.AddScoped<IJwtGenerator, JwtGenerator>();
             services.AddScoped<IUserAccessor, UserAccessor>();
             services.AddScoped<IPopulateData, PopulateData>();
+            services.AddScoped<IImageAccessor, ImageAccessor>();
+            services.Configure<CloudinarySettings>(Configuration.GetSection("Cloudinary"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

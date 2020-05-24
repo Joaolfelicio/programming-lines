@@ -8,7 +8,7 @@ namespace Application.Validators
         {
             return ruleBuilder.NotEmpty()
                               .MinimumLength(6).WithMessage("Slug must be at least 6 characters")
-                              .Matches("^[a-z]+(?:-[a-z]+)*$").WithMessage("Slug must have a valid format");
+                              .Matches("^[a-z0-9]+(?:-[a-z0-9]+)*$").WithMessage("Slug must have a valid format");
         }
 
         public static IRuleBuilder<T, string> CategoryCodeRules<T>(this IRuleBuilder<T, string> ruleBuilder)

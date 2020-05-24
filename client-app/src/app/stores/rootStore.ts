@@ -4,6 +4,7 @@ import CommonStore from "./commonStore";
 import { configure } from "mobx";
 import { UserStore } from "./userStore";
 import CategoryStore from "./categoryStore";
+import AdminStore from "./adminStore";
 
 configure({ enforceActions: "always" });
 
@@ -12,12 +13,14 @@ export class RootStore {
     commonStore: CommonStore;
     userStore: UserStore;
     categoryStore: CategoryStore;
+    adminStore: AdminStore;
 
     constructor() {
         this.postStore = new PostStore(this);
         this.commonStore = new CommonStore(this);
         this.userStore = new UserStore(this);
         this.categoryStore = new CategoryStore(this);
+        this.adminStore = new AdminStore(this);
     }
 }
 

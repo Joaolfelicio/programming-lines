@@ -98,3 +98,10 @@ code {
 .markdown-body {
   margin: 5px auto;
 }
+
+.admin-preview {
+  height: 560px !important;
+  overflow: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
