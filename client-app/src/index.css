@@ -105,3 +105,9 @@ code {
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
+.category-dropdown img {
+  width: 21px !important;
+  height: 20px !important;
+  margin-top: -2px !important;
+}

@@ -123,7 +123,10 @@
 38. [ ] BO - Posts
     1.  [ ] Create
         1.  [x] Markdown preview
-        2.  [ ] Photo widget <---------------------
+        2.  [x] Photo widget
+            1.  [x] Cloudinary config on the api
+        3.  [ ] Category Dropdown
+            1.  [ ] Not fetching data when goes directly into the admin page <------------------------------------
     2.  [ ] Delete
     3.  [ ] Update
 39. [ ] BO - Categories
@@ -137,4 +140,6 @@
 43. [ ] Responsiveness
     1.  [ ] react-media
 44. [ ] SEO
+45. [ ] Release
+    1.  [ ] Cloudinary Secrets
 

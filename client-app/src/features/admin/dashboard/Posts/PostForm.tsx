@@ -14,13 +14,16 @@ import { observer } from "mobx-react-lite";
 import ReactMarkdown from "react-markdown";
 import CodeBlock from "../../../../app/common/syntaxHighlight/CodeBlock";
 import { OnChange } from "react-final-form-listeners";
-import { PhotoUploadWidget } from "./ImageUpload/PhotoUploadWidget";
+import { PhotoUploadWidget as ImageUploadWidget } from "./ImageUpload/PhotoUploadWidget";
 import { RootStoreContext } from "../../../../app/stores/rootStore";
+import DropdownCategories from "../Categories/DropdownCategories";
 const readingTime = require("reading-time");
 
 const PostForm = () => {
   const rootStore = useContext(RootStoreContext);
-  const {uploadingImage, newPostImageUrl} = rootStore.adminStore;
+  const { uploadingImage, newPostImageUrl, uploadImage } = rootStore.adminStore;
+
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   const [post, setPost] = useState(new IPostFormValues());
   const [loading, setLoading] = useState(false);
@@ -37,9 +40,9 @@ const PostForm = () => {
   );
 
   const labelStyle = {
-    fontSize: 18,
-    marginLeft: 3,
+    fontSize: 20,
     marginTop: 10,
+    marginBottom: 5,
   };
 
   const validate = combineValidators({
@@ -54,10 +57,9 @@ const PostForm = () => {
   });
 
   const handleUploadImage = (photo: Blob) => {
-    // uploadPhoto(photo).then(() => setAddPhotoMode(false));
+    uploadImage(photo);
   };
 
-  
   return (
     <Segment clearing raised>
       <Header
@@ -71,7 +73,6 @@ const PostForm = () => {
         onSubmit={() => console.log("hello")}
         render={({ handleSubmit, invalid, pristine, submitting }) => (
           <Form onSubmit={handleSubmit} loading={loading}>
-
             <label style={labelStyle}>Slug:</label>
             <Field
               placeholder="Slug"
@@ -97,10 +98,12 @@ const PostForm = () => {
             />
 
             <label style={labelStyle}>Image:</label>
-            <PhotoUploadWidget uploadPhoto={handleUploadImage} loading={uploadingImage} />
-            {newPostImageUrl && <img src={newPostImageUrl} />}
+            <ImageUploadWidget
+              uploadImage={handleUploadImage}
+              loading={uploadingImage}
+            />
 
-            <Menu tabular style={{ marginBottom: 0 }}>
+            <Menu tabular style={{ marginBottom: 0, marginTop: 50 }}>
               <Menu.Item
                 name="Write"
                 active={!isContentPreview}
@@ -145,13 +148,8 @@ const PostForm = () => {
 
             <label style={labelStyle}>Category:</label>
             {/* TODO: FETCH THE AVAILABLES CATEGORIES AND PUT IT IN A SELECT */}
-            <Field
-              placeholder="Category"
-              value={post.categoryCode}
-              name="category"
-              component={TextInput}
-            />
-            
+            <DropdownCategories setSelectedCategory={setSelectedCategory} />
+
             <Button
               loading={submitting}
               disabled={loading || invalid || pristine}

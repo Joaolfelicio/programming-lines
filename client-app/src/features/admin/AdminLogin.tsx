@@ -13,7 +13,6 @@ import { Form, Header, Button, Grid, Segment } from "semantic-ui-react";
 import { Form as FinalForm, Field } from "react-final-form";
 import TextInput from "../../app/common/form/TextInput";
 import ErrorMessage from "../../app/common/form/ErrorMessage";
-import { toJS } from "mobx";
 import { history } from "../..";
 
 const isValidEmail = createValidator(

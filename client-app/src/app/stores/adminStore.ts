@@ -13,7 +13,7 @@ export default class AdminStore {
   @observable uploadingImage = false;
   @observable newPostImageUrl = "";
 
-  @action uploadPhoto = async (file: Blob) => {
+  @action uploadImage = async (file: Blob) => {
     this.uploadingImage = true;
     try {
       const imageUrl = await api.Admin.uploadImage(file);
@@ -21,6 +21,7 @@ export default class AdminStore {
         this.newPostImageUrl = imageUrl;
         this.uploadingImage = false;
       });
+      toast.success("Image sucessfully uploaded to cloudinary.");
     } catch (error) {
       console.log(error);
       toast.error("Problem uploading photo");
@@ -29,4 +30,8 @@ export default class AdminStore {
       });
     }
   };
+
+  @action setNewPostImageUrl = (newUrl: string) => {
+    this.newPostImageUrl = newUrl;
+  }
 }
