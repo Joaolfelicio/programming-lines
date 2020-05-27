@@ -1,5 +1,5 @@
 import React, { useState, Fragment, useContext } from "react";
-import { Segment, Form, Button, Header, Menu, Label } from "semantic-ui-react";
+import { Segment, Form, Button, Header, Menu } from "semantic-ui-react";
 import { Form as FinalForm, Field } from "react-final-form";
 import TextInput from "../../../../app/common/form/TextInput";
 import { IPostFormValues } from "../../../../app/models/post";
@@ -14,16 +14,17 @@ import { observer } from "mobx-react-lite";
 import ReactMarkdown from "react-markdown";
 import CodeBlock from "../../../../app/common/syntaxHighlight/CodeBlock";
 import { OnChange } from "react-final-form-listeners";
-import { PhotoUploadWidget as ImageUploadWidget } from "./ImageUpload/PhotoUploadWidget";
+import { ImageUploadWidget } from "./ImageUpload/ImageUploadWidget";
 import { RootStoreContext } from "../../../../app/stores/rootStore";
 import DropdownCategories from "../Categories/DropdownCategories";
 const readingTime = require("reading-time");
 
 const PostForm = () => {
   const rootStore = useContext(RootStoreContext);
-  const { uploadingImage, newPostImageUrl, uploadImage } = rootStore.adminStore;
+  const { uploadingImage, uploadImage } = rootStore.adminStore;
 
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
 
   const [post, setPost] = useState(new IPostFormValues());
   const [loading, setLoading] = useState(false);
@@ -57,7 +58,7 @@ const PostForm = () => {
   });
 
   const handleUploadImage = (photo: Blob) => {
-    uploadImage(photo);
+    uploadImage(photo).then((url) => setImageUrl(url));
   };
 
   return (
@@ -97,10 +98,15 @@ const PostForm = () => {
               component={TextInput}
             />
 
+            <label style={labelStyle}>Category:</label>
+            <DropdownCategories setSelectedCategory={setSelectedCategory} />
+
             <label style={labelStyle}>Image:</label>
             <ImageUploadWidget
               uploadImage={handleUploadImage}
               loading={uploadingImage}
+              imageUrl={imageUrl}
+              setImageUrl={setImageUrl}
             />
 
             <Menu tabular style={{ marginBottom: 0, marginTop: 50 }}>
@@ -145,10 +151,6 @@ const PostForm = () => {
                 </OnChange>
               </Fragment>
             )}
-
-            <label style={labelStyle}>Category:</label>
-            {/* TODO: FETCH THE AVAILABLES CATEGORIES AND PUT IT IN A SELECT */}
-            <DropdownCategories setSelectedCategory={setSelectedCategory} />
 
             <Button
               loading={submitting}

@@ -17,7 +17,6 @@ export default class CategoryStore {
   @action getCategories = async () => {
     try {
       if (this.categoriesRegistry.size === 0) {
-          console.log(this.loadingCategories)
         const categories = await api.Category.list();
         runInAction(() => {
           categories.forEach((category) => {

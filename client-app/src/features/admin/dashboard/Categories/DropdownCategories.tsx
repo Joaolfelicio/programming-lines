@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Dropdown } from "semantic-ui-react";
 import { RootStoreContext } from "../../../../app/stores/rootStore";
+import { observer } from "mobx-react-lite";
 
 interface IProps {
   setSelectedCategory: (categoryCode: string) => void;
@@ -8,7 +9,7 @@ interface IProps {
 
 const DropdownCategories: React.FC<IProps> = ({ setSelectedCategory }) => {
   const rootStore = useContext(RootStoreContext);
-  const { categoryByOrder, getCategories } = rootStore.categoryStore;
+  const { categoryByOrder, loadingCategories } = rootStore.categoryStore;
 
   const formatCategories = () => {
     const categories: any = [];
@@ -25,9 +26,8 @@ const DropdownCategories: React.FC<IProps> = ({ setSelectedCategory }) => {
   };
 
   useEffect(() => {
-    getCategories();
     formatCategories();
-  }, [getCategories]);
+  }, []);
 
   const [formatedCategories, setFormatedCategories] = useState([]);
 
@@ -40,8 +40,9 @@ const DropdownCategories: React.FC<IProps> = ({ setSelectedCategory }) => {
       selection
       options={formatedCategories}
       onChange={(e, {value}) => setSelectedCategory(value as string)}
+      loading={loadingCategories}
     />
   );
 };
 
-export default DropdownCategories;
+export default observer(DropdownCategories);

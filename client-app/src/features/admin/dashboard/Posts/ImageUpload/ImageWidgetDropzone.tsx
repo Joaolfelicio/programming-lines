@@ -24,7 +24,7 @@ const dropzoneActive = {
     borderColor: "green"
 }
 
-const PhotoWidgetDropzone: React.FC<IProps> = ({ setFiles }) => {
+const ImageWidgetDropzone: React.FC<IProps> = ({ setFiles }) => {
   const onDrop = useCallback((acceptedFiles) => {
     setFiles(
       acceptedFiles.map((file: Object) =>
@@ -47,4 +47,4 @@ const PhotoWidgetDropzone: React.FC<IProps> = ({ setFiles }) => {
   );
 };
 
-export default PhotoWidgetDropzone;
+export default ImageWidgetDropzone;

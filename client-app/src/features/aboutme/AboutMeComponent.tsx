@@ -2,7 +2,6 @@ import React, { useContext, Fragment } from "react";
 import { observer } from "mobx-react-lite";
 import { RootStoreContext } from "../../app/stores/rootStore";
 import SocialMedia from "./SocialMedia";
-import { Container } from "semantic-ui-react";
 
 const AboutMeComponent = () => {
   const rootStore = useContext(RootStoreContext);

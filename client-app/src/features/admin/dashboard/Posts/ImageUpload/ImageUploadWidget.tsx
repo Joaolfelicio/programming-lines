@@ -1,21 +1,21 @@
-import React, { Fragment, useState, useEffect, useContext } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { Button } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
-import PhotoWidgetDropzone from "./PhotoWidgetDropzone";
-import { RootStoreContext } from "../../../../../app/stores/rootStore";
+import PhotoWidgetDropzone from "./ImageWidgetDropzone";
 
 interface IProps {
   loading: boolean;
+  imageUrl: string;
   uploadImage: (file: Blob) => void;
+  setImageUrl: (url: string) => void;
 }
 
-export const PhotoUploadWidget: React.FC<IProps> = ({
+export const ImageUploadWidget: React.FC<IProps> = ({
   loading,
   uploadImage,
+  imageUrl,
+  setImageUrl
 }) => {
-  const rootStore = useContext(RootStoreContext);
-  const { newPostImageUrl, setNewPostImageUrl } = rootStore.adminStore;
-
   const [files, setFiles] = useState<any[]>([]);
 
   useEffect(() => {
@@ -44,6 +44,7 @@ export const PhotoUploadWidget: React.FC<IProps> = ({
                   margin: 15,
                   borderRadius: 5
                 }}
+                alt={file.name + "."}
               />
             ))}
           </div>
@@ -53,7 +54,7 @@ export const PhotoUploadWidget: React.FC<IProps> = ({
             icon="check"
             content="Upload"
             loading={loading}
-            disabled={newPostImageUrl.length! > 0}
+            disabled={imageUrl.length! > 0}
             onClick={() => uploadImage(files[0]!)}
             floated="right"
             style={{ marginRight: 15 }}
@@ -62,7 +63,7 @@ export const PhotoUploadWidget: React.FC<IProps> = ({
             disabled={loading}
             onClick={() => {
               setFiles([]);
-              setNewPostImageUrl("");
+              setImageUrl("");
             }}
             content="Clear"
             floated="right"
@@ -74,4 +75,4 @@ export const PhotoUploadWidget: React.FC<IProps> = ({
   );
 };
 
-export default observer(PhotoUploadWidget);
+export default observer(ImageUploadWidget);

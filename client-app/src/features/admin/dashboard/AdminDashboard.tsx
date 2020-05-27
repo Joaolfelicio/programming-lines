@@ -1,11 +1,18 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useContext, useEffect } from "react";
 import { Menu } from "semantic-ui-react";
 import AdminPosts from "./Posts/AdminPosts";
 import AdminCategories from "./Categories/AdminCategories";
 import AdminNewsletter from "./Newsletter/AdminNewsletter";
+import { RootStoreContext } from "../../../app/stores/rootStore";
 
 const AdminDashboard = () => {
+  const rootStore = useContext(RootStoreContext);
+  const {getCategories} = rootStore.categoryStore;
   const [activeAdminDashboard, setActiveAdminDashboard] = useState("Posts");
+
+  useEffect(() => {
+    getCategories();
+  }, [getCategories])
 
   return (
     <Fragment>

@@ -11,27 +11,28 @@ export default class AdminStore {
   }
 
   @observable uploadingImage = false;
-  @observable newPostImageUrl = "";
 
-  @action uploadImage = async (file: Blob) => {
-    this.uploadingImage = true;
+  uploadImage = async (file: Blob): Promise<string> => {
+    let url = "";
+    this.setUploadingImage(true);
     try {
       const imageUrl = await api.Admin.uploadImage(file);
       runInAction(() => {
-        this.newPostImageUrl = imageUrl;
-        this.uploadingImage = false;
+        url = imageUrl;
+        this.setUploadingImage(false);
       });
       toast.success("Image sucessfully uploaded to cloudinary.");
     } catch (error) {
-      console.log(error);
       toast.error("Problem uploading photo");
       runInAction(() => {
-        this.uploadingImage = false;
+        this.setUploadingImage(false);
       });
+    } finally {
+      return url;
     }
   };
 
-  @action setNewPostImageUrl = (newUrl: string) => {
-    this.newPostImageUrl = newUrl;
+  @action setUploadingImage = (uploading: boolean) => {
+    this.uploadingImage = uploading;
   }
 }

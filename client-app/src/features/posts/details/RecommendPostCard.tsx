@@ -1,6 +1,6 @@
 import React from "react";
 import { IPostRecommend } from "../../../app/models/post";
-import { Card, Image } from "semantic-ui-react";
+import { Card } from "semantic-ui-react";
 import moment from "moment";
 import { Link } from "react-router-dom";
 const readingTime = require("reading-time");
