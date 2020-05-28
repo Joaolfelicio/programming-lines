@@ -144,4 +144,6 @@
 44. [ ] SEO
 45. [ ] Release
     1.  [ ] Cloudinary Secrets
+46. [ ] BUGS:
+    
 

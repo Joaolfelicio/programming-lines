@@ -70,8 +70,9 @@ export default class PostStore {
   }
 
   @action getPosts = async () => {
+    console.log(this.postsRegistry.size);
     try {
-      if (this.postsRegistry.size === 0 || this.changingPage) {
+      if (this.postsRegistry.size === 0 || this.changingPage || this.postsCount === 0) {
         this.postsRegistry.clear();
         this.loadingPosts = true;
         const postsEnvelope = await api.Post.list(this.axiosParams);
