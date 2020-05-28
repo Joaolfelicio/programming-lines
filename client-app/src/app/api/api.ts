@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { IPost, IPostsEnvelope } from "../models/post";
+import { IPost, IPostsEnvelope, IPostsForm } from "../models/post";
 import { IAnonymousUser } from "../models/anonymousUser";
 import { IFingeprintEnvelope } from "../models/Requests/fingerprintEnvelope";
 import { IReactionEnvelope } from "../models/Requests/reactionEnvelope";
@@ -97,6 +97,7 @@ const Post = {
   detail: (slug: string): Promise<IPost> => requests.get(`/Post/${slug}`),
   searchableList: (): Promise<ISearchablePostDto[]> =>
     requests.get("/Post/SearchablePosts"),
+  create: (post: IPostsForm) => requests.post("/Post", post)
 };
 
 const AnonUser = {

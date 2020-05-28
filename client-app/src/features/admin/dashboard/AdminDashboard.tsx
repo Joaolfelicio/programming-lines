@@ -14,6 +14,8 @@ const AdminDashboard = () => {
     getCategories();
   }, [getCategories])
 
+  document.title = "Programming Lines - Admin";
+
   return (
     <Fragment>
       <Menu pointing secondary style={{ width: 730, margin: "10px auto" }}>

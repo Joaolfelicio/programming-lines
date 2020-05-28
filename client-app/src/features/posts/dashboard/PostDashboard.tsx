@@ -53,6 +53,7 @@ const PostDashboard = () => {
             setPage((activePage! as number) - 1);
             getPosts();
             setChangingPage(false);
+            window.scrollTo(0, 0);
           }}
           style={{ marginTop: 35 }}
         />

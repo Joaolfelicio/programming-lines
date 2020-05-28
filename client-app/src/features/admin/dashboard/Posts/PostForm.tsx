@@ -9,6 +9,7 @@ import {
   isRequired,
   composeValidators,
   createValidator,
+  hasLengthGreaterThan,
 } from "revalidate";
 import { observer } from "mobx-react-lite";
 import ReactMarkdown from "react-markdown";
@@ -21,10 +22,10 @@ const readingTime = require("reading-time");
 
 const PostForm = () => {
   const rootStore = useContext(RootStoreContext);
-  const { uploadingImage, uploadImage } = rootStore.adminStore;
+  const { createPost, creatingPost } = rootStore.postStore;
 
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageFiles, setImageFiles] = useState<any[]>([]);
 
   const [post, setPost] = useState(new IPostFormValues());
   const [loading, setLoading] = useState(false);
@@ -33,7 +34,7 @@ const PostForm = () => {
 
   const isValidSlug = createValidator(
     (message) => (value) => {
-      if (value && !/^[a-z0-9]+(?:-[a-z0-9]+)*$/i.test(value)) {
+      if (value && !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value)) {
         return message;
       }
     },
@@ -50,15 +51,27 @@ const PostForm = () => {
     slug: composeValidators(
       isValidSlug({ message: "Slug needs to be valid" })
     )(),
-    title: isRequired("Title"),
+    title: composeValidators(
+      isRequired("Title"),
+      hasLengthGreaterThan(6)({
+        message: "Title needs to be at least 6 characters",
+      })
+    )(),
     subTitle: isRequired("SubTitle"),
-    image: isRequired("Image"),
     content: isRequired("Content"),
-    category: isRequired("Category"),
   });
 
-  const handleUploadImage = (photo: Blob) => {
-    uploadImage(photo).then((url) => setImageUrl(url));
+  const handleFormSubmit = (values: any) => {
+    const newPost: IPostFormValues = {
+      slug: values.slug,
+      title: values.title,
+      subTitle: values.subTitle,
+      content: values.content,
+      image: imageFiles[0],
+      categoryCode: selectedCategory,
+    };
+    console.log(newPost);
+    createPost(newPost);
   };
 
   return (
@@ -71,7 +84,7 @@ const PostForm = () => {
       <FinalForm
         validate={validate}
         initialValues={post}
-        onSubmit={() => console.log("hello")}
+        onSubmit={handleFormSubmit}
         render={({ handleSubmit, invalid, pristine, submitting }) => (
           <Form onSubmit={handleSubmit} loading={loading}>
             <label style={labelStyle}>Slug:</label>
@@ -103,10 +116,8 @@ const PostForm = () => {
 
             <label style={labelStyle}>Image:</label>
             <ImageUploadWidget
-              uploadImage={handleUploadImage}
-              loading={uploadingImage}
-              imageUrl={imageUrl}
-              setImageUrl={setImageUrl}
+              setImageFiles={setImageFiles}
+              imageFiles={imageFiles}
             />
 
             <Menu tabular style={{ marginBottom: 0, marginTop: 50 }}>
@@ -153,8 +164,14 @@ const PostForm = () => {
             )}
 
             <Button
-              loading={submitting}
-              disabled={loading || invalid || pristine}
+              loading={submitting || creatingPost}
+              disabled={
+                loading ||
+                invalid ||
+                pristine ||
+                imageFiles.length === 0 ||
+                selectedCategory.length === 0
+              }
               floated="right"
               positive
               type="submit"
@@ -163,8 +180,10 @@ const PostForm = () => {
             <Button
               floated="right"
               disabled={loading}
+              // TODO: Fix the on clear
+              onClick={() => setPost(new IPostFormValues())}
               type="button"
-              content="Cancel"
+              content="Clear"
             />
           </Form>
         )}

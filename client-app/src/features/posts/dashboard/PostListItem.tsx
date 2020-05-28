@@ -25,7 +25,7 @@ const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
   const { setActiveFilter } = rootStore.commonStore;
 
   return (
-    <Item style={{height: 165}}>
+    <Item style={{ height: 165 }}>
       <Item.Image
         className="post-list-image"
         as={Link}
@@ -39,17 +39,26 @@ const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
         <Fragment>
           <Item.Header>
             <div className="posts-header">
-              <Link to={internalUrl(post.slug)} style={{width: "87%"}}>
-                <h2 style={{ marginBottom: "0px", fontSize: 20 }}>{post.title}</h2>
+              <Link to={internalUrl(post.slug)} style={{ width: "87%" }}>
+                <h2 style={{ marginBottom: "0px", fontSize: 20 }}>
+                  {post.title}
+                </h2>
               </Link>
 
-              <div style={{ display: "flex", alignItems: "flex-start", width: "10%" }}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "flex-start",
+                  width: "10%",
+                }}
+              >
                 <Image
                   src={post.category.image}
-                  alt={post.category.name}
+                  alt={`${post.category.name} - ${post.category.code}.`}
                   onClick={() => {
                     setActiveFilter(post.category.code);
                     setPredicate("categoryCode", post.category.code);
+                    window.scrollTo(0, 0);
                   }}
                   style={{ width: 21, height: 20, cursor: "Pointer" }}
                 />
@@ -62,9 +71,7 @@ const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
             </div>
           </Item.Header>
         </Fragment>
-        <Item.Description>
-          {post.subTitle}
-        </Item.Description>
+        <Item.Description>{post.subTitle}</Item.Description>
         <Item.Extra className="post-buttons">
           <Button
             name={post.slug}

@@ -4,17 +4,12 @@ import { observer } from "mobx-react-lite";
 import PhotoWidgetDropzone from "./ImageWidgetDropzone";
 
 interface IProps {
-  loading: boolean;
-  imageUrl: string;
-  uploadImage: (file: Blob) => void;
-  setImageUrl: (url: string) => void;
+  setImageFiles: (files: any[]) => void;
+  imageFiles: any[];
 }
 
 export const ImageUploadWidget: React.FC<IProps> = ({
-  loading,
-  uploadImage,
-  imageUrl,
-  setImageUrl
+  setImageFiles, imageFiles
 }) => {
   const [files, setFiles] = useState<any[]>([]);
 
@@ -26,11 +21,11 @@ export const ImageUploadWidget: React.FC<IProps> = ({
 
   return (
     <Fragment>
-      {files.length === 0 && <PhotoWidgetDropzone setFiles={setFiles} />}
-      {files.length > 0 && (
+      {imageFiles.length === 0 && <PhotoWidgetDropzone setFiles={setImageFiles} />}
+      {imageFiles.length > 0 && (
         <Fragment>
           <div style={{ textAlign: "center" }}>
-            {files.map((file) => (
+            {imageFiles.map((file) => (
               <img
                 key={file.name}
                 src={file.preview}
@@ -49,21 +44,10 @@ export const ImageUploadWidget: React.FC<IProps> = ({
             ))}
           </div>
           <Button
-            as="button"
-            positive
-            icon="check"
-            content="Upload"
-            loading={loading}
-            disabled={imageUrl.length! > 0}
-            onClick={() => uploadImage(files[0]!)}
-            floated="right"
-            style={{ marginRight: 15 }}
-          />
-          <Button
-            disabled={loading}
+            disabled={imageFiles.length === 0}
             onClick={() => {
-              setFiles([]);
-              setImageUrl("");
+              console.log(imageFiles[0])
+              setImageFiles([]);
             }}
             content="Clear"
             floated="right"

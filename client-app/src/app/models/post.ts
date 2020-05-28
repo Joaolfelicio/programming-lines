@@ -40,7 +40,7 @@ export interface IPostsForm {
     slug: string;
     title: string;
     subTitle: string;
-    image: string;
+    image: Blob | string;
     content: string;
     categoryCode: string;
 }
@@ -49,7 +49,7 @@ export class IPostFormValues implements IPostsForm {
     slug = "";
     title = "";
     subTitle = "";
-    image = "";
+    image = new Blob();
     content = "";
     categoryCode = "";
 }

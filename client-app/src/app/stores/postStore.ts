@@ -1,18 +1,13 @@
 import { RootStore } from "./rootStore";
-import {
-  observable,
-  action,
-  runInAction,
-  computed,
-  reaction
-} from "mobx";
+import { observable, action, runInAction, computed, reaction } from "mobx";
 import api from "../api/api";
 import { toast } from "react-toastify";
 import { setPostProps } from "../common/util/util";
-import { IPost } from "../models/post";
+import { IPost, IPostsForm } from "../models/post";
 import { IReactionEnvelope } from "../models/Requests/reactionEnvelope";
 import { IReaction } from "../models/reaction";
 import { ISearchablePostDto, ISearchPost } from "../models/Dto/searchPostDto";
+import { history } from "../../index";
 const orderBy = require("lodash.orderby");
 
 const LIMIT = 5;
@@ -43,6 +38,7 @@ export default class PostStore {
   @observable page = 0;
   @observable predicate = new Map();
   @observable changingPage = false;
+  @observable creatingPost = false;
 
   @action setChangingPage = (changingPage: boolean) => {
     this.changingPage = changingPage;
@@ -208,6 +204,25 @@ export default class PostStore {
       runInAction(() => {
         this.reactionLoading = false;
       });
+    }
+  };
+
+  @action createPost = async (values: IPostsForm) => {
+    this.creatingPost = true;
+    try {
+      const imageUrl = await api.Admin.uploadImage(values.image as Blob);
+      values.image = imageUrl;
+      await api.Post.create(values);
+      runInAction(() => {
+        this.creatingPost = false;
+      });
+      history.push(`/post/${values.slug}`);
+    } catch (error) {
+      runInAction(() => {
+        this.creatingPost = false;
+      });
+      console.log(error);
+      throw error;
     }
   };
 

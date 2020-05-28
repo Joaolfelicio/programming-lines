@@ -125,8 +125,10 @@
         1.  [x] Markdown preview
         2.  [x] Photo widget
             1.  [x] Cloudinary config on the api
-        3.  [ ] Category Dropdown
-            1.  [ ] Not fetching data when goes directly into the admin page <------------------------------------
+        3.  [x] Category Dropdown
+            1.  [ ] Not fetching data when goes directly into the admin page
+        4.  [x] Submit handler
+        5.  [ ] Clear button <-
     2.  [ ] Delete
     3.  [ ] Update
 39. [ ] BO - Categories
