@@ -128,7 +128,8 @@
         3.  [x] Category Dropdown
             1.  [ ] Not fetching data when goes directly into the admin page
         4.  [x] Submit handler
-        5.  [ ] Clear button <-
+        5.  [x] Maintain position of the scroll bar inside the content
+        6.  [x] Clear button
     2.  [ ] Delete
     3.  [ ] Update
 39. [ ] BO - Categories

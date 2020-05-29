@@ -2,7 +2,7 @@ import React, { useState, Fragment, useContext } from "react";
 import { Segment, Form, Button, Header, Menu } from "semantic-ui-react";
 import { Form as FinalForm, Field } from "react-final-form";
 import TextInput from "../../../../app/common/form/TextInput";
-import { IPostFormValues } from "../../../../app/models/post";
+import { IPostFormValues, IPostsForm } from "../../../../app/models/post";
 import TextAreaInput from "../../../../app/common/form/TextAreaInput";
 import {
   combineValidators,
@@ -18,6 +18,9 @@ import { OnChange } from "react-final-form-listeners";
 import { ImageUploadWidget } from "./ImageUpload/ImageUploadWidget";
 import { RootStoreContext } from "../../../../app/stores/rootStore";
 import DropdownCategories from "../Categories/DropdownCategories";
+import { IUserFormValues } from "../../../../app/models/adminUser";
+import { FORM_ERROR } from "final-form";
+import ErrorMessage from "../../../../app/common/form/ErrorMessage";
 const readingTime = require("reading-time");
 
 const PostForm = () => {
@@ -27,7 +30,7 @@ const PostForm = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [imageFiles, setImageFiles] = useState<any[]>([]);
 
-  const [post, setPost] = useState(new IPostFormValues());
+  const [post, setPost] = useState<IPostsForm>(new IPostFormValues());
   const [loading, setLoading] = useState(false);
   const [isContentPreview, setIsContentPreview] = useState(false);
   const [content, setContent] = useState("");
@@ -61,19 +64,6 @@ const PostForm = () => {
     content: isRequired("Content"),
   });
 
-  const handleFormSubmit = (values: any) => {
-    const newPost: IPostFormValues = {
-      slug: values.slug,
-      title: values.title,
-      subTitle: values.subTitle,
-      content: values.content,
-      image: imageFiles[0],
-      categoryCode: selectedCategory,
-    };
-    console.log(newPost);
-    createPost(newPost);
-  };
-
   return (
     <Segment clearing raised>
       <Header
@@ -84,9 +74,29 @@ const PostForm = () => {
       <FinalForm
         validate={validate}
         initialValues={post}
-        onSubmit={handleFormSubmit}
-        render={({ handleSubmit, invalid, pristine, submitting }) => (
-          <Form onSubmit={handleSubmit} loading={loading}>
+        onSubmit={(values: any) => {
+          const newPost: IPostFormValues = {
+            slug: values.slug,
+            title: values.title,
+            subTitle: values.subTitle,
+            content: values.content,
+            image: imageFiles[0],
+            categoryCode: selectedCategory,
+          };
+          console.log(newPost);
+          return createPost(newPost).catch((error) => ({
+            [FORM_ERROR]: error,
+          }));
+        }}
+        render={({
+          handleSubmit,
+          invalid,
+          pristine,
+          submitting,
+          submitError,
+          dirtySinceLastSubmit,
+        }) => (
+          <Form onSubmit={handleSubmit} error loading={loading}>
             <label style={labelStyle}>Slug:</label>
             <Field
               placeholder="Slug"
@@ -112,7 +122,10 @@ const PostForm = () => {
             />
 
             <label style={labelStyle}>Category:</label>
-            <DropdownCategories setSelectedCategory={setSelectedCategory} />
+            <DropdownCategories
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+            />
 
             <label style={labelStyle}>Image:</label>
             <ImageUploadWidget
@@ -135,7 +148,7 @@ const PostForm = () => {
               <Menu.Item name={`${readingTime(content).words} words`} />
             </Menu>
 
-            {isContentPreview ? (
+            <div style={{ display: isContentPreview ? "initial" : "none" }}>
               <ReactMarkdown
                 className="markdown-body admin-preview"
                 source={content}
@@ -145,33 +158,37 @@ const PostForm = () => {
                   code: CodeBlock,
                 }}
               />
-            ) : (
-              <Fragment>
-                <Field
-                  placeholder="Content"
-                  value={post.content}
-                  name="content"
-                  component={TextAreaInput}
-                  rows={31}
-                  style={{ marginTop: 20, marginBottom: 20 }}
-                />
-                <OnChange name="content">
-                  {(value) => {
-                    setContent(value);
-                  }}
-                </OnChange>
-              </Fragment>
+            </div>
+            <div style={{ display: isContentPreview ? "none" : "initial" }}>
+              <Field
+                placeholder="Content"
+                value={post.content}
+                name="content"
+                component={TextAreaInput}
+                rows={31}
+                style={{ marginTop: 20, marginBottom: 20 }}
+              />
+              <OnChange name="content">
+                {(value) => {
+                  setContent(value);
+                }}
+              </OnChange>
+            </div>
+
+            {submitError && !dirtySinceLastSubmit && (
+              <ErrorMessage error={submitError} />
             )}
 
             <Button
               loading={submitting || creatingPost}
               disabled={
                 loading ||
-                invalid ||
+                (invalid && !dirtySinceLastSubmit) ||
                 pristine ||
                 imageFiles.length === 0 ||
                 selectedCategory.length === 0
               }
+              style={{ marginTop: 20, marginLeft: 20 }}
               floated="right"
               positive
               type="submit"
@@ -180,8 +197,12 @@ const PostForm = () => {
             <Button
               floated="right"
               disabled={loading}
-              // TODO: Fix the on clear
-              onClick={() => setPost(new IPostFormValues())}
+              style={{ marginTop: 20 }}
+              onClick={() => {
+                setPost(new IPostFormValues());
+                setSelectedCategory("");
+                setImageFiles([]);
+              }}
               type="button"
               content="Clear"
             />

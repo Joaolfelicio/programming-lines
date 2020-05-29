@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import {
   atomOneDark,
-  atomOneLight,
+  atomOneLight
 } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { RootStoreContext } from "../../stores/rootStore";
 import { observer } from "mobx-react-lite";
@@ -23,7 +23,7 @@ const CodeBlock: React.FC<IProps> = ({ language, value }) => {
       language={language}
       style={isDarkMode ? atomOneDark : atomOneLight}
     >
-      {value}
+      {value ? value : ""}
     </SyntaxHighlighter>
   );
 };

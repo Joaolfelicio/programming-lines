@@ -5,9 +5,13 @@ import { observer } from "mobx-react-lite";
 
 interface IProps {
   setSelectedCategory: (categoryCode: string) => void;
+  selectedCategory: string;
 }
 
-const DropdownCategories: React.FC<IProps> = ({ setSelectedCategory }) => {
+const DropdownCategories: React.FC<IProps> = ({
+  setSelectedCategory,
+  selectedCategory,
+}) => {
   const rootStore = useContext(RootStoreContext);
   const { categoryByOrder, loadingCategories } = rootStore.categoryStore;
 
@@ -39,7 +43,8 @@ const DropdownCategories: React.FC<IProps> = ({ setSelectedCategory }) => {
       search
       selection
       options={formatedCategories}
-      onChange={(e, {value}) => setSelectedCategory(value as string)}
+      onChange={(e, { value }) => setSelectedCategory(value as string)}
+      value={selectedCategory}
       loading={loadingCategories}
     />
   );
