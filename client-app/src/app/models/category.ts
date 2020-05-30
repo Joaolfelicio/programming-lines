@@ -6,3 +6,17 @@ export interface ICategory {
     color: string;
     creationDate: Date;
 }
+
+export interface ICategoryForm {
+    code: string;
+    image: Blob | string;
+    name: string;
+    color: string;
+}
+
+export class ICategoryFormValues implements ICategoryForm {
+    name = "";
+    code = "";
+    image = new Blob();
+    color = "";
+}

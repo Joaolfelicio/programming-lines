@@ -21,7 +21,7 @@ const CategoriesListItem: React.FC<IProps> = ({ category }) => {
       }}
     >
       <div style={{ display: "flex", alignItems: "center", width: "20%" }}>
-        <Image avatar src={category.image} />
+        <Image src={category.image} style={{width: 21, height: 20}} />
         <List.Content style={{ marginLeft: 5 }}>{category.name}</List.Content>
       </div>
       <List.Content
@@ -43,7 +43,7 @@ const CategoriesListItem: React.FC<IProps> = ({ category }) => {
             setIsDeletionModalOpen(true);
           }}
         >
-          Remove
+          Delete
         </Button>
         <Button primary size="small">
           Edit

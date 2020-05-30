@@ -19,7 +19,7 @@ namespace Infrastructure.Images
             _cloudinary = new Cloudinary(account);
         }
 
-        public async Task<string> UploadImage(IFormFile file)
+        public async Task<string> UploadImage(IFormFile file, int width, int height)
         {
             var uploadResult = new ImageUploadResult();
 
@@ -30,9 +30,10 @@ namespace Infrastructure.Images
                     var uploadParams = new ImageUploadParams
                     {
                         File = new FileDescription(file.FileName, stream),
-                        Transformation = new Transformation().Height(305)
-                                                             .Width(670)
-                                                             .Crop("fill")
+                        Transformation = new Transformation().Height(height)
+                                                             .Width(width)
+                                                             .Crop("fill"),
+                        Folder = "programming-lines"
                     };
                     uploadResult = await _cloudinary.UploadAsync(uploadParams);
                 }

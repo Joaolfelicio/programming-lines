@@ -4,27 +4,30 @@ import { Icon, Header } from "semantic-ui-react";
 
 interface IProps {
   setFiles: (files: object[]) => void;
-}
-
-const dropzoneStyles = {
-    border: "dashed 3px",
-    borderColor: "#eee",
-    borderRadius: 5,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "column" as "column",
-    textAlign: "center" as "center",
-    height: 305,
-    width: 670,
-    margin: "15px auto"
+  width: number;
+  height: number;
 }
 
 const dropzoneActive = {
-    borderColor: "green"
+  borderColor: "green"
 }
 
-const ImageWidgetDropzone: React.FC<IProps> = ({ setFiles }) => {
+const ImageWidgetDropzone: React.FC<IProps> = ({ setFiles, width, height }) => {
+  
+  const dropzoneStyles = {
+      border: "dashed 3px",
+      borderColor: "#eee",
+      borderRadius: 5,
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      flexDirection: "column" as "column",
+      textAlign: "center" as "center",
+      height: height,
+      width: width,
+      margin: "15px auto"
+  }
+  
   const onDrop = useCallback((acceptedFiles) => {
     setFiles(
       acceptedFiles.map((file: Object) =>

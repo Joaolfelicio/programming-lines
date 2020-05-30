@@ -5,6 +5,6 @@ namespace Application.Interface
 {
     public interface IImageAccessor
     {
-        Task<string> UploadImage(IFormFile file);
+        Task<string> UploadImage(IFormFile file, int width, int height);
     }
 }

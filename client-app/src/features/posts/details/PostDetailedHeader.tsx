@@ -1,14 +1,19 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import { IPost } from "../../../app/models/post";
 import { observer } from "mobx-react-lite";
-import { Header, Image } from "semantic-ui-react";
+import { Header, Image, Button } from "semantic-ui-react";
 import moment from "moment";
+import { RootStoreContext } from "../../../app/stores/rootStore";
 
 interface IProps {
   post: IPost;
 }
 
 const PostDetailedHeader: React.FC<IProps> = ({ post }) => {
+  const rootStore = useContext(RootStoreContext);
+  const { adminUser } = rootStore.userStore;
+  const { formatDeletionModal, setIsDeletionModalOpen } = rootStore.modalStore;
+
   return (
     <Fragment>
       <Header as="h1" content={post.title} style={{ fontSize: "2.9rem" }} />
@@ -16,25 +21,51 @@ const PostDetailedHeader: React.FC<IProps> = ({ post }) => {
         as="h2"
         style={{
           color: "rgb(100, 104, 109)",
-          fontSize: "1.9rem"
+          fontSize: "1.9rem",
         }}
         content={post.subTitle}
       />
-      <p
+
+      <div
         style={{
-          color: "rgb(100, 104, 109)",
-          fontSize: "1.15rem",
+          display: "flex",
+          justifyContent: "space-between",
           marginBottom: "1.45rem",
         }}
       >
-        <time>{moment(post.publishDate).format("MMM Do YYYY")}</time> -{" "}
-        <em>{post.timeToRead}</em>
-      </p>
+        <div style={{ color: "rgb(100, 104, 109)", fontSize: "1.15rem" }}>
+          <time>{moment(post.publishDate).format("MMM Do YYYY")}</time> -{" "}
+          <em>{post.timeToRead}</em>
+        </div>
+        {adminUser && (
+          <div>
+            <Button
+              negative
+              size="small"
+              onClick={() => {
+                formatDeletionModal(
+                  "Delete Post?",
+                  `Are you sure that you want to delete the post "${post.title}"?`,
+                  post.id,
+                  "post"
+                );
+                setIsDeletionModalOpen(true);
+              }}
+            >
+              Delete
+            </Button>
+            <Button primary size="small">
+              Edit
+            </Button>
+          </div>
+        )}
+      </div>
+
       <Image
         fluid
         centered
         src={post.image}
-        alt={post.title + "."}
+        alt={post.title}
         style={{ marginBottom: "40px", borderRadius: "3px" }}
       />
     </Fragment>

@@ -6,8 +6,14 @@ namespace Api.Controllers
 {
     public class AdminController : BaseController
     {
-        [HttpPost("UploadImage")]
-        public async Task<ActionResult<string>> Add([FromForm] UploadImage.Command command)
+        [HttpPost("UploadPostImage")]
+        public async Task<ActionResult<string>> AddPostImage([FromForm] UploadPostImage.Command command)
+        {
+            return await Mediator.Send(command);
+        }
+
+        [HttpPost("UploadCategoryImage")]
+        public async Task<ActionResult<string>> AddCategoryImage([FromForm] UploadCategoryImage.Command command)
         {
             return await Mediator.Send(command);
         }

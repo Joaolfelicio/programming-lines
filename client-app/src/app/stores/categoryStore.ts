@@ -1,7 +1,8 @@
 import { RootStore } from "./rootStore";
 import { observable, action, runInAction, computed } from "mobx";
 import api from "../api/api";
-import { ICategory } from "../models/category";
+import { ICategory, ICategoryForm } from "../models/category";
+import { history } from "../../index";
 const orderBy = require("lodash.orderby");
 
 export default class CategoryStore {
@@ -13,6 +14,11 @@ export default class CategoryStore {
 
   @observable categoriesRegistry = new Map();
   @observable loadingCategories = true;
+  @observable creatingCategory = false;
+
+  @action setCreatingCategory = (isCreating: boolean) => {
+    this.creatingCategory = isCreating;
+  }
 
   @action getCategories = async () => {
     try {
@@ -33,6 +39,26 @@ export default class CategoryStore {
       });
     }
   };
+
+  @action createCategory = async (category: ICategoryForm) => {
+    this.creatingCategory = true;
+    try {
+      const imageUrl = await api.Admin.uploadCategoryImage(category.image as Blob);
+      category.image = imageUrl;
+      await api.Category.create(category);
+      runInAction(() => {
+        this.creatingCategory = false;
+      });
+      window.location.reload();
+
+    } catch (error) {
+      console.log(error);
+      runInAction(() => {
+        this.creatingCategory = false;
+      })
+      throw error;
+    }
+  }
 
   @computed get categoryByOrder(): ICategory[] {
     const categories = Array.from(this.categoriesRegistry.values());

@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Segment, Form, Button, Header, Menu } from "semantic-ui-react";
 import { Form as FinalForm, Field } from "react-final-form";
 import TextInput from "../../../../app/common/form/TextInput";
@@ -15,10 +15,9 @@ import { observer } from "mobx-react-lite";
 import ReactMarkdown from "react-markdown";
 import CodeBlock from "../../../../app/common/syntaxHighlight/CodeBlock";
 import { OnChange } from "react-final-form-listeners";
-import { ImageUploadWidget } from "./ImageUpload/ImageUploadWidget";
+import { ImageUploadWidget } from "../../../../app/common/imageUpload/ImageUploadWidget";
 import { RootStoreContext } from "../../../../app/stores/rootStore";
 import DropdownCategories from "../Categories/DropdownCategories";
-import { IUserFormValues } from "../../../../app/models/adminUser";
 import { FORM_ERROR } from "final-form";
 import ErrorMessage from "../../../../app/common/form/ErrorMessage";
 const readingTime = require("reading-time");
@@ -31,7 +30,6 @@ const PostForm = () => {
   const [imageFiles, setImageFiles] = useState<any[]>([]);
 
   const [post, setPost] = useState<IPostsForm>(new IPostFormValues());
-  const [loading, setLoading] = useState(false);
   const [isContentPreview, setIsContentPreview] = useState(false);
   const [content, setContent] = useState("");
 
@@ -69,7 +67,7 @@ const PostForm = () => {
       <Header
         content="New post"
         size="huge"
-        style={{ margin: 10, marginBottom: 10 }}
+        style={{ marginTop: 10, marginBottom: 10 }}
       />
       <FinalForm
         validate={validate}
@@ -96,7 +94,7 @@ const PostForm = () => {
           submitError,
           dirtySinceLastSubmit,
         }) => (
-          <Form onSubmit={handleSubmit} error loading={loading}>
+          <Form onSubmit={handleSubmit} error>
             <label style={labelStyle}>Slug:</label>
             <Field
               placeholder="Slug"
@@ -129,6 +127,8 @@ const PostForm = () => {
 
             <label style={labelStyle}>Image:</label>
             <ImageUploadWidget
+              width={670}
+              height={305}
               setImageFiles={setImageFiles}
               imageFiles={imageFiles}
             />
@@ -182,7 +182,6 @@ const PostForm = () => {
             <Button
               loading={submitting || creatingPost}
               disabled={
-                loading ||
                 (invalid && !dirtySinceLastSubmit) ||
                 pristine ||
                 imageFiles.length === 0 ||
@@ -196,7 +195,7 @@ const PostForm = () => {
             />
             <Button
               floated="right"
-              disabled={loading}
+              disabled={submitting}
               style={{ marginTop: 20 }}
               onClick={() => {
                 setPost(new IPostFormValues());

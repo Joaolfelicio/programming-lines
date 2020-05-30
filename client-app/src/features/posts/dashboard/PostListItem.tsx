@@ -68,6 +68,7 @@ const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
               <time style={{ fontSize: "11px" }}>
                 {moment(post.publishDate).format("MMM Do YYYY")}
               </time>
+
             </div>
           </Item.Header>
         </Fragment>

@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { IAnonUserIdEnvelope } from "../models/Requests/anonUserIdEnvelope";
 import { ISearchablePostDto } from "../models/Dto/searchPostDto";
 import { history } from "../../index";
-import { ICategory } from "../models/category";
+import { ICategory, ICategoryForm } from "../models/category";
 import { IUserFormValues, IAdminUser } from "../models/adminUser";
 
 // axios.defaults.baseURL = process.env.REACT_APP_API_URL;
@@ -125,10 +125,14 @@ const Category = {
   list: (): Promise<ICategory[]> => {
     return requests.get(`/Category`);
   },
+  create: (category: ICategoryForm) => {
+    return requests.post("/Category", category);
+  }
 };
 
 const Admin = {
-  uploadImage: (photo: Blob): Promise<string> => requests.postForm(`/admin/uploadimage`, photo),
+  uploadPostImage: (photo: Blob): Promise<string> => requests.postForm(`/admin/UploadPostImage`, photo),
+  uploadCategoryImage: (photo: Blob): Promise<string> => requests.postForm(`/admin/UploadCategoryImage`, photo),
 }
 
 export default {

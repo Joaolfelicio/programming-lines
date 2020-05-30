@@ -134,7 +134,8 @@
     3.  [ ] Update
 39. [ ] BO - Categories
     1.  [x] List of all the categories, with the edit and delete button
-    2.  [ ] Create <-------
+    2.  [x] Create
+        1.  [ ] Validate Hexacode <--
     3.  [ ] Delete
     4.  [ ] Update
 40. [ ] BO - Newsletter
@@ -147,5 +148,6 @@
 45. [ ] Release
     1.  [ ] Cloudinary Secrets
 46. [ ] BUGS:
+    1.  [ ] If filter by category, and said category has no posts, it will forever load <--
     
 

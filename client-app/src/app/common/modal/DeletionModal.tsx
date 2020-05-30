@@ -19,7 +19,7 @@ const DeletionModal = () => {
       open={isDeletionModalOpen}
       basic
       size="small"
-      style={{left: "35vh"}}
+      style={{left: 0, right: 0, textAlign: "center"}}
     >
       <Header icon="archive" content={deletionHeaderMessage} />
       <Modal.Content>

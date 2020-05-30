@@ -42,8 +42,8 @@ const App: React.FC<RouteComponentProps> = () => {
 
   return (
     <Fragment>
-      <NavBar />
       <DeletionModal />
+      <NavBar />
       <Container style={{ marginTop: "7em" }}>
         <Switch>
           <Route exact path="/" component={PostDashboard} />

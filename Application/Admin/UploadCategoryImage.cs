@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Application.Admin
 {
-    public class UploadImage
+    public class UploadCategoryImage
     {
         public class Command : IRequest<string>
         {
@@ -23,7 +23,7 @@ namespace Application.Admin
 
             public async Task<string> Handle(Command request, CancellationToken cancellationToken)
             {
-                return await _imageAccessor.UploadImage(request.File);
+                return await _imageAccessor.UploadImage(request.File, 50, 50);
             }
         }
     }

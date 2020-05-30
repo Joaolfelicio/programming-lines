@@ -211,16 +211,16 @@ export default class PostStore {
     }
   };
 
-  @action createPost = async (values: IPostsForm) => {
+  @action createPost = async (post: IPostsForm) => {
     this.creatingPost = true;
     try {
-      const imageUrl = await api.Admin.uploadImage(values.image as Blob);
-      values.image = imageUrl;
-      await api.Post.create(values);
+      const imageUrl = await api.Admin.uploadPostImage(post.image as Blob);
+      post.image = imageUrl;
+      await api.Post.create(post);
       runInAction(() => {
         this.creatingPost = false;
       });
-      history.push(`/post/${values.slug}`);
+      history.push(`/post/${post.slug}`);
     } catch (error) {
       runInAction(() => {
         this.creatingPost = false;
