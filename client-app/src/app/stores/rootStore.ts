@@ -5,6 +5,7 @@ import { configure } from "mobx";
 import { UserStore } from "./userStore";
 import CategoryStore from "./categoryStore";
 import AdminStore from "./adminStore";
+import ModalStore from "./modalStore";
 
 configure({ enforceActions: "always" });
 
@@ -14,6 +15,7 @@ export class RootStore {
     userStore: UserStore;
     categoryStore: CategoryStore;
     adminStore: AdminStore;
+    modalStore: ModalStore;
 
     constructor() {
         this.postStore = new PostStore(this);
@@ -21,6 +23,7 @@ export class RootStore {
         this.userStore = new UserStore(this);
         this.categoryStore = new CategoryStore(this);
         this.adminStore = new AdminStore(this);
+        this.modalStore = new ModalStore(this);
     }
 }
 

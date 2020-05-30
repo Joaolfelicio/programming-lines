@@ -1,12 +1,21 @@
-import React from 'react'
-import { Segment } from 'semantic-ui-react'
+import React, { useContext } from "react";
+import { Segment, List } from "semantic-ui-react";
+import { RootStoreContext } from "../../../../app/stores/rootStore";
+import CategoriesListItem from "./CategoriesListItem";
 
 const CategoriesList = () => {
-    return (
-        <Segment raised>
-            ALL CATEGORIES
-        </Segment>
-    )
-}
+  const rootStore = useContext(RootStoreContext);
+  const { categoryByOrder } = rootStore.categoryStore;
 
-export default CategoriesList
+  return (
+    <Segment raised>
+      <List divided verticalAlign="middle">
+        {categoryByOrder.map((category) => (
+          <CategoriesListItem category={category} key={category.id} />
+        ))}
+      </List>
+    </Segment>
+  );
+};
+
+export default CategoriesList;

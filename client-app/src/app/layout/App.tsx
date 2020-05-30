@@ -19,6 +19,7 @@ import AboutMeComponent from "../../features/aboutme/AboutMeComponent";
 import AdminLogin from "../../features/admin/AdminLogin";
 import PrivateRoute from "./PrivateRoute";
 import AdminDashboard from "../../features/admin/dashboard/AdminDashboard";
+import DeletionModal from "../common/modal/DeletionModal";
 
 const App: React.FC<RouteComponentProps> = () => {
   const rootStore = useContext(RootStoreContext);
@@ -42,6 +43,7 @@ const App: React.FC<RouteComponentProps> = () => {
   return (
     <Fragment>
       <NavBar />
+      <DeletionModal />
       <Container style={{ marginTop: "7em" }}>
         <Switch>
           <Route exact path="/" component={PostDashboard} />

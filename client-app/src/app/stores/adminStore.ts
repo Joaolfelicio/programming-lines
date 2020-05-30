@@ -9,4 +9,6 @@ export default class AdminStore {
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
   }
+
+
 }

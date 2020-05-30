@@ -133,9 +133,10 @@
     2.  [ ] Delete
     3.  [ ] Update
 39. [ ] BO - Categories
-    1.  [ ] Create
-    2.  [ ] Delete
-    3.  [ ] Update
+    1.  [x] List of all the categories, with the edit and delete button
+    2.  [ ] Create <-------
+    3.  [ ] Delete
+    4.  [ ] Update
 40. [ ] BO - Newsletter
     1.  [ ] List
 41. [x] Footer

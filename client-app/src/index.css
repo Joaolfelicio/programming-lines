@@ -112,3 +112,6 @@ code {
   height: 20px !important;
   margin-top: -2px !important;
 }
+.modals.dimmer .ui.scrolling.modal {
+  margin: 0 auto !important;
+}

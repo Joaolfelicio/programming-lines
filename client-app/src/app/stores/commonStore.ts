@@ -49,6 +49,7 @@ export default class CommonStore {
   @observable activeFilter = "Recent";
   @observable token: string | null = window.localStorage.getItem("jwt");
 
+
   @action setActiveFilter = (filter: string) => {
     this.activeFilter = filter;
   };
