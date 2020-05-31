@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -33,6 +34,9 @@ namespace Application.Category
                     throw new RestException(HttpStatusCode.NotFound, new {Category = "Not found."});
                 }
 
+                var postsToDelete = await _context.Posts.Where(x => x.Category == category).ToListAsync();
+                
+                _context.Posts.RemoveRange(postsToDelete);
                 _context.Categories.Remove(category);
 
                 var success = await _context.SaveChangesAsync() > 0;

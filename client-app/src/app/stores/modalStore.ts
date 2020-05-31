@@ -1,5 +1,6 @@
 import { RootStore } from "./rootStore";
-import { configure, observable, action } from "mobx";
+import { configure, observable, action, runInAction } from "mobx";
+import api from "../api/api";
 
 configure({ enforceActions: "always" });
 
@@ -33,12 +34,23 @@ export default class ModalStore {
     this.deletionType = deletionType;
   };
 
-  @action deleteObject = () => {
-      this.deletionLoading = true;
-    if (this.deletionType === "post") {
-    } else if (this.deletionType === "category") {
+  @action deleteObject = async () => {
+    this.deletionLoading = true;
+    try {
+      if (this.deletionType === "post") {
+        await api.Post.delete(this.deletionId);
+      } else if (this.deletionType === "category") {
+        await api.Category.delete(this.deletionId);
+      }
+      runInAction(() => {
+        this.deletionLoading = false;
+        window.location.reload();
+      });
+    } catch (error) {
+      console.log(error);
+      runInAction(() => {
+        this.deletionLoading = false;
+      });
     }
-    this.deletionLoading = false;
-    this.isDeletionModalOpen = false;
   };
 }

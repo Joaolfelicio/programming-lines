@@ -6,6 +6,7 @@ import { UserStore } from "./userStore";
 import CategoryStore from "./categoryStore";
 import AdminStore from "./adminStore";
 import ModalStore from "./modalStore";
+import NewsletterStore from "./newsletterStore";
 
 configure({ enforceActions: "always" });
 
@@ -16,6 +17,7 @@ export class RootStore {
     categoryStore: CategoryStore;
     adminStore: AdminStore;
     modalStore: ModalStore;
+    newsletterStore: NewsletterStore;
 
     constructor() {
         this.postStore = new PostStore(this);
@@ -24,6 +26,7 @@ export class RootStore {
         this.categoryStore = new CategoryStore(this);
         this.adminStore = new AdminStore(this);
         this.modalStore = new ModalStore(this);
+        this.newsletterStore = new NewsletterStore(this);
     }
 }
 

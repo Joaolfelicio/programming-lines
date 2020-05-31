@@ -46,7 +46,7 @@ const PostDashboard = () => {
           pointing
           secondary
           activePage={page + 1}
-          totalPages={totalPages}
+          totalPages={totalPages ? totalPages : 1}
           className="pagination"
           onPageChange={(e, { activePage }) => {
             setChangingPage(true);

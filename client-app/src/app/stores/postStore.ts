@@ -84,8 +84,8 @@ export default class PostStore {
           posts.forEach((post: IPost) => {
             setPostProps(post, this.rootStore.userStore.anonymousUser!);
             this.postsRegistry.set(post.slug, post);
-            this.loadingPosts = false;
           });
+          this.loadingPosts = false;
           this.postsCount = postsCount;
         });
       }

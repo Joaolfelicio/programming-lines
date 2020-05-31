@@ -45,7 +45,7 @@ namespace Application.Category
 
                 if (category != null)
                 {
-                    throw new RestException(HttpStatusCode.BadRequest, new { Category = "This category already exists." });
+                    throw new RestException(HttpStatusCode.BadRequest, new { Category = "Category code already exists." });
                 }
 
                 category = new Domain.Category

@@ -130,13 +130,13 @@
         4.  [x] Submit handler
         5.  [x] Maintain position of the scroll bar inside the content
         6.  [x] Clear button
-    2.  [ ] Delete
+    2.  [x] Delete
     3.  [ ] Update
 39. [ ] BO - Categories
     1.  [x] List of all the categories, with the edit and delete button
     2.  [x] Create
-        1.  [ ] Validate Hexacode <--
-    3.  [ ] Delete
+        1.  [x] Validate Hexacode
+    3.  [x] Delete
     4.  [ ] Update
 40. [ ] BO - Newsletter
     1.  [ ] List
@@ -148,6 +148,7 @@
 45. [ ] Release
     1.  [ ] Cloudinary Secrets
 46. [ ] BUGS:
-    1.  [ ] If filter by category, and said category has no posts, it will forever load <--
+    1.  [x] If filter by category, and said category has no posts, it will forever load 
+47. [ ] Clean client app models (more models per file)
     
 

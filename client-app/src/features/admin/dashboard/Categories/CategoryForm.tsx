@@ -29,12 +29,23 @@ const isCategoryCodeValid = createValidator(
   "Invalid category code"
 );
 
+const isHexaColorValid = createValidator(
+  (message) => (value) => {
+    if (value && !/^#(?:[0-9a-f]{3}){1,2}$/i.test(value)) {
+      return message;
+    }
+  },
+  "Invalid hexa color"
+);
+
 const validate = combineValidators({
   categoryCode: composeValidators(
     isCategoryCodeValid({ message: "Category code needs to be valid" })
   )(),
   name: isRequired("Name"),
-  color: isRequired("Color"),
+  color: composeValidators(
+    isHexaColorValid({ message: "Hexa color needs to be valid" })
+  )()
 });
 
 const labelStyle = {

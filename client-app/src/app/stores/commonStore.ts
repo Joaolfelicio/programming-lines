@@ -1,8 +1,5 @@
 import { RootStore } from "./rootStore";
 import { observable, action, configure, reaction } from "mobx";
-import api from "../api/api";
-import { INewsletterEnvelope } from "../models/Requests/newsletterEnvelope";
-import { toast } from "react-toastify";
 
 configure({ enforceActions: "always" });
 
@@ -60,20 +57,6 @@ export default class CommonStore {
 
   @action setIsDarkMode = () => {
     this.isDarkMode = !this.isDarkMode;
-  };
-
-  @action subscribeNewsletter = async (displayName: string, email: string) => {
-    const newsletter: INewsletterEnvelope = {
-      displayName: displayName,
-      email: email,
-    };
-    try {
-      await api.Newsletter.subscribe(newsletter);
-      toast.success("Sucessfully subscribed to the newsletter.");
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
   };
 
   @action setToken(token: string | null) {

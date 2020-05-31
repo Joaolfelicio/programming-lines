@@ -81,13 +81,15 @@ const requests = {
     axios.put(url, body).then(sleep(1000)).then(responseBody),
   delete: (url: string) =>
     axios.delete(url).then(sleep(1000)).then(responseBody),
-    postForm: (url: string, file: Blob) => {
-      let formData = new FormData();
-      formData.append('File', file);
-      return axios.post(url, formData, {
-          headers: {'Content-type': 'multipart/form-data'}
-      }).then(responseBody)
-  }
+  postForm: (url: string, file: Blob) => {
+    let formData = new FormData();
+    formData.append("File", file);
+    return axios
+      .post(url, formData, {
+        headers: { "Content-type": "multipart/form-data" },
+      })
+      .then(responseBody);
+  },
 };
 
 const Post = {
@@ -97,7 +99,8 @@ const Post = {
   detail: (slug: string): Promise<IPost> => requests.get(`/Post/${slug}`),
   searchableList: (): Promise<ISearchablePostDto[]> =>
     requests.get("/Post/SearchablePosts"),
-  create: (post: IPostsForm) => requests.post("/Post", post)
+  create: (post: IPostsForm) => requests.post("/Post", post),
+  delete: (id: string) => requests.delete(`/Post/${id}`),
 };
 
 const AnonUser = {
@@ -112,28 +115,29 @@ const AnonUser = {
 };
 
 const AdminUser = {
-  login: (user: IUserFormValues): Promise<IAdminUser> => requests.post("/user/login", user),
+  login: (user: IUserFormValues): Promise<IAdminUser> =>
+    requests.post("/user/login", user),
   current: (): Promise<IAdminUser> => requests.get("/user/currentUser"),
-}
+};
 
 const Newsletter = {
   subscribe: (newsletter: INewsletterEnvelope) =>
     requests.post(`/Newsletter`, newsletter),
+  list: () => requests.get("/Newsletter"),
 };
 
 const Category = {
-  list: (): Promise<ICategory[]> => {
-    return requests.get(`/Category`);
-  },
-  create: (category: ICategoryForm) => {
-    return requests.post("/Category", category);
-  }
+  list: (): Promise<ICategory[]> => requests.get(`/Category`),
+  create: (category: ICategoryForm) => requests.post("/Category", category),
+  delete: (id: string) => requests.delete(`/Category/${id}`),
 };
 
 const Admin = {
-  uploadPostImage: (photo: Blob): Promise<string> => requests.postForm(`/admin/UploadPostImage`, photo),
-  uploadCategoryImage: (photo: Blob): Promise<string> => requests.postForm(`/admin/UploadCategoryImage`, photo),
-}
+  uploadPostImage: (photo: Blob): Promise<string> =>
+    requests.postForm(`/admin/UploadPostImage`, photo),
+  uploadCategoryImage: (photo: Blob): Promise<string> =>
+    requests.postForm(`/admin/UploadCategoryImage`, photo),
+};
 
 export default {
   Post,
@@ -141,5 +145,5 @@ export default {
   Newsletter,
   Category,
   AdminUser,
-  Admin
+  Admin,
 };

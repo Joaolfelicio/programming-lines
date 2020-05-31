@@ -2,7 +2,6 @@ import { RootStore } from "./rootStore";
 import { observable, action, runInAction, computed } from "mobx";
 import api from "../api/api";
 import { ICategory, ICategoryForm } from "../models/category";
-import { history } from "../../index";
 const orderBy = require("lodash.orderby");
 
 export default class CategoryStore {

@@ -36,7 +36,8 @@ const validate = combineValidators({
 
 const Newsletter = () => {
   const rootStore = useContext(RootStoreContext);
-  const { subscribeNewsletter, isDarkMode } = rootStore.commonStore;
+  const { isDarkMode } = rootStore.commonStore;
+  const { subscribeNewsletter } = rootStore.newsletterStore;
 
   return (
     <Segment
