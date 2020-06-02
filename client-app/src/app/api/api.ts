@@ -124,6 +124,7 @@ const Newsletter = {
   subscribe: (newsletter: INewsletterEnvelope) =>
     requests.post(`/Newsletter`, newsletter),
   list: () => requests.get("/Newsletter"),
+  delete: (id: string) => requests.delete(`/Newsletter/${id}`)
 };
 
 const Category = {

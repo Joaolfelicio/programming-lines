@@ -1,12 +1,16 @@
-import React, { useContext, useEffect } from "react";
-import { Segment, Header, List } from "semantic-ui-react";
+import React, { useContext, useEffect, Fragment } from "react";
+import { Segment, Header, List, Divider } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { RootStoreContext } from "../../../../app/stores/rootStore";
 import NewsletterListItem from "./NewsletterListItem";
 
 const NewsletterList = () => {
   const rootStore = useContext(RootStoreContext);
-  const { getNewsletters, newslettersByOrder, loadingNewsletter } = rootStore.newsletterStore;
+  const {
+    getNewsletters,
+    newslettersByOrder,
+    loadingNewsletter,
+  } = rootStore.newsletterStore;
 
   useEffect(() => {
     getNewsletters();
@@ -21,7 +25,10 @@ const NewsletterList = () => {
       />
       <List divided verticalAlign="middle">
         {newslettersByOrder.map((newsletter) => (
-          <NewsletterListItem newsletter={newsletter} key={newsletter.id} />
+          <Fragment key={newsletter.id}>
+            <NewsletterListItem newsletter={newsletter}/>
+            <Divider />
+          </Fragment>
         ))}
       </List>
     </Segment>

@@ -131,15 +131,16 @@
         5.  [x] Maintain position of the scroll bar inside the content
         6.  [x] Clear button
     2.  [x] Delete
-    3.  [ ] Update
+    3.  [ ] Update <--
 39. [ ] BO - Categories
     1.  [x] List of all the categories, with the edit and delete button
     2.  [x] Create
         1.  [x] Validate Hexacode
     3.  [x] Delete
-    4.  [ ] Update
+    4.  [ ] Update <--
 40. [ ] BO - Newsletter
-    1.  [ ] List
+    1.  [x] Fetch the data
+    2.  [x] List
 41. [x] Footer
 42. [x] Add post title in the index.tsx title
 43. [ ] Responsiveness

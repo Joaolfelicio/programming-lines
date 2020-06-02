@@ -39,12 +39,21 @@ export default class ModalStore {
     try {
       if (this.deletionType === "post") {
         await api.Post.delete(this.deletionId);
+        window.location.reload();
       } else if (this.deletionType === "category") {
         await api.Category.delete(this.deletionId);
+        window.location.reload();
+      } else if (this.deletionType === "newsletter") {
+        await api.Newsletter.delete(this.deletionId);
+        runInAction(() => {
+          this.rootStore.newsletterStore.newsletterRegistry.delete(
+            this.deletionId
+          );
+        });
       }
       runInAction(() => {
+        this.isDeletionModalOpen = false;
         this.deletionLoading = false;
-        window.location.reload();
       });
     } catch (error) {
       console.log(error);
