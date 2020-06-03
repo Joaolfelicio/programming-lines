@@ -112,6 +112,23 @@ code {
   height: 20px !important;
   margin-top: -2px !important;
 }
+
 .modals.dimmer .ui.scrolling.modal {
   margin: 0 auto !important;
+}
+
+i.arrow.up {
+  margin: 0;
+  font-size: 1.5em;
+}
+
+.back-top-button {
+  color: #6a737d;
+  border-radius: 10px !important;
+  border: 2px solid #6a737d !important;
+  padding: 8px;
+}
+
+.back-top-button:hover {
+  border: 2px solid black !important;
 }

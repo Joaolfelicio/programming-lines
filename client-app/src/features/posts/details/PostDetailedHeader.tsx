@@ -33,7 +33,14 @@ const PostDetailedHeader: React.FC<IProps> = ({ post }) => {
           marginBottom: "1.45rem",
         }}
       >
-        <div style={{ color: "rgb(100, 104, 109)", fontSize: "1.15rem" }}>
+        <div
+          style={{
+            color: "rgb(100, 104, 109)",
+            fontSize: "1.15rem",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
           <time>{moment(post.publishDate).format("MMM Do YYYY")}</time> -{" "}
           <em>{post.timeToRead}</em>
         </div>

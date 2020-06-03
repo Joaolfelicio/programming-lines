@@ -62,7 +62,7 @@
     2.  [x] Time to read
     3.  [x] User has liked
         1.  [x] If user never liked
-        2.  [x] loading when liking
+        2.  [x] Loading when liking
     4.  [x] Add date
     5.  [ ] Container it posts list should be bigger on bigger devices
     6.  [x] Fix Posts order by date

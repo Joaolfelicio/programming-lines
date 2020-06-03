@@ -46,6 +46,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-scroll-progress-read": "0.0.13",
+    "react-scrolltop-button": "^0.1.6",
     "react-syntax-highlighter": "^12.2.1",
     "react-toastify": "^6.0.5",
     "reading-time": "^1.2.0",
