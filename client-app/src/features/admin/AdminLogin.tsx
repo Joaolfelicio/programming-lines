@@ -39,7 +39,7 @@ const AdminLogin = () => {
 
   useEffect(() => {
     if(adminUser) {
-      history.push("/admin/dashboard");
+      history.push("/admindashboard");
     }
   }, [adminUser]);
 

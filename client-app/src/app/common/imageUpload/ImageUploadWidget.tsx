@@ -14,7 +14,7 @@ export const ImageUploadWidget: React.FC<IProps> = ({
   setImageFiles,
   imageFiles,
   width,
-  height,
+  height
 }) => {
   const [files, setFiles] = useState<any[]>([]);
 
@@ -33,12 +33,14 @@ export const ImageUploadWidget: React.FC<IProps> = ({
           height={height}
         />
       )}
+      {imageFiles.length > 0 && console.log(imageFiles)}
       {imageFiles.length > 0 && (
+        
         <Fragment>
           <div style={{ textAlign: "center" }}>
             {imageFiles.map((file) => (
               <img
-                key={file.name}
+                key={file.preview}
                 src={file.preview}
                 className="img-preview"
                 style={{

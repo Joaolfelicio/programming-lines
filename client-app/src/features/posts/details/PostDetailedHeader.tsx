@@ -4,6 +4,7 @@ import { observer } from "mobx-react-lite";
 import { Header, Image, Button } from "semantic-ui-react";
 import moment from "moment";
 import { RootStoreContext } from "../../../app/stores/rootStore";
+import {history} from "../../../index";
 
 interface IProps {
   post: IPost;
@@ -61,7 +62,7 @@ const PostDetailedHeader: React.FC<IProps> = ({ post }) => {
             >
               Delete
             </Button>
-            <Button primary size="small">
+            <Button primary size="small" onClick={() => history.push(`/admindashboard/posts/${post.slug}`)}>
               Edit
             </Button>
           </div>

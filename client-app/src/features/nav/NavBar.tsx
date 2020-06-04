@@ -82,19 +82,19 @@ const NavBar = () => {
             to="/"
             name="Posts"
             active={
-              location.pathname.includes("/post") || location.pathname === "/"
+              location.pathname.endsWith("/post") || location.pathname === "/"
             }
           />
           <Menu.Item
             as={Link}
             to="/aboutme"
             name="About me"
-            active={location.pathname.includes("/aboutme")}
+            active={location.pathname.endsWith("/aboutme")}
           />
           {adminUser && (
             <Menu.Item
               as={Link}
-              to="/admin/dashboard"
+              to="/admindashboard"
               name="Admin"
               active={location.pathname.includes("/admin")}
             />

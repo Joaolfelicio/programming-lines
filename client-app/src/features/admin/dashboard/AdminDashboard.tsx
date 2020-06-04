@@ -4,15 +4,17 @@ import AdminPosts from "./Posts/AdminPosts";
 import AdminCategories from "./Categories/AdminCategories";
 import AdminNewsletter from "./Newsletter/AdminNewsletter";
 import { RootStoreContext } from "../../../app/stores/rootStore";
+import { history } from "../../../index";
 
 const AdminDashboard = () => {
   const rootStore = useContext(RootStoreContext);
-  const {getCategories} = rootStore.categoryStore;
+  const { getCategories } = rootStore.categoryStore;
   const [activeAdminDashboard, setActiveAdminDashboard] = useState("Posts");
 
   useEffect(() => {
     getCategories();
-  }, [getCategories])
+    history.push("/admindashboard/posts");
+  }, [getCategories, history]);
 
   document.title = "Programming Lines - Admin";
 
@@ -22,17 +24,26 @@ const AdminDashboard = () => {
         <Menu.Item
           name="Posts"
           active={activeAdminDashboard === "Posts"}
-          onClick={() => setActiveAdminDashboard("Posts")}
+          onClick={() => {
+            history.push("/admindashboard/posts");
+            setActiveAdminDashboard("Posts");
+          }}
         />
         <Menu.Item
           name="Categories"
           active={activeAdminDashboard === "Categories"}
-          onClick={() => setActiveAdminDashboard("Categories")}
+          onClick={() => {
+            history.push("/admindashboard/categories");
+            setActiveAdminDashboard("Categories");
+          }}
         />
         <Menu.Item
           name="Newsletter"
           active={activeAdminDashboard === "Newsletter"}
-          onClick={() => setActiveAdminDashboard("Newsletter")}
+          onClick={() => {
+            history.push("/admindashboard/newsletter");
+            setActiveAdminDashboard("Newsletter");
+          }}
         />
       </Menu>
 

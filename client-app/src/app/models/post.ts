@@ -37,6 +37,7 @@ export interface IPostsEnvelope {
 }
 
 export interface IPostsForm {
+    id?: string;
     slug: string;
     title: string;
     subTitle: string;

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Segment, Form, Button, Header, Menu } from "semantic-ui-react";
 import { Form as FinalForm, Field } from "react-final-form";
 import TextInput from "../../../../app/common/form/TextInput";
@@ -20,18 +20,64 @@ import { RootStoreContext } from "../../../../app/stores/rootStore";
 import DropdownCategories from "../Categories/DropdownCategories";
 import { FORM_ERROR } from "final-form";
 import ErrorMessage from "../../../../app/common/form/ErrorMessage";
+import api from "../../../../app/api/api";
 const readingTime = require("reading-time");
 
 const PostForm = () => {
   const rootStore = useContext(RootStoreContext);
-  const { createPost, creatingPost } = rootStore.postStore;
+  const {
+    createPost,
+    creatingPost,
+    getDetailedPost,
+    detailedPost,
+  } = rootStore.postStore;
 
   const [selectedCategory, setSelectedCategory] = useState("");
   const [imageFiles, setImageFiles] = useState<any[]>([]);
 
+  const [editMode, setEditMode] = useState(false);
+  const [editLoading, setEditLoading] = useState(false);
+
   const [post, setPost] = useState<IPostsForm>(new IPostFormValues());
   const [isContentPreview, setIsContentPreview] = useState(false);
   const [content, setContent] = useState("");
+
+  useEffect(() => {
+    const lastFragmentUrl = window.location.href.substring(
+      window.location.href.lastIndexOf("/") + 1
+    );
+
+    if (
+      lastFragmentUrl.toLowerCase() !== "posts" &&
+      lastFragmentUrl.toLowerCase() !== "admindashboard"
+    ) {
+      setEditMode(true);
+      setEditLoading(true);
+      getDetailedPost(lastFragmentUrl);
+      const editPost: IPostsForm = {
+        slug: detailedPost!.slug,
+        title: detailedPost!.title,
+        subTitle: detailedPost!.subTitle,
+        image: detailedPost!.image,
+        content: detailedPost!.content,
+        categoryCode: detailedPost!.category.code,
+        id: detailedPost!.id,
+      };
+      
+      (async function getEditImage() {
+        let imageBlob = await fetch(editPost.image as string).then((r) =>
+        r.blob()
+        );
+        Object.assign(imageBlob, {
+          preview: URL.createObjectURL(imageBlob),
+        });
+        setImageFiles([imageBlob]);
+      })();
+      setSelectedCategory(editPost.categoryCode)
+      setPost(editPost);
+      setEditLoading(false);
+    }
+  }, [setEditMode, getDetailedPost, setPost]);
 
   const isValidSlug = createValidator(
     (message) => (value) => {
@@ -65,7 +111,7 @@ const PostForm = () => {
   return (
     <Segment clearing raised>
       <Header
-        content="New post"
+        content={editMode ? "Edit Post" : "New Post"}
         size="huge"
         style={{ marginTop: 10, marginBottom: 10 }}
       />
@@ -94,7 +140,7 @@ const PostForm = () => {
           submitError,
           dirtySinceLastSubmit,
         }) => (
-          <Form onSubmit={handleSubmit} error>
+          <Form onSubmit={handleSubmit} error loading={editLoading}>
             <label style={labelStyle}>Slug:</label>
             <Field
               placeholder="Slug"
@@ -126,6 +172,7 @@ const PostForm = () => {
             />
 
             <label style={labelStyle}>Image:</label>
+            {}
             <ImageUploadWidget
               width={670}
               height={305}
@@ -191,13 +238,14 @@ const PostForm = () => {
               floated="right"
               positive
               type="submit"
-              content="Submit"
+              content={editMode ? "Edit" : "Create"}
             />
             <Button
               floated="right"
               disabled={submitting}
               style={{ marginTop: 20 }}
               onClick={() => {
+                setEditMode(false);
                 setPost(new IPostFormValues());
                 setSelectedCategory("");
                 setImageFiles([]);

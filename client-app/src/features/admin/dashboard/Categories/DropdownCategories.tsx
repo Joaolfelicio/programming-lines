@@ -42,9 +42,11 @@ const DropdownCategories: React.FC<IProps> = ({
       className="category-dropdown"
       search
       selection
+      selectOnBlur={false}
       options={formatedCategories}
       onChange={(e, { value }) => setSelectedCategory(value as string)}
       value={selectedCategory}
+      
       loading={loadingCategories}
     />
   );

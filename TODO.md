@@ -151,5 +151,7 @@
 46. [ ] BUGS:
     1.  [x] If filter by category, and said category has no posts, it will forever load 
 47. [ ] Clean client app models (more models per file)
+48. [ ] FUTURE RELEASES:
+    1.  [ ] Edit post with dropzone
     
 

@@ -50,7 +50,7 @@ const App: React.FC<RouteComponentProps> = () => {
           <Route path="/aboutme" component={AboutMeComponent} />
           <Route path="/post/:slug" component={PostsDetails} />
           <Route exact path="/admin" component={AdminLogin} />
-          <PrivateRoute path="/admin/dashboard" component={AdminDashboard} />
+          <PrivateRoute path="/admindashboard" component={AdminDashboard} />
           <Route component={NotFound} />
         </Switch>
         <Route
