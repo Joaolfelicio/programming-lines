@@ -33,7 +33,6 @@ export const ImageUploadWidget: React.FC<IProps> = ({
           height={height}
         />
       )}
-      {imageFiles.length > 0 && console.log(imageFiles)}
       {imageFiles.length > 0 && (
         
         <Fragment>

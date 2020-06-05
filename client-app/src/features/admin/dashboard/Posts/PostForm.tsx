@@ -63,19 +63,18 @@ const PostForm = () => {
         categoryCode: detailedPost!.category.code,
         id: detailedPost!.id,
       };
-      
+
       (async function getEditImage() {
         let imageBlob = await fetch(editPost.image as string).then((r) =>
-        r.blob()
+          r.blob().finally(() => setEditLoading(false))
         );
         Object.assign(imageBlob, {
           preview: URL.createObjectURL(imageBlob),
         });
         setImageFiles([imageBlob]);
       })();
-      setSelectedCategory(editPost.categoryCode)
+      setSelectedCategory(editPost.categoryCode);
       setPost(editPost);
-      setEditLoading(false);
     }
   }, [setEditMode, getDetailedPost, setPost]);
 
@@ -236,7 +235,8 @@ const PostForm = () => {
               }
               style={{ marginTop: 20, marginLeft: 20 }}
               floated="right"
-              positive
+              positive={!editMode}
+              primary={editMode}
               type="submit"
               content={editMode ? "Edit" : "Create"}
             />

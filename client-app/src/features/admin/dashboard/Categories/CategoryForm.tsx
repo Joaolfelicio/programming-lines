@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Segment, Header, Form, Menu, Button } from "semantic-ui-react";
 import { Form as FinalForm, Field } from "react-final-form";
 import {
@@ -55,6 +55,33 @@ const labelStyle = {
 };
 
 const CategoryForm = () => {
+
+  const [editLoading, setEditLoading] = useState(false);
+
+  useEffect(() => {
+    const lastFragmentUrl = window.location.href.substring(
+      window.location.href.lastIndexOf("/") + 1
+    );
+
+    if (
+      lastFragmentUrl.toLowerCase() !== "posts" &&
+      lastFragmentUrl.toLowerCase() !== "admindashboard"
+    ) {
+setEditLoading(true);
+
+      (async function getEditImage() {
+        let imageBlob = await fetch(IMAGEURL).then((r) =>
+          r.blob().finally(() => setEditLoading(false))
+        );
+        Object.assign(imageBlob, {
+          preview: URL.createObjectURL(imageBlob),
+        });
+        setImageFiles([imageBlob]);
+      })();
+
+    }
+  }, [])
+
   const rootStore = useContext(RootStoreContext);
   const { creatingCategory, createCategory } = rootStore.categoryStore;
 
