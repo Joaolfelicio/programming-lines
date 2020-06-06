@@ -14,6 +14,7 @@ export default class CategoryStore {
   @observable categoriesRegistry = new Map();
   @observable loadingCategories = true;
   @observable creatingCategory = false;
+  @observable categoryToEdit: ICategory | null = null; 
 
   @action setCreatingCategory = (isCreating: boolean) => {
     this.creatingCategory = isCreating;
@@ -21,7 +22,6 @@ export default class CategoryStore {
 
   @action getCategories = async () => {
     try {
-      console.log(this.categoriesRegistry.size)
       if (this.categoriesRegistry.size === 0) {
         const categories = await api.Category.list();
         runInAction(() => {
@@ -38,6 +38,17 @@ export default class CategoryStore {
       });
     }
   };
+
+  @action getCategoryToEdit = async (categoryCode: string) => {
+    try {
+      const category = await api.Category.detail(categoryCode);
+      runInAction(() => {
+        this.categoryToEdit = category;
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   @action createCategory = async (category: ICategoryForm) => {
     this.creatingCategory = true;

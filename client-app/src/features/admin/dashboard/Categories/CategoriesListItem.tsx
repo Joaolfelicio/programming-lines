@@ -11,6 +11,7 @@ interface IProps {
 const CategoriesListItem: React.FC<IProps> = ({ category }) => {
   const rootStore = useContext(RootStoreContext);
   const { setIsDeletionModalOpen, formatDeletionModal } = rootStore.modalStore;
+  const { getCategoryToEdit } = rootStore.categoryStore;
 
   return (
     <div
@@ -21,7 +22,7 @@ const CategoriesListItem: React.FC<IProps> = ({ category }) => {
       }}
     >
       <div style={{ display: "flex", alignItems: "center", width: "20%" }}>
-        <Image src={category.image} style={{width: 21, height: 20}} />
+        <Image src={category.image} style={{ width: 21, height: 20 }} />
         <List.Content style={{ marginLeft: 5 }}>{category.name}</List.Content>
       </div>
       <List.Content
@@ -45,7 +46,11 @@ const CategoriesListItem: React.FC<IProps> = ({ category }) => {
         >
           Delete
         </Button>
-        <Button primary size="small">
+        <Button
+          primary
+          size="small"
+          onClick={() => getCategoryToEdit(category.code)}
+        >
           Edit
         </Button>
       </div>

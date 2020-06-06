@@ -29,7 +29,7 @@ const PostForm = () => {
     creatingPost,
     getDetailedPost,
     detailedPost,
-    editPost
+    editPost,
   } = rootStore.postStore;
 
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -46,7 +46,6 @@ const PostForm = () => {
     const lastFragmentUrl = window.location.href.substring(
       window.location.href.lastIndexOf("/") + 1
     );
-
     if (
       lastFragmentUrl.toLowerCase() !== "posts" &&
       lastFragmentUrl.toLowerCase() !== "admindashboard"
@@ -76,7 +75,7 @@ const PostForm = () => {
       setSelectedCategory(editPost.categoryCode);
       setPost(editPost);
     }
-  }, [setEditMode, getDetailedPost, setPost]);
+  }, [setEditMode, getDetailedPost, setPost, setImageFiles, setEditLoading]);
 
   const isValidSlug = createValidator(
     (message) => (value) => {
@@ -127,9 +126,9 @@ const PostForm = () => {
             categoryCode: selectedCategory,
           };
           console.log(newPost);
-          console.log('PostId', post.id)
+          console.log("PostId", post.id);
           //If it's a new post
-          if(!post.id) {
+          if (!post.id) {
             return createPost(newPost).catch((error) => ({
               [FORM_ERROR]: error,
             }));
@@ -138,7 +137,6 @@ const PostForm = () => {
               [FORM_ERROR]: error,
             }));
           }
-
         }}
         render={({
           handleSubmit,
@@ -186,6 +184,7 @@ const PostForm = () => {
               height={305}
               setImageFiles={setImageFiles}
               imageFiles={imageFiles}
+              boxSize="big"
             />
 
             <Menu tabular style={{ marginBottom: 0, marginTop: 50 }}>

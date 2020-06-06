@@ -8,13 +8,15 @@ interface IProps {
   imageFiles: any[];
   width: number;
   height: number;
+  boxSize: string;
 }
 
 export const ImageUploadWidget: React.FC<IProps> = ({
   setImageFiles,
   imageFiles,
   width,
-  height
+  height,
+  boxSize
 }) => {
   const [files, setFiles] = useState<any[]>([]);
 
@@ -31,6 +33,7 @@ export const ImageUploadWidget: React.FC<IProps> = ({
           setFiles={setImageFiles}
           width={width}
           height={height}
+          boxSize={boxSize}
         />
       )}
       {imageFiles.length > 0 && (

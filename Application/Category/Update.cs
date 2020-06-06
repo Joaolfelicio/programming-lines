@@ -37,6 +37,13 @@ namespace Application.Category
                     throw new RestException(HttpStatusCode.NotFound, new { Category = "Not found." });
                 }
 
+                var codeAlreadyExists = await _context.Categories.FirstOrDefaultAsync(x => x.Code == request.Code) != null;
+
+                if (category.Code != request.Code && codeAlreadyExists)
+                {
+                    throw new RestException(HttpStatusCode.BadRequest, new { Category = "Category Code already exists." });
+                }
+
                 category.Code = request.Code ?? category.Code;
                 category.Name = request.Name ?? category.Name;
                 category.Image = request.Image ?? category.Image;

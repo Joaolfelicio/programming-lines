@@ -1,14 +1,23 @@
-import React, { Fragment } from 'react'
-import CategoriesList from './CategoriesList'
-import CategoryForm from './CategoryForm'
+import React, { Fragment, useContext, useEffect } from "react";
+import CategoriesList from "./CategoriesList";
+import CategoryForm from "./CategoryForm";
+import { observer } from "mobx-react-lite";
+import { RootStoreContext } from "../../../../app/stores/rootStore";
 
 const AdminCategories = () => {
-    return (
-        <Fragment>
-            <CategoriesList />
-            <CategoryForm />
-        </Fragment>
-    )
-}
+  const rootStore = useContext(RootStoreContext);
+  const { getCategories } = rootStore.categoryStore;
 
-export default AdminCategories
+  useEffect(() => {
+    getCategories();
+  }, [getCategories]);
+
+  return (
+    <Fragment>
+      <CategoriesList />
+      <CategoryForm />
+    </Fragment>
+  );
+};
+
+export default observer(AdminCategories);

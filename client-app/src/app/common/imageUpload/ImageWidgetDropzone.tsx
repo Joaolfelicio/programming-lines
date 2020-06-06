@@ -6,13 +6,14 @@ interface IProps {
   setFiles: (files: object[]) => void;
   width: number;
   height: number;
+  boxSize: string;
 }
 
 const dropzoneActive = {
   borderColor: "green"
 }
 
-const ImageWidgetDropzone: React.FC<IProps> = ({ setFiles, width, height }) => {
+const ImageWidgetDropzone: React.FC<IProps> = ({ setFiles, width, height, boxSize }) => {
   
   const dropzoneStyles = {
       border: "dashed 3px",
@@ -44,7 +45,7 @@ const ImageWidgetDropzone: React.FC<IProps> = ({ setFiles, width, height }) => {
       <input {...getInputProps()} />
       
       <Icon name="upload" size="huge"/>
-      <Header content="Drop image here" />
+      {boxSize != "small" && <Header content="Drop image here" />}
       
     </div>
   );

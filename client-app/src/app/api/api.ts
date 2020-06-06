@@ -132,6 +132,7 @@ const Category = {
   list: (): Promise<ICategory[]> => requests.get(`/Category`),
   create: (category: ICategoryForm) => requests.post("/Category", category),
   delete: (id: string) => requests.delete(`/Category/${id}`),
+  detail: (categoryCode: string) => requests.get(`/Category/${categoryCode}`)
 };
 
 const Admin = {

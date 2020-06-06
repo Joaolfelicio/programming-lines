@@ -46,7 +46,6 @@ const DropdownCategories: React.FC<IProps> = ({
       options={formatedCategories}
       onChange={(e, { value }) => setSelectedCategory(value as string)}
       value={selectedCategory}
-      
       loading={loadingCategories}
     />
   );

@@ -1,11 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Segment, Header, Form, Menu, Button } from "semantic-ui-react";
+import { Segment, Header, Form, Button } from "semantic-ui-react";
 import { Form as FinalForm, Field } from "react-final-form";
 import {
   combineValidators,
   composeValidators,
   isRequired,
-  hasLengthGreaterThan,
   createValidator,
 } from "revalidate";
 import { FORM_ERROR } from "final-form";
@@ -13,12 +12,12 @@ import TextInput from "../../../../app/common/form/TextInput";
 import ImageUploadWidget from "../../../../app/common/imageUpload/ImageUploadWidget";
 import ErrorMessage from "../../../../app/common/form/ErrorMessage";
 import {
-  ICategory,
   ICategoryForm,
   ICategoryFormValues,
 } from "../../../../app/models/category";
 import { RootStoreContext } from "../../../../app/stores/rootStore";
 import { observer } from "mobx-react-lite";
+import { toJS } from "mobx";
 
 const isCategoryCodeValid = createValidator(
   (message) => (value) => {
@@ -45,7 +44,7 @@ const validate = combineValidators({
   name: isRequired("Name"),
   color: composeValidators(
     isHexaColorValid({ message: "Hexa color needs to be valid" })
-  )()
+  )(),
 });
 
 const labelStyle = {
@@ -55,45 +54,57 @@ const labelStyle = {
 };
 
 const CategoryForm = () => {
+  const rootStore = useContext(RootStoreContext);
+  const { getCategoryToEdit, categoryToEdit } = rootStore.categoryStore;
+  const { creatingCategory, createCategory } = rootStore.categoryStore;
 
   const [editLoading, setEditLoading] = useState(false);
-
-  useEffect(() => {
-    const lastFragmentUrl = window.location.href.substring(
-      window.location.href.lastIndexOf("/") + 1
-    );
-
-    if (
-      lastFragmentUrl.toLowerCase() !== "posts" &&
-      lastFragmentUrl.toLowerCase() !== "admindashboard"
-    ) {
-setEditLoading(true);
-
-      // (async function getEditImage() {
-      //   let imageBlob = await fetch(IMAGEURL).then((r) =>
-      //     r.blob().finally(() => setEditLoading(false))
-      //   );
-      //   Object.assign(imageBlob, {
-      //     preview: URL.createObjectURL(imageBlob),
-      //   });
-      //   setImageFiles([imageBlob]);
-      // })();
-
-    }
-  }, [])
-
-  const rootStore = useContext(RootStoreContext);
-  const { creatingCategory, createCategory } = rootStore.categoryStore;
+  const [editMode, setEditMode] = useState(false);
 
   const [category, setCategory] = useState<ICategoryForm>(
     new ICategoryFormValues()
   );
   const [imageFiles, setImageFiles] = useState<any[]>([]);
 
+  useEffect(() => {
+
+    console.log("categoryToEdit", toJS(categoryToEdit));
+    if (categoryToEdit) {
+      setEditMode(true);
+      setEditLoading(true);
+
+      const editCategory: ICategoryForm = {
+        code: categoryToEdit!.code,
+        name: categoryToEdit!.name,
+        color: categoryToEdit!.color,
+        image: categoryToEdit!.image,
+      };
+      console.log(editCategory);
+      (async function getEditImage() {
+        let imageBlob = await fetch(categoryToEdit!.image as string).then((r) =>
+          r.blob().finally(() => setEditLoading(false))
+        );
+        Object.assign(imageBlob, {
+          preview: URL.createObjectURL(imageBlob),
+        });
+        setImageFiles([imageBlob]);
+      })();
+      setCategory(editCategory);
+    }
+
+  }, [
+    setEditMode,
+    setEditLoading,
+    getCategoryToEdit,
+    setImageFiles,
+    setCategory,
+    categoryToEdit,
+  ]);
+  
   return (
     <Segment clearing raised>
       <Header
-        content="New category"
+        content={editMode ? "Edit Category" : "New Category"}
         size="huge"
         style={{ marginTop: 10, marginBottom: 10 }}
       />
@@ -120,12 +131,12 @@ setEditLoading(true);
           submitError,
           dirtySinceLastSubmit,
         }) => (
-          <Form onSubmit={handleSubmit} error>
+          <Form onSubmit={handleSubmit} error loading={editLoading}>
             <label style={labelStyle}>Category code:</label>
             <Field
               placeholder="Category code"
               value={category.code}
-              name="categoryCode"
+              name="code"
               component={TextInput}
             />
 
@@ -139,10 +150,11 @@ setEditLoading(true);
 
             <label style={labelStyle}>Image:</label>
             <ImageUploadWidget
-              width={150}
-              height={150}
+              width={65}
+              height={65}
               setImageFiles={setImageFiles}
               imageFiles={imageFiles}
+              boxSize="small"
             />
 
             <label style={{ ...labelStyle, marginTop: 50 }}>
@@ -168,9 +180,10 @@ setEditLoading(true);
               }
               style={{ marginTop: 20, marginLeft: 20 }}
               floated="right"
-              positive
+              positive={!editMode}
+              primary={editMode}
               type="submit"
-              content="Submit"
+              content={editMode ? "Edit" : "Create"}
             />
             <Button
               floated="right"

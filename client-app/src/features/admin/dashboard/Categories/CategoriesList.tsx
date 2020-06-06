@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Segment, List, Header } from "semantic-ui-react";
 import { RootStoreContext } from "../../../../app/stores/rootStore";
 import CategoriesListItem from "./CategoriesListItem";
+import { observer } from "mobx-react-lite";
 
 const CategoriesList = () => {
   const rootStore = useContext(RootStoreContext);
@@ -23,4 +24,4 @@ const CategoriesList = () => {
   );
 };
 
-export default CategoriesList;
+export default observer(CategoriesList);
