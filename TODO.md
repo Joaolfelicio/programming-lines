@@ -152,6 +152,6 @@
     1.  [x] If filter by category, and said category has no posts, it will forever load 
 47. [ ] Clean client app models (more models per file)
 48. [ ] FUTURE RELEASES:
-    1.  [ ] Edit post with dropzone
-    
-
+    1.  [x] Edit post with dropzone
+    2.  [ ] Edit post even if the image doesn't change, it will reupload it
+    3.  [ ] Edit post if you just change the image and/or category, it won't allow to submit

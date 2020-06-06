@@ -69,15 +69,15 @@ const CategoryForm = () => {
     ) {
 setEditLoading(true);
 
-      (async function getEditImage() {
-        let imageBlob = await fetch(IMAGEURL).then((r) =>
-          r.blob().finally(() => setEditLoading(false))
-        );
-        Object.assign(imageBlob, {
-          preview: URL.createObjectURL(imageBlob),
-        });
-        setImageFiles([imageBlob]);
-      })();
+      // (async function getEditImage() {
+      //   let imageBlob = await fetch(IMAGEURL).then((r) =>
+      //     r.blob().finally(() => setEditLoading(false))
+      //   );
+      //   Object.assign(imageBlob, {
+      //     preview: URL.createObjectURL(imageBlob),
+      //   });
+      //   setImageFiles([imageBlob]);
+      // })();
 
     }
   }, [])

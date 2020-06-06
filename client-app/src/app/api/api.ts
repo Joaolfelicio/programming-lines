@@ -101,6 +101,7 @@ const Post = {
     requests.get("/Post/SearchablePosts"),
   create: (post: IPostsForm) => requests.post("/Post", post),
   delete: (id: string) => requests.delete(`/Post/${id}`),
+  edit: (post: IPostsForm, postId: string) => requests.put(`/Post/${postId}`, post)
 };
 
 const AnonUser = {

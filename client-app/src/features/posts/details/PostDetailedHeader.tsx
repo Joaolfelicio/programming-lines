@@ -42,7 +42,8 @@ const PostDetailedHeader: React.FC<IProps> = ({ post }) => {
             alignItems: "center",
           }}
         >
-          <time>{moment(post.publishDate).format("MMM Do YYYY")}</time> -{" "}
+          <time>{moment(post.publishDate).format("MMM Do YYYY")}</time>
+          <span style={{marginLeft: 3, marginRight: 3}}>-</span>
           <em>{post.timeToRead}</em>
         </div>
         {adminUser && (

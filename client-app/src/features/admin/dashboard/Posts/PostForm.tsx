@@ -20,7 +20,6 @@ import { RootStoreContext } from "../../../../app/stores/rootStore";
 import DropdownCategories from "../Categories/DropdownCategories";
 import { FORM_ERROR } from "final-form";
 import ErrorMessage from "../../../../app/common/form/ErrorMessage";
-import api from "../../../../app/api/api";
 const readingTime = require("reading-time");
 
 const PostForm = () => {
@@ -30,6 +29,7 @@ const PostForm = () => {
     creatingPost,
     getDetailedPost,
     detailedPost,
+    editPost
   } = rootStore.postStore;
 
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -127,9 +127,18 @@ const PostForm = () => {
             categoryCode: selectedCategory,
           };
           console.log(newPost);
-          return createPost(newPost).catch((error) => ({
-            [FORM_ERROR]: error,
-          }));
+          console.log('PostId', post.id)
+          //If it's a new post
+          if(!post.id) {
+            return createPost(newPost).catch((error) => ({
+              [FORM_ERROR]: error,
+            }));
+          } else {
+            return editPost(newPost, post.id!).catch((error) => ({
+              [FORM_ERROR]: error,
+            }));
+          }
+
         }}
         render={({
           handleSubmit,

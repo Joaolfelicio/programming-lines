@@ -230,6 +230,21 @@ export default class PostStore {
     }
   };
 
+  @action editPost = async (post: IPostsForm, postId: string) => {
+    try {
+      const imageUrl = await api.Admin.uploadPostImage(post.image as Blob);
+      post.image = imageUrl;
+      await api.Post.edit(post, postId);
+      runInAction(() => {
+        this.postsRegistry.clear();
+      })
+      history.push(`/post/${post.slug}`);
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  };
+
   @computed get orderPosts(): IPost[] {
     const posts = Array.from(this.postsRegistry.values());
 

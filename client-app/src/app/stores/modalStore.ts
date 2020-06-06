@@ -1,6 +1,7 @@
 import { RootStore } from "./rootStore";
 import { configure, observable, action, runInAction } from "mobx";
 import api from "../api/api";
+import { history } from "../../index";
 
 configure({ enforceActions: "always" });
 
@@ -39,6 +40,7 @@ export default class ModalStore {
     try {
       if (this.deletionType === "post") {
         await api.Post.delete(this.deletionId);
+        history.push("/")
         window.location.reload();
       } else if (this.deletionType === "category") {
         await api.Category.delete(this.deletionId);

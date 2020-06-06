@@ -39,6 +39,13 @@ namespace Application.Post
                     throw new RestException(HttpStatusCode.NotFound, new { Post = "Post not found." });
                 }
 
+                var slugAlreadyExists = await _context.Posts.FirstOrDefaultAsync(x => x.Slug == request.Slug) != null;
+
+                if (post.Slug != request.Slug && slugAlreadyExists)
+                {
+                    throw new RestException(HttpStatusCode.BadRequest, new { Post = "Slug already exists." });
+                }
+
                 var categoryCode = request.CategoryCode ?? post.Category.Code;
 
                 var category = await _context.Categories.FirstOrDefaultAsync(x => x.Code == categoryCode, cancellationToken);
@@ -50,7 +57,7 @@ namespace Application.Post
 
                 post.Slug = request.Slug ?? post.Slug;
                 post.Title = request.Title ?? post.Title;
-                post.SubTitle = request.Title ?? post.SubTitle;
+                post.SubTitle = request.SubTitle ?? post.SubTitle;
                 post.Category = category ?? post.Category;
                 post.Content = request.Content ?? post.Content;
                 post.Image = request.Image ?? post.Image;
