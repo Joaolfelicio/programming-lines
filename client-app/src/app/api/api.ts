@@ -101,7 +101,8 @@ const Post = {
     requests.get("/Post/SearchablePosts"),
   create: (post: IPostsForm) => requests.post("/Post", post),
   delete: (id: string) => requests.delete(`/Post/${id}`),
-  edit: (post: IPostsForm, postId: string) => requests.put(`/Post/${postId}`, post)
+  edit: (post: IPostsForm, postId: string) =>
+    requests.put(`/Post/${postId}`, post),
 };
 
 const AnonUser = {
@@ -125,14 +126,16 @@ const Newsletter = {
   subscribe: (newsletter: INewsletterEnvelope) =>
     requests.post(`/Newsletter`, newsletter),
   list: () => requests.get("/Newsletter"),
-  delete: (id: string) => requests.delete(`/Newsletter/${id}`)
+  delete: (id: string) => requests.delete(`/Newsletter/${id}`),
 };
 
 const Category = {
   list: (): Promise<ICategory[]> => requests.get(`/Category`),
   create: (category: ICategoryForm) => requests.post("/Category", category),
   delete: (id: string) => requests.delete(`/Category/${id}`),
-  detail: (categoryCode: string) => requests.get(`/Category/${categoryCode}`)
+  detail: (categoryCode: string) => requests.get(`/Category/${categoryCode}`),
+  edit: (category: ICategoryForm, categoryCode: string) =>
+    requests.put(`/Category/${categoryCode}`, category),
 };
 
 const Admin = {

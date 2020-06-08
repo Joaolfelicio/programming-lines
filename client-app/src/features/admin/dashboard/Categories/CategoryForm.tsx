@@ -67,7 +67,6 @@ const CategoryForm = () => {
   const [imageFiles, setImageFiles] = useState<any[]>([]);
 
   useEffect(() => {
-
     console.log("categoryToEdit", toJS(categoryToEdit));
     if (categoryToEdit) {
       setEditMode(true);
@@ -91,7 +90,6 @@ const CategoryForm = () => {
       })();
       setCategory(editCategory);
     }
-
   }, [
     setEditMode,
     setEditLoading,
@@ -100,7 +98,7 @@ const CategoryForm = () => {
     setCategory,
     categoryToEdit,
   ]);
-  
+
   return (
     <Segment clearing raised>
       <Header

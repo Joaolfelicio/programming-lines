@@ -237,7 +237,7 @@ export default class PostStore {
       await api.Post.edit(post, postId);
       runInAction(() => {
         this.postsRegistry.clear();
-      })
+      });
       history.push(`/post/${post.slug}`);
     } catch (error) {
       console.log(error);

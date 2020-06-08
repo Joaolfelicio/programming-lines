@@ -70,6 +70,20 @@ export default class CategoryStore {
     }
   }
 
+  @action editCategory = async (category: ICategoryForm) => {
+    try {
+      const imageUrl = await api.Admin.uploadCategoryImage(category.image as Blob);
+      category.image = imageUrl;
+      await api.Category.edit(category, category.code);
+      runInAction(() => {
+        this.categoriesRegistry.set(category.code, category);
+      });
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
+
   @computed get categoryByOrder(): ICategory[] {
     const categories = Array.from(this.categoriesRegistry.values());
     return orderBy(categories, ["name"], ["asc"]);
