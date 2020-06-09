@@ -45,7 +45,7 @@ const ImageWidgetDropzone: React.FC<IProps> = ({ setFiles, width, height, boxSiz
       <input {...getInputProps()} />
       
       <Icon name="upload" size="huge"/>
-      {boxSize != "small" && <Header content="Drop image here" />}
+      {boxSize !== "small" && <Header content="Drop image here" />}
       
     </div>
   );

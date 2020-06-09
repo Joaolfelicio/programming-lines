@@ -17,7 +17,7 @@ const CategoriesList = () => {
       />
       <List divided verticalAlign="middle">
         {categoryByOrder.map((category) => (
-          <CategoriesListItem category={category} key={category.id} />
+          <CategoriesListItem category={category} key={category.code} />
         ))}
       </List>
     </Segment>

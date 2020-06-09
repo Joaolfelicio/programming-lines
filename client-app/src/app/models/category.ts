@@ -8,6 +8,7 @@ export interface ICategory {
 }
 
 export interface ICategoryForm {
+    id?: string;
     code: string;
     image: Blob | string;
     name: string;

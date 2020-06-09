@@ -155,3 +155,4 @@
     1.  [x] Edit post with dropzone
     2.  [ ] Edit post even if the image doesn't change, it will reupload it
     3.  [ ] Edit post if you just change the image and/or category, it won't allow to submit
+    4.  [ ] ^ Same thing for categories

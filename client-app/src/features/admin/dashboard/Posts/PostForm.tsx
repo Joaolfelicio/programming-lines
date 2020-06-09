@@ -52,6 +52,7 @@ const PostForm = () => {
     ) {
       setEditMode(true);
       setEditLoading(true);
+
       getDetailedPost(lastFragmentUrl);
       const editPost: IPostsForm = {
         slug: detailedPost!.slug,
@@ -75,7 +76,14 @@ const PostForm = () => {
       setSelectedCategory(editPost.categoryCode);
       setPost(editPost);
     }
-  }, [setEditMode, getDetailedPost, setPost, setImageFiles, setEditLoading]);
+  }, [
+    setEditMode,
+    getDetailedPost,
+    setPost,
+    setImageFiles,
+    setEditLoading,
+    detailedPost,
+  ]);
 
   const isValidSlug = createValidator(
     (message) => (value) => {
@@ -125,8 +133,7 @@ const PostForm = () => {
             image: imageFiles[0],
             categoryCode: selectedCategory,
           };
-          console.log(newPost);
-          console.log("PostId", post.id);
+
           //If it's a new post
           if (!post.id) {
             return createPost(newPost).catch((error) => ({

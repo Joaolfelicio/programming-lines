@@ -14,7 +14,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     getCategories();
     history.push("/admindashboard/posts");
-  }, [getCategories, history]);
+  }, [getCategories]);
 
   document.title = "Programming Lines - Admin";
 

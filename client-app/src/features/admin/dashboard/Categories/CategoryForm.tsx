@@ -17,7 +17,6 @@ import {
 } from "../../../../app/models/category";
 import { RootStoreContext } from "../../../../app/stores/rootStore";
 import { observer } from "mobx-react-lite";
-import { toJS } from "mobx";
 
 const isCategoryCodeValid = createValidator(
   (message) => (value) => {
@@ -55,10 +54,15 @@ const labelStyle = {
 
 const CategoryForm = () => {
   const rootStore = useContext(RootStoreContext);
-  const { getCategoryToEdit, categoryToEdit } = rootStore.categoryStore;
+  const {
+    getCategoryToEdit,
+    categoryToEdit,
+    clearCategoryToEdit,
+    editLoading,
+    editCategory,
+  } = rootStore.categoryStore;
   const { creatingCategory, createCategory } = rootStore.categoryStore;
 
-  const [editLoading, setEditLoading] = useState(false);
   const [editMode, setEditMode] = useState(false);
 
   const [category, setCategory] = useState<ICategoryForm>(
@@ -67,21 +71,21 @@ const CategoryForm = () => {
   const [imageFiles, setImageFiles] = useState<any[]>([]);
 
   useEffect(() => {
-    console.log("categoryToEdit", toJS(categoryToEdit));
     if (categoryToEdit) {
       setEditMode(true);
-      setEditLoading(true);
 
       const editCategory: ICategoryForm = {
+        id: categoryToEdit!.id,
         code: categoryToEdit!.code,
         name: categoryToEdit!.name,
         color: categoryToEdit!.color,
         image: categoryToEdit!.image,
       };
       console.log(editCategory);
+
       (async function getEditImage() {
         let imageBlob = await fetch(categoryToEdit!.image as string).then((r) =>
-          r.blob().finally(() => setEditLoading(false))
+          r.blob()
         );
         Object.assign(imageBlob, {
           preview: URL.createObjectURL(imageBlob),
@@ -90,9 +94,9 @@ const CategoryForm = () => {
       })();
       setCategory(editCategory);
     }
+
   }, [
     setEditMode,
-    setEditLoading,
     getCategoryToEdit,
     setImageFiles,
     setCategory,
@@ -100,7 +104,7 @@ const CategoryForm = () => {
   ]);
 
   return (
-    <Segment clearing raised>
+    <Segment clearing raised loading={editLoading}>
       <Header
         content={editMode ? "Edit Category" : "New Category"}
         size="huge"
@@ -110,16 +114,23 @@ const CategoryForm = () => {
         validate={validate}
         initialValues={category}
         onSubmit={(values: any) => {
-          const newCategory: ICategoryForm = {
-            code: values.categoryCode,
+          const category: ICategoryForm = {
+            code: values.code,
             name: values.name,
             color: values.color,
             image: imageFiles[0],
           };
-          console.log(newCategory);
-          return createCategory(newCategory).catch((error) => ({
-            [FORM_ERROR]: error,
-          }));
+          console.log(categoryToEdit);
+
+          if (!categoryToEdit) {
+            return createCategory(category).catch((error) => ({
+              [FORM_ERROR]: error,
+            }));
+          } else {
+            return editCategory(category, categoryToEdit!.id).catch((error) => ({
+              [FORM_ERROR]: error,
+            }));
+          }
         }}
         render={({
           handleSubmit,
@@ -188,7 +199,9 @@ const CategoryForm = () => {
               disabled={submitting}
               style={{ marginTop: 20 }}
               onClick={() => {
+                setEditMode(false);
                 setCategory(new ICategoryFormValues());
+                clearCategoryToEdit();
                 setImageFiles([]);
               }}
               type="button"
