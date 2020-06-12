@@ -50,7 +50,7 @@
         1.  [x] Fix routing
         2.  [x] Blur when user selects a post 
         3.  [x] Right now if user goes to detailed post and refresh, no results and displayed
-    2.  [ ] Dark Mode
+    2.  [ ] Dark Mode <--
         1.  [x] Fix Bug of when interacting with Nav Bar, dark moddle toggle moves.
         2.  [x] Store in local storage the preference
         3.  [ ] Style Everywhere
@@ -72,26 +72,26 @@
     1.  [x] Shouldn't call API if it's in memory (use history.push)
     2.  [x] Put in the title "Programming Lines - Title of the Post"
     3.  [x] Reactions and share
-    4.  [ ] Reading Process bar
+    4.  [ ] ~~ Reading Process bar ~~
     5.  [ ] Placeholder
     6.  [x] Category Button on click filter
     7.  [ ] Fix linkedin icon hover
-23. [ ] ~~CS - Replies (Maybe)~~
+23. [ ] ~~CS - Replies ~~
 24. [x] CS - Reactions
 25. [x] AnonymousUser 
     1.  [x] Store in Local Storage AnonUserId  
     2.  [x] API - Create/Login user receive ID instead of fingerprint 
     3.  [x] Store fingerprint only in state
-    4.  [x] I Think there might be a bug related to anonusers and reactions (Maybe not)
+    4.  [x] Fix bug related to anonusers and reactions
 26. [x] Recommendations
     1.  [x] Card should always be the same size
-27. [ ] CS - Newsletter
+27. [x] CS - Newsletter
     1.  [x] Post API
     2.  [x] Display error
     3.  [x] Display success
     4.  [x] Loading button
     5.  [x] Clean form on submit
-28. [ ] CS - Filters
+28. [x] CS - Filters
     1.  [x] Recent
     2.  [x] Popular
     3.  [x] Categories (Display all categories)
@@ -119,38 +119,38 @@
     2.  [x] Click "Popular", then "Recent", instead of only 1 element, got 2
     3.  [x] Lots of bugs
 36. [x] React-markdown
-37. [ ] BackOffice
-38. [ ] BO - Posts
-    1.  [ ] Create
+37. [x] BackOffice
+38. [x] BO - Posts
+    1.  [ x Create
         1.  [x] Markdown preview
         2.  [x] Photo widget
             1.  [x] Cloudinary config on the api
         3.  [x] Category Dropdown
-            1.  [ ] Not fetching data when goes directly into the admin page
         4.  [x] Submit handler
         5.  [x] Maintain position of the scroll bar inside the content
         6.  [x] Clear button
     2.  [x] Delete
-    3.  [ ] Update <--
+    3.  [x] Update
 39. [ ] BO - Categories
     1.  [x] List of all the categories, with the edit and delete button
     2.  [x] Create
         1.  [x] Validate Hexacode
     3.  [x] Delete
-    4.  [ ] Update <--
-40. [ ] BO - Newsletter
+    4.  [x] Update
+40. [x] BO - Newsletter
     1.  [x] Fetch the data
     2.  [x] List
 41. [x] Footer
 42. [x] Add post title in the index.tsx title
-43. [ ] Responsiveness
+43. [ ] Responsiveness <--
     1.  [ ] react-media
 44. [ ] SEO
-45. [ ] Release
+45. [ ] Clean client app models (more models per file)
+46. [ ] Release
     1.  [ ] Cloudinary Secrets
-46. [ ] BUGS:
-    1.  [x] If filter by category, and said category has no posts, it will forever load 
-47. [ ] Clean client app models (more models per file)
+47. [ ] BUGS:
+    1.  [x] If filter by category, and said category has no posts, it will forever load
+    2.  [ ] Not fetching categories data in the dropdown when you directly into the admin page
 48. [ ] FUTURE RELEASES:
     1.  [x] Edit post with dropzone
     2.  [ ] Edit post even if the image doesn't change, it will reupload it
