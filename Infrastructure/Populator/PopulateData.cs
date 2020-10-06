@@ -11,7 +11,7 @@ using Application.Reply.Model;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace Infrastructure.Generator
+namespace Infrastructure.Populator
 {
     public class PopulateData : IPopulateData
     {

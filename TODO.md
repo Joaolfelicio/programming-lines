@@ -42,7 +42,7 @@
 17. [x] API - Comments
     1.  [x] Test Create
     2.  [x] Test Delete
-18. [x] API - Replyx
+18. [x] API - Reply
     1.  [x] Test Create 
     2.  [x] Test Delete
 19. [x] CS - Nav Bar
@@ -50,7 +50,7 @@
         1.  [x] Fix routing
         2.  [x] Blur when user selects a post 
         3.  [x] Right now if user goes to detailed post and refresh, no results and displayed
-    2.  [ ] Dark Mode <--
+    2.  [ ] Dark Mode <---
         1.  [x] Fix Bug of when interacting with Nav Bar, dark moddle toggle moves.
         2.  [x] Store in local storage the preference
         3.  [ ] Style Everywhere
@@ -121,7 +121,7 @@
 36. [x] React-markdown
 37. [x] BackOffice
 38. [x] BO - Posts
-    1.  [ x Create
+    1.  [x] Create
         1.  [x] Markdown preview
         2.  [x] Photo widget
             1.  [x] Cloudinary config on the api
@@ -142,16 +142,19 @@
     2.  [x] List
 41. [x] Footer
 42. [x] Add post title in the index.tsx title
-43. [ ] Responsiveness <--
+43. [ ] PWA
+44. [ ] Responsiveness <----
     1.  [ ] react-media
-44. [ ] SEO
-45. [ ] Clean client app models (more models per file)
-46. [ ] Release
+45. [ ] SEO
+46. [ ] Clean client app models (more models per file)
+47. [ ] Release
     1.  [ ] Cloudinary Secrets
-47. [ ] BUGS:
+	2.  [ ] Deployment Heroku
+48. [ ] BUGS:
     1.  [x] If filter by category, and said category has no posts, it will forever load
     2.  [ ] Not fetching categories data in the dropdown when you directly into the admin page
-48. [ ] FUTURE RELEASES:
+	3.  [ ] Category icon in the recommend post is kinda out of the frame
+49. [ ] FUTURE RELEASES:
     1.  [x] Edit post with dropzone
     2.  [ ] Edit post even if the image doesn't change, it will reupload it
     3.  [ ] Edit post if you just change the image and/or category, it won't allow to submit

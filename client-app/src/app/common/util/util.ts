@@ -46,7 +46,8 @@ export const generateShareUrl = (
 };
 
 export const internalUrl = (slug:string) => `/post/${slug}`;
-export const externalUrl = (slug:string) => `http://localhost:3000/post/${slug}`;
+//TODO: Fix this url
+export const externalUrl = (slug:string) => `http://localhost:3001/post/${slug}`;
 export const twitterShareUrl = "http://twitter.com/share?text=[TITLE]&url=[URL]";
 export const linkedInShareUrl =
   "https://www.linkedin.com/sharing/share-offsite/?url=[URL]";

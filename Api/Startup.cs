@@ -26,9 +26,9 @@ using Application.Interface;
 using Infrastructure.Security;
 using Api.Middleware;
 using FluentValidation.AspNetCore;
-using Infrastructure.Generator;
 using Infrastructure.Images;
 using Infrastructure.Images.Model;
+using Infrastructure.Populator;
 
 namespace Api
 {
@@ -59,7 +59,7 @@ namespace Api
                     policy.AllowAnyHeader()
                           .AllowAnyMethod()
                           .WithExposedHeaders("WWW-Authenticate")
-                          .WithOrigins("http://localhost:3000")
+                          .WithOrigins("http://localhost:3001")
                           .AllowCredentials();
                 });
             });
