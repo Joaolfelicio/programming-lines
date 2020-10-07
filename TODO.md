@@ -159,3 +159,5 @@
     2.  [ ] Edit post even if the image doesn't change, it will reupload it
     3.  [ ] Edit post if you just change the image and/or category, it won't allow to submit
     4.  [ ] ^ Same thing for categories
+    5.  [ ] Push posts to github "Posts" folder.
+    6.  [ ] Push posts to medium.
