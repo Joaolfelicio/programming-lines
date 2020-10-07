@@ -103,6 +103,7 @@
     9.  [x] Filer on category icon click
     10. [x] Filter on category label inside post
     11. [x] Fix the filter by reactions and then by date on "Popular"
+	12. [ ] Loading indicator in the filters
 29. [ ] ~~CS - Comments~~
     1.  [ ] ~~Allow markdown?~~
 30. [x] CS - NotFound Page
@@ -153,7 +154,7 @@
 48. [ ] BUGS:
     1.  [x] If filter by category, and said category has no posts, it will forever load
     2.  [ ] Not fetching categories data in the dropdown when you directly into the admin page
-	3.  [ ] Category icon in the recommend post is kinda out of the frame
+	3.  [ ] Category icon in the recommend post is kinda out of the frame (Might be the image that is cropped)
 49. [ ] FUTURE RELEASES:
     1.  [x] Edit post with dropzone
     2.  [ ] Edit post even if the image doesn't change, it will reupload it

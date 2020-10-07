@@ -16,8 +16,8 @@ const AboutMeComponent = () => {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          width: "90%",
-          margin: "0 auto 25vh auto",
+          width: "80%",
+          margin: "10vh auto 15vh auto",
           fontSize: 20,
         }}
       >

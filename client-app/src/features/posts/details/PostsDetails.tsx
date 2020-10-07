@@ -19,6 +19,7 @@ const PostsDetails: React.FC<RouteComponentProps<DetailParams>> = ({
 }) => {
   const rootStore = useContext(RootStoreContext);
   const { detailedPost, loadingPosts, getDetailedPost } = rootStore.postStore;
+  const { isDarkMode } = rootStore.commonStore;
 
   useEffect(() => {
     getDetailedPost(match.params.slug);
@@ -46,6 +47,9 @@ const PostsDetails: React.FC<RouteComponentProps<DetailParams>> = ({
           text="Top"
           distance={500}
           className="back-top-button"
+          style={{
+            backgroundColor: isDarkMode ? "#171717" : "#DFDFDF"
+          }}
           breakpoint={9999}
           speed={500}
           icon={<Icon name="arrow up" />}

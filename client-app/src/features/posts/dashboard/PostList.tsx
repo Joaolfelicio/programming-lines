@@ -10,7 +10,7 @@ const PostList = () => {
 
   return (
     <Fragment>
-      <ItemGroup>
+      <ItemGroup >     
         {orderPosts.map((post, index) => (
           <Fragment key={post.id}>
             <PostListItem reactionTarget={reactionTarget} post={post} />

@@ -95,10 +95,6 @@ code {
   outline: 0 !important;
 }
 
-.markdown-body {
-  margin: 5px auto;
-}
-
 .admin-preview {
   height: 560px !important;
   overflow: auto;
@@ -125,10 +121,10 @@ i.arrow.up {
 .back-top-button {
   color: #6a737d;
   border-radius: 10px !important;
-  border: 2px solid #6a737d !important;
+  border: 0px!important;
   padding: 8px;
 }
 
 .back-top-button:hover {
-  border: 2px solid black !important;
+  border: 0px!important;
 }

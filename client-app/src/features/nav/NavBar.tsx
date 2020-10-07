@@ -1,5 +1,5 @@
 import React, { useContext, Fragment, useState } from "react";
-import { Menu, Search } from "semantic-ui-react";
+import { Menu, Search, Segment } from "semantic-ui-react";
 import DarkModeToggle from "react-dark-mode-toggle";
 import { RootStoreContext } from "../../app/stores/rootStore";
 import { observer } from "mobx-react-lite";
@@ -31,7 +31,11 @@ const NavBar = () => {
     <Fragment>
       <Menu
         fixed="top"
-        style={{ borderRadius: "0px", height: 50 }}
+        style={{
+          borderRadius: "0px",
+          height: 50,
+          borderBottom: isDarkMode ? "1px solid rgb(64,64,64)" : "",
+        }}
         inverted={isDarkMode}
         borderless
       >
@@ -73,6 +77,8 @@ const NavBar = () => {
               setPostsBySearchTerm(data.value!);
               setSearchInput(data.value!);
             }}
+            minCharacters={2}
+            noResultsDescription="Try searching by post title or topic."
           />
         </Menu.Item>
 

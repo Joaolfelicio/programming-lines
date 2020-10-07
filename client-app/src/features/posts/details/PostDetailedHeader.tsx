@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import { Header, Image, Button } from "semantic-ui-react";
 import moment from "moment";
 import { RootStoreContext } from "../../../app/stores/rootStore";
-import {history} from "../../../index";
+import { history } from "../../../index";
 
 interface IProps {
   post: IPost;
@@ -13,15 +13,20 @@ interface IProps {
 const PostDetailedHeader: React.FC<IProps> = ({ post }) => {
   const rootStore = useContext(RootStoreContext);
   const { adminUser } = rootStore.userStore;
+  const { isDarkMode } = rootStore.commonStore;
   const { formatDeletionModal, setIsDeletionModalOpen } = rootStore.modalStore;
 
   return (
     <Fragment>
-      <Header as="h1" content={post.title} style={{ fontSize: "2.9rem" }} />
+      <Header
+        as="h1"
+        content={post.title}
+        style={{ fontSize: "2.9rem", color: isDarkMode ? "rgba(255, 255, 255, 0.87)" : "#121212" }}
+      />
       <Header
         as="h2"
         style={{
-          color: "rgb(100, 104, 109)",
+          color: isDarkMode ? "rgba(255, 255, 255, 0.87)" : "rgb(100, 104, 109)",
           fontSize: "1.9rem",
         }}
         content={post.subTitle}
@@ -36,14 +41,14 @@ const PostDetailedHeader: React.FC<IProps> = ({ post }) => {
       >
         <div
           style={{
-            color: "rgb(100, 104, 109)",
+            color: isDarkMode ? "rgba(255, 255, 255, 0.87)" : "rgb(100, 104, 109)",
             fontSize: "1.15rem",
             display: "flex",
             alignItems: "center",
           }}
         >
           <time>{moment(post.publishDate).format("MMM Do YYYY")}</time>
-          <span style={{marginLeft: 3, marginRight: 3}}>-</span>
+          <span style={{ marginLeft: 3, marginRight: 3 }}>-</span>
           <em>{post.timeToRead}</em>
         </div>
         {adminUser && (
@@ -63,7 +68,11 @@ const PostDetailedHeader: React.FC<IProps> = ({ post }) => {
             >
               Delete
             </Button>
-            <Button primary size="small" onClick={() => history.push(`/admindashboard/posts/${post.slug}`)}>
+            <Button
+              primary
+              size="small"
+              onClick={() => history.push(`/admindashboard/posts/${post.slug}`)}
+            >
               Edit
             </Button>
           </div>

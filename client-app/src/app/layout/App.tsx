@@ -13,7 +13,7 @@ import {
   withRouter,
 } from "react-router-dom";
 import PostsDetails from "../../features/posts/details/PostsDetails";
-import { Container } from "semantic-ui-react";
+import { Segment } from "semantic-ui-react";
 import NotFound from "./NotFound";
 import AboutMeComponent from "../../features/aboutme/AboutMeComponent";
 import AdminLogin from "../../features/admin/AdminLogin";
@@ -44,7 +44,17 @@ const App: React.FC<RouteComponentProps> = () => {
     <Fragment>
       <DeletionModal />
       <NavBar />
-      <Container style={{ marginTop: "7em" }}>
+      <Segment
+        style={{
+          paddingTop: "5em",
+          border: 0,
+          borderRadius: 0,
+          marginBottom: 0,
+          marginTop: 0,
+          minHeight: "100vh",
+        }}
+        inverted={isDarkMode}
+      >
         <Switch>
           <Route exact path="/" component={PostDashboard} />
           <Route path="/aboutme" component={AboutMeComponent} />
@@ -58,7 +68,7 @@ const App: React.FC<RouteComponentProps> = () => {
           path={["/", "/post/:slug", "/aboutme"]}
           component={Newsletter}
         />
-      </Container>
+      </Segment>
       <ToastContainer
         position="bottom-right"
         autoClose={2000}

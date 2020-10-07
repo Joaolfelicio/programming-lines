@@ -37,9 +37,9 @@ const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
 
       <Item.Content className="post-content">
         <Fragment>
-          <Item.Header>
+          <Item.Header >
             <div className="posts-header">
-              <Link to={internalUrl(post.slug)} style={{ width: "87%" }}>
+              <Link to={internalUrl(post.slug)} style={{ width: "92%" }}>
                 <h2 style={{ marginBottom: "0px", fontSize: 20 }}>
                   {post.title}
                 </h2>
@@ -47,9 +47,7 @@ const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
 
               <div
                 style={{
-                  display: "flex",
-                  alignItems: "flex-start",
-                  width: "10%",
+                  marginRight: 1
                 }}
               >
                 <Image

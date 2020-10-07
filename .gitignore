@@ -11,6 +11,7 @@
 appsettings.json
 *.db
 wwwroot
+*.bat
 
 # User-specific files
 *.rsuser
