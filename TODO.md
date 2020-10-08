@@ -75,7 +75,7 @@
     4.  [ ] ~~ Reading Process bar ~~
     5.  [ ] Placeholder
     6.  [x] Category Button on click filter
-    7.  [ ] Fix linkedin icon hover
+    7.  [x] Fix linkedin icon hover
 23. [ ] ~~CS - Replies ~~
 24. [x] CS - Reactions
 25. [x] AnonymousUser 
@@ -138,6 +138,7 @@
         1.  [x] Validate Hexacode
     3.  [x] Delete
     4.  [x] Update
+	5.  [ ] When clicking in another tab, it should remove the edit
 40. [x] BO - Newsletter
     1.  [x] Fetch the data
     2.  [x] List

@@ -1,13 +1,17 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import { IPostRecommend } from "../../../app/models/post";
 import RecommendPostCard from "./RecommendPostCard";
 import { Header } from "semantic-ui-react";
+import { RootStoreContext } from "../../../app/stores/rootStore";
 
 interface IProps {
   recommendedPosts: IPostRecommend[];
 }
 
 const RecommendPostList: React.FC<IProps> = ({ recommendedPosts }) => {
+  const rootStore = useContext(RootStoreContext);
+  const { isDarkMode } = rootStore.commonStore;
+
   return (
     <Fragment>
       <Header
@@ -15,6 +19,7 @@ const RecommendPostList: React.FC<IProps> = ({ recommendedPosts }) => {
           marginTop: 40,
           marginBottom: 20,
           fontSize: "1.8rem",
+          color: isDarkMode ? " rgba(255, 255, 255, 0.87)" : "#121212"
         }}
         className="markdown-body"
         as="h4"

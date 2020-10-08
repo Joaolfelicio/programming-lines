@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+import { RootStoreContext } from "../../app/stores/rootStore";
 import "./styles/socialMediaStyle.css"
 
 const SocialMedia = () => {
+  const rootStore = useContext(RootStoreContext);
+  const { isDarkMode } = rootStore.commonStore;
+
   return (
-    <div className="social-media">
+    <div className={isDarkMode ? "social-media social-darkMode" : "social-media social-whiteMode"}>
       <a
         href="https://github.com/Joaolfelicio"
         className="icon-button github"

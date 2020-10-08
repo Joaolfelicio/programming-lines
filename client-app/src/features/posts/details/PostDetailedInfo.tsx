@@ -19,7 +19,7 @@ interface IProps {
 const PostDetailedInfo: React.FC<IProps> = ({ post }) => {
   const rootStore = useContext(RootStoreContext);
   const { reactionLoading, reactToPost, setPredicate } = rootStore.postStore;
-  const { setActiveFilter } = rootStore.commonStore;
+  const { setActiveFilter, isDarkMode } = rootStore.commonStore;
 
   return (
     <Fragment>
@@ -40,6 +40,7 @@ const PostDetailedInfo: React.FC<IProps> = ({ post }) => {
           marginLeft: 0,
         }}
       >
+        {/* rgb(92 104 115) */}
         <img
           src={post.category.image}
           alt={post.category.name}
@@ -52,7 +53,10 @@ const PostDetailedInfo: React.FC<IProps> = ({ post }) => {
           name={post.slug}
           loading={reactionLoading}
           disabled={reactionLoading}
-          style={{ marginRight: "15px", fontSize: "1.2rem" }}
+          style={{
+            marginRight: "15px",
+            fontSize: "1.2rem",
+          }}
           size="small"
           color={post.hasLiked ? "red" : "grey"}
           icon="heart"

@@ -22,7 +22,7 @@ interface IProps {
 const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
   const rootStore = useContext(RootStoreContext);
   const { reactionLoading, reactToPost, setPredicate } = rootStore.postStore;
-  const { setActiveFilter } = rootStore.commonStore;
+  const { setActiveFilter, isDarkMode } = rootStore.commonStore;
 
   return (
     <Item style={{ height: 165 }}>
@@ -37,17 +37,23 @@ const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
 
       <Item.Content className="post-content">
         <Fragment>
-          <Item.Header >
+          <Item.Header>
             <div className="posts-header">
               <Link to={internalUrl(post.slug)} style={{ width: "92%" }}>
-                <h2 style={{ marginBottom: "0px", fontSize: 20 }}>
+                <h2
+                  style={{
+                    marginBottom: "0px",
+                    fontSize: 20,
+                    color: isDarkMode ? "#4a94e8" : "",
+                  }}
+                >
                   {post.title}
                 </h2>
               </Link>
 
               <div
                 style={{
-                  marginRight: 1
+                  marginRight: 1,
                 }}
               >
                 <Image
@@ -63,14 +69,20 @@ const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
               </div>
             </div>
             <div>
-              <time style={{ fontSize: "11px" }}>
+              <time
+                style={{
+                  fontSize: "11px",
+                  color: isDarkMode ? "#DFDFDF" : "",
+                }}
+              >
                 {moment(post.publishDate).format("MMM Do YYYY")}
               </time>
-
             </div>
           </Item.Header>
         </Fragment>
-        <Item.Description>{post.subTitle}</Item.Description>
+        <Item.Description style={{ color: isDarkMode ? "#DFDFDF" : "#121212" }}>
+          {post.subTitle}
+        </Item.Description>
         <Item.Extra className="post-buttons">
           <Button
             name={post.slug}
@@ -85,7 +97,8 @@ const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
               reactToPost(post.slug, post.id);
             }}
           />
-          {post.timeToRead}
+          <span style={{color: isDarkMode ? "#DFDFDF" : "#121212", fontStyle: "italic"}}>{post.timeToRead}</span>
+          
           <Popup
             style={{ transitionDuration: "0s", opactivity: "0.8" }}
             wide

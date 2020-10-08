@@ -54,10 +54,9 @@ const Newsletter = () => {
       }}
     >
       <Header
-        inverted={isDarkMode}
         as="h4"
         content="Subscribe to the Newsletter"
-        style={{ textAlign: "center", marginBottom: 25 }}
+        style={{ textAlign: "center", marginBottom: 25, color: isDarkMode ? "#DFDFDF" : "#121212" }}
       />
 
       <FinalForm

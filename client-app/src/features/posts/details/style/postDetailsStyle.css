@@ -70,3 +70,7 @@
 .markdown-body-whiteMode li {
   color: #24292e;
 }
+
+.markdown-body-darkMode a {
+  color: #4a94e8;
+}

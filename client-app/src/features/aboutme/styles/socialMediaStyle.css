@@ -27,22 +27,25 @@
   width: 2.6rem;
 }
 
-.linkedin i {
+.social-media .linkedin i {
   background-color: #0e76a8;
 }
 
-.github i {
+.social-media .github i {
   background-color: #333;
 }
 
-.mail i {
+.social-media .mail i {
   background-color: #57b68b;
 }
 
 /* Hover Transition */
-.mail i:hover,
-.github i:hover,
-.linkedin i:hover {
-  background-color: black;
+.social-whiteMode i:hover {
+  background-color: #bababa;
+  transition: 0.3s ease-in;
+}
+
+.social-darkMode i:hover {
+  background-color: #6c64fb;
   transition: 0.3s ease-in;
 }

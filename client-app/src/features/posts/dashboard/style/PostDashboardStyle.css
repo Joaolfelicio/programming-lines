@@ -1,0 +1,10 @@
+.filter-placeholder-darkMode {
+    background-image: linear-gradient(to right,rgba(0,0,0,0.3) 0,rgba(0,0,0,0.3) 15%,rgba(0,0,0,0.15) 30%) !important;
+}
+.pagination-darkMode a {
+    color: #DFDFDF !important;
+}
+
+.pagination-darkMode .active {
+    border-bottom-color: #DFDFDF !important;
+}

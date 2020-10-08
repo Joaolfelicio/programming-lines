@@ -17,6 +17,8 @@ const PostDashboard = () => {
     page
   } = rootStore.postStore;
 
+  const {isDarkMode} = rootStore.commonStore;
+
   useEffect(() => {
     getPosts();
   }, [getPosts]);
@@ -28,7 +30,7 @@ const PostDashboard = () => {
         <PostFilters />
       </GridColumn>
       <GridColumn width={13}>
-        {loadingPosts ? (
+        {loadingPosts? (
           <Fragment>
             <PostListItemPlaceholder />
             <PostListItemPlaceholder />
@@ -47,7 +49,7 @@ const PostDashboard = () => {
           secondary
           activePage={page + 1}
           totalPages={totalPages ? totalPages : 1}
-          className="pagination"
+          className={isDarkMode ? "pagination pagination-darkMode" : "pagination"}
           onPageChange={(e, { activePage }) => {
             setChangingPage(true);
             setPage((activePage! as number) - 1);
@@ -55,7 +57,7 @@ const PostDashboard = () => {
             setChangingPage(false);
             window.scrollTo(0, 0);
           }}
-          style={{ marginTop: 35 }}
+          style={{ marginTop: 35, color: isDarkMode ? "#DFDFDF" : "#121212"}}
         />
       </GridColumn>
     </Grid>
