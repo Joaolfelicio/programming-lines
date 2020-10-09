@@ -1,0 +1,30 @@
+.search-box-darkMode .results {
+  background-color: rgb(100, 104, 109) !important;
+  border: 0;
+}
+
+.search-box-darkMode .result:hover {
+  background-color: #757c8a !important;
+}
+
+.search-box-darkMode .result {
+  border: 1px solid #838995;
+}
+
+.search-box-darkMode .result .content .title,
+.search-box-darkMode .result .content .description,
+.search-box-darkMode .message .header,
+.search-box-darkMode .message .description {
+  color: #dfdfdf !important;
+}
+
+.post-header {
+  margin-left: 15px;
+  margin-top: 0px;
+  font-size: 20px;
+}
+
+.search-box input {
+    width: 300px;
+    border-radius: 5px !important;
+  }

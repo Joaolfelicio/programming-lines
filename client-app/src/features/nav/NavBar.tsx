@@ -1,5 +1,5 @@
 import React, { useContext, Fragment, useState } from "react";
-import { Menu, Search, Segment } from "semantic-ui-react";
+import { Menu, Search } from "semantic-ui-react";
 import DarkModeToggle from "react-dark-mode-toggle";
 import { RootStoreContext } from "../../app/stores/rootStore";
 import { observer } from "mobx-react-lite";
@@ -19,13 +19,8 @@ const NavBar = () => {
 
   const [searchInput, setSearchInput] = useState("");
 
-  const headerStyle = {
-    marginLeft: "15px",
-    marginTop: "0px",
-    fontSize: "20px",
-  };
-
   const location = useLocation();
+
 
   return (
     <Fragment>
@@ -52,9 +47,9 @@ const NavBar = () => {
           <img src="/assets/logo.png" alt="Programming blog logo." />
           {/* If we are seeing a detailed post, the blog name should be h2, if we are in the homepage the blog post should be h1 */}
           {history.location.pathname === "/" ? (
-            <h1 style={headerStyle}>Programming Lines</h1>
+            <h1 className="post-header">Programming Lines</h1>
           ) : (
-            <h2 style={headerStyle}>Programming Lines</h2>
+            <h2 className="post-header">Programming Lines</h2>
           )}
         </Menu.Item>
 
@@ -72,7 +67,8 @@ const NavBar = () => {
             value={searchInput}
             size="small"
             placeholder="Search posts..."
-            className="search-box"
+            //TODO: Fix this:
+            className={isDarkMode ? "search-box-darkMode" : "search-box"}
             onSearchChange={(e, data) => {
               setPostsBySearchTerm(data.value!);
               setSearchInput(data.value!);

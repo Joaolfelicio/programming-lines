@@ -78,7 +78,7 @@ const Newsletter = () => {
         }) => (
           <Form inverted={isDarkMode} onSubmit={handleSubmit} error>
             <Field
-              placeholder="Full Name..."
+              placeholder="First and last name..."
               name="fullName"
               component={TextInput}
             />

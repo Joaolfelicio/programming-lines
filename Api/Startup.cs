@@ -60,6 +60,7 @@ namespace Api
                           .AllowAnyMethod()
                           .WithExposedHeaders("WWW-Authenticate")
                           .WithOrigins("http://localhost:3001")
+                          .WithOrigins("http://localhost:5000")
                           .AllowCredentials();
                 });
             });

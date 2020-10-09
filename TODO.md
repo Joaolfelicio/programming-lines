@@ -54,6 +54,7 @@
         1.  [x] Fix Bug of when interacting with Nav Bar, dark moddle toggle moves.
         2.  [x] Store in local storage the preference
         3.  [ ] Style Everywhere
+		4.  [ ] Get default system preference
     3.  [ ] Hamburguer for mobile
     4.  [x] If user is in detailed page, change "Programming lines" to h2
 20. [x] CS - Login  
@@ -152,6 +153,9 @@
 47. [ ] Release
     1.  [ ] Cloudinary Secrets
 	2.  [ ] Deployment Heroku
+48. [ ] Performance
+	1.  [ ] Remove inline styling
+	2.  [ ] Split css file in smaller chuncks
 48. [ ] BUGS:
     1.  [x] If filter by category, and said category has no posts, it will forever load
     2.  [ ] Not fetching categories data in the dropdown when you directly into the admin page

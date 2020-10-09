@@ -27,7 +27,7 @@ const RecommendPostCard: React.FC<IProps> = ({ post }) => {
       >
         <img src={post.image} alt={post.title} style={{ height: 125 }} />
         <Card.Content
-          style={{ backgroundColor: isDarkMode ? "rgb(92 104 115)" : "#fff" }}
+          style={{ backgroundColor: isDarkMode ? "rgb(100, 104, 109)" : "#fff" }}
         >
           <Card.Meta style={{ color: isDarkMode ? "#DFDFDF" : "#121212" }}>
             <time className="date">{moment().format("MMM Do YYYY")}</time>-
@@ -52,7 +52,7 @@ const RecommendPostCard: React.FC<IProps> = ({ post }) => {
             display: "flex",
             alignItems: "center",
             color: isDarkMode ? "#DFDFDF" : "#121212",
-            backgroundColor: isDarkMode ? "rgb(92 104 115)" : "#fff",
+            backgroundColor: isDarkMode ? "rgb(100, 104, 109)" : "#fff",
           }}
         >
           <img
