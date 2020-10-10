@@ -4,6 +4,7 @@ import DarkModeToggle from "react-dark-mode-toggle";
 import { RootStoreContext } from "../../app/stores/rootStore";
 import { observer } from "mobx-react-lite";
 import { useHistory, Link, useLocation } from "react-router-dom";
+import "./style/NavBarStyle.css";
 
 const NavBar = () => {
   const history = useHistory();
@@ -68,7 +69,7 @@ const NavBar = () => {
             size="small"
             placeholder="Search posts..."
             //TODO: Fix this:
-            className={isDarkMode ? "search-box-darkMode" : "search-box"}
+            className={isDarkMode ? "search-box search-box-darkMode" : "search-box"}
             onSearchChange={(e, data) => {
               setPostsBySearchTerm(data.value!);
               setSearchInput(data.value!);
