@@ -10,21 +10,21 @@ const PostFiltersCategoryPlaceholder = () => {
   return (
     <Fragment>
       <Menu.Item>
-        <Placeholder >
+        <Placeholder className="filter-placeholder">
           <Placeholder.Header>
             <Placeholder.Image style={{ width: 20, height: 20 }} />
           </Placeholder.Header>
         </Placeholder>
       </Menu.Item>
       <Menu.Item>
-        <Placeholder className={isDarkMode ? "placeholder-darkMode" : ""}>
+        <Placeholder className="filter-placeholder">
           <Placeholder.Header>
             <Placeholder.Image style={{ width: 20, height: 20 }} />
           </Placeholder.Header>
         </Placeholder>
       </Menu.Item>
       <Menu.Item>
-        <Placeholder className={isDarkMode ? "placeholder-darkMode" : ""}>
+        <Placeholder className="filter-placeholder">
           <Placeholder.Header>
             <Placeholder.Image style={{ width: 20, height: 20 }} />
           </Placeholder.Header>

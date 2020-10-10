@@ -38,14 +38,18 @@ const AdminLogin = () => {
   const { isDarkMode } = rootStore.commonStore;
 
   useEffect(() => {
-    if(adminUser) {
+    if (adminUser) {
       history.push("/admindashboard");
     }
   }, [adminUser]);
 
   return (
-    <Grid textAlign="center" style={{ marginTop: "20vh" }} inverted={isDarkMode}>
-      <Grid.Column style={{ maxWidth: 450}}>
+    <Grid
+      textAlign="center"
+      style={{ marginTop: "20vh" }}
+      inverted={isDarkMode}
+    >
+      <Grid.Column style={{ maxWidth: 450 }}>
         <FinalForm
           onSubmit={(values: IUserFormValues) =>
             loginAdminUser(values).catch((error) => ({
@@ -61,9 +65,23 @@ const AdminLogin = () => {
             pristine,
             dirtySinceLastSubmit,
           }) => (
-            <Segment stacked inverted={isDarkMode} style={{ border: isDarkMode ? "1px solid rgb(64, 64, 64)" : ""  }}>
-              <Form onSubmit={handleSubmit} error style={{ textAlign: "left"}} inverted={isDarkMode}>
-                <Header as="h2" content="Login" textAlign="center" style={{color: isDarkMode ? "#DFDFDF" : "#121212"}} />
+            <Segment
+              stacked
+              inverted={isDarkMode}
+              style={{ border: isDarkMode ? "1px solid rgb(64, 64, 64)" : "" }}
+            >
+              <Form
+                onSubmit={handleSubmit}
+                error
+                style={{ textAlign: "left" }}
+                inverted={isDarkMode}
+              >
+                <Header
+                  as="h2"
+                  content="Login"
+                  textAlign="center"
+                  style={{ color: isDarkMode ? "#DFDFDF" : "#121212" }}
+                />
                 <Field
                   fluid
                   name="email"
