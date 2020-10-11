@@ -7,9 +7,14 @@ import { observer } from "mobx-react-lite";
 const CategoriesList = () => {
   const rootStore = useContext(RootStoreContext);
   const { categoryByOrder } = rootStore.categoryStore;
+  const { isDarkMode } = rootStore.commonStore;
 
   return (
-    <Segment raised>
+    <Segment
+      raised
+      inverted={isDarkMode}
+      style={{ border: isDarkMode ? "1px solid rgb(64, 64, 64)" : "" }}
+    >
       <Header
         content="Categories List"
         size="huge"

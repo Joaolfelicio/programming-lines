@@ -60,8 +60,10 @@ const CategoryForm = () => {
     clearCategoryToEdit,
     editLoading,
     editCategory,
+    creatingCategory,
+    createCategory,
   } = rootStore.categoryStore;
-  const { creatingCategory, createCategory } = rootStore.categoryStore;
+  const { isDarkMode } = rootStore.commonStore;
 
   const [editMode, setEditMode] = useState(false);
 
@@ -94,7 +96,6 @@ const CategoryForm = () => {
       })();
       setCategory(editCategory);
     }
-
   }, [
     setEditMode,
     getCategoryToEdit,
@@ -104,7 +105,13 @@ const CategoryForm = () => {
   ]);
 
   return (
-    <Segment clearing raised loading={editLoading}>
+    <Segment
+      clearing
+      raised
+      loading={editLoading}
+      inverted={isDarkMode}
+      style={{ border: isDarkMode ? "1px solid rgb(64, 64, 64)" : "" }}
+    >
       <Header
         content={editMode ? "Edit Category" : "New Category"}
         size="huge"
@@ -127,9 +134,11 @@ const CategoryForm = () => {
               [FORM_ERROR]: error,
             }));
           } else {
-            return editCategory(category, categoryToEdit!.id).catch((error) => ({
-              [FORM_ERROR]: error,
-            }));
+            return editCategory(category, categoryToEdit!.id).catch(
+              (error) => ({
+                [FORM_ERROR]: error,
+              })
+            );
           }
         }}
         render={({
