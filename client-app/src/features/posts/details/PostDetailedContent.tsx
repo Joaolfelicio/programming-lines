@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import ReactMarkdown from "react-markdown";
 import "github-markdown-css";
 import CodeBlock from "../../../app/common/syntaxHighlight/CodeBlock";
-import "./style/PostDetailsStyle.css";
+import "./style/MarkdownBodyStyle.css";
 import { RootStoreContext } from "../../../app/stores/rootStore";
 
 interface IProps {

@@ -15,7 +15,7 @@
 .search-box-darkMode .result .content .description,
 .search-box-darkMode .message .header,
 .search-box-darkMode .message .description {
-  color: #dfdfdf !important;
+  color: rgb(179, 180, 171) !important;
 }
 
 .post-header {

@@ -1,0 +1,18 @@
+.category-dropdown img {
+  width: 21px !important;
+  height: 20px !important;
+  margin-top: -2px !important;
+}
+
+#category-dropdown-darkMode, #category-dropdown-darkMode .item {
+    background-color: rgb(100, 104, 109);
+    color: rgb(179, 180, 171);
+}
+
+#category-dropdown-darkMode .item {
+    border: 0
+}
+
+#category-dropdown-darkMode .item:hover {
+    background-color: #757c8a;
+}

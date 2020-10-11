@@ -1,5 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Segment, Form, Button, Header, Menu } from "semantic-ui-react";
+import "./style/AdminDashboardPostStyle.css";
+import "../../../posts/details/style/MarkdownBodyStyle.css";
 import { Form as FinalForm, Field } from "react-final-form";
 import TextInput from "../../../../app/common/form/TextInput";
 import { IPostFormValues, IPostsForm } from "../../../../app/models/post";
@@ -22,6 +24,7 @@ import { FORM_ERROR } from "final-form";
 import ErrorMessage from "../../../../app/common/form/ErrorMessage";
 const readingTime = require("reading-time");
 
+
 const PostForm = () => {
   const rootStore = useContext(RootStoreContext);
   const {
@@ -31,6 +34,7 @@ const PostForm = () => {
     detailedPost,
     editPost,
   } = rootStore.postStore;
+  const {isDarkMode} = rootStore.commonStore;
 
   const [selectedCategory, setSelectedCategory] = useState("");
   const [imageFiles, setImageFiles] = useState<any[]>([]);
@@ -115,7 +119,7 @@ const PostForm = () => {
   });
 
   return (
-    <Segment clearing raised>
+    <Segment clearing raised inverted={isDarkMode} style={{border: isDarkMode ? "1px solid rgb(64,64,64)" : ""}}>
       <Header
         content={editMode ? "Edit Post" : "New Post"}
         size="huge"
@@ -185,7 +189,7 @@ const PostForm = () => {
             />
 
             <label style={labelStyle}>Image:</label>
-            {}
+            
             <ImageUploadWidget
               width={670}
               height={305}
@@ -194,7 +198,7 @@ const PostForm = () => {
               boxSize="big"
             />
 
-            <Menu tabular style={{ marginBottom: 0, marginTop: 50 }}>
+            <Menu tabular style={{ marginBottom: 0, marginTop: 50 }} inverted={isDarkMode}>
               <Menu.Item
                 name="Write"
                 active={!isContentPreview}
@@ -211,7 +215,11 @@ const PostForm = () => {
 
             <div style={{ display: isContentPreview ? "initial" : "none" }}>
               <ReactMarkdown
-                className="markdown-body admin-preview"
+              className={
+                isDarkMode
+                  ? "markdown-body markdown-body-darkMode admin-preview"
+                  : "markdown-body markdown-body-whiteMode admin-preview"
+              }
                 source={content}
                 skipHtml={false}
                 escapeHtml={false}
@@ -226,6 +234,7 @@ const PostForm = () => {
                 value={post.content}
                 name="content"
                 component={TextAreaInput}
+                id={isDarkMode ? "content-write-darkMode" : ""}
                 rows={31}
                 style={{ marginTop: 20, marginBottom: 20 }}
               />
@@ -266,7 +275,7 @@ const PostForm = () => {
                 setImageFiles([]);
               }}
               type="button"
-              content="Clear"
+              content="Cancel"
             />
           </Form>
         )}

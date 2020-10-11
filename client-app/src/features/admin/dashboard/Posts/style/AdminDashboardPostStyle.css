@@ -1,0 +1,32 @@
+.upload + .header {
+  color: rgba(191, 191, 191, 0.87) !important;
+}
+
+.admin-preview {
+  height: 560px !important;
+  overflow: auto;
+  padding-top: 10px !important;
+  margin-top: 0px;
+  margin-bottom: 20px;
+}
+
+.menu div.item:hover {
+  color: unset !important;
+}
+
+.tabular.menu {
+    border-bottom: 1px solid #d4d4d5 !important;
+}
+
+.field textarea {
+    background-color: #1D2833;
+}
+
+.inverted div:nth-child(2) textarea[name="content"] {
+    background-color: #1D2833 !important;
+    color: #DFDFDF !important;
+    border-bottom: 1px solid #d4d4d5 !important;
+    border-left: 1px solid #d4d4d5 !important;
+    border-right: 1px solid #d4d4d5 !important;
+    border-radius: .28571429rem;
+}

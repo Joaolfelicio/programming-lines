@@ -90,20 +90,6 @@ code {
   outline: 0 !important;
 }
 
-.admin-preview {
-  height: 560px !important;
-  overflow: auto;
-  padding-top: 10px !important;
-  margin-top: 0px;
-  margin-bottom: 20px;
-}
-
-.category-dropdown img {
-  width: 21px !important;
-  height: 20px !important;
-  margin-top: -2px !important;
-}
-
 .modals.dimmer .ui.scrolling.modal {
   margin: 0 auto !important;
 }

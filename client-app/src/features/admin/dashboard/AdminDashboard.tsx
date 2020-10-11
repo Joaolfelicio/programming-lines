@@ -9,6 +9,7 @@ import { history } from "../../../index";
 const AdminDashboard = () => {
   const rootStore = useContext(RootStoreContext);
   const { getCategories } = rootStore.categoryStore;
+  const { isDarkMode } = rootStore.commonStore;
   const [activeAdminDashboard, setActiveAdminDashboard] = useState("Posts");
 
   useEffect(() => {
@@ -20,7 +21,12 @@ const AdminDashboard = () => {
 
   return (
     <Fragment>
-      <Menu pointing secondary style={{ width: 730, margin: "10px auto" }}>
+      <Menu
+        pointing
+        secondary
+        style={{ width: 730, margin: "10px auto" }}
+        inverted={isDarkMode}
+      >
         <Menu.Item
           name="Posts"
           active={activeAdminDashboard === "Posts"}

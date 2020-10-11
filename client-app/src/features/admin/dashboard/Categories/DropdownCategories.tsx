@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Dropdown } from "semantic-ui-react";
 import { RootStoreContext } from "../../../../app/stores/rootStore";
 import { observer } from "mobx-react-lite";
+import "./style/AdminDashboardCategoriesStyle.css";
 
 interface IProps {
   setSelectedCategory: (categoryCode: string) => void;
@@ -14,6 +15,7 @@ const DropdownCategories: React.FC<IProps> = ({
 }) => {
   const rootStore = useContext(RootStoreContext);
   const { categoryByOrder, loadingCategories } = rootStore.categoryStore;
+  const { isDarkMode } = rootStore.commonStore;
 
   const formatCategories = () => {
     const categories: any = [];
@@ -39,7 +41,7 @@ const DropdownCategories: React.FC<IProps> = ({
     <Dropdown
       placeholder="Select the category"
       fluid
-      className="category-dropdown"
+      className={isDarkMode ? "category-dropdown" : ""}
       search
       selection
       selectOnBlur={false}
@@ -47,6 +49,8 @@ const DropdownCategories: React.FC<IProps> = ({
       onChange={(e, { value }) => setSelectedCategory(value as string)}
       value={selectedCategory}
       loading={loadingCategories}
+      id={isDarkMode ? "category-dropdown-darkMode" : ""
+      }
     />
   );
 };

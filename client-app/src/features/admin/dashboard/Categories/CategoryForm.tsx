@@ -205,7 +205,7 @@ const CategoryForm = () => {
                 setImageFiles([]);
               }}
               type="button"
-              content="Clear"
+              content="Cancel"
             />
           </Form>
         )}
