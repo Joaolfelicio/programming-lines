@@ -11,13 +11,19 @@ const NewsletterList = () => {
     newslettersByOrder,
     loadingNewsletter,
   } = rootStore.newsletterStore;
+  const { isDarkMode } = rootStore.commonStore;
 
   useEffect(() => {
     getNewsletters();
   }, [getNewsletters]);
 
   return (
-    <Segment raised loading={loadingNewsletter}>
+    <Segment
+      raised
+      loading={loadingNewsletter}
+      inverted={isDarkMode}
+      style={{ border: isDarkMode ? "1px solid rgb(64,64,64)" : "" }}
+    >
       <Header
         content="Newsletter List"
         size="huge"
@@ -26,7 +32,7 @@ const NewsletterList = () => {
       <List divided verticalAlign="middle">
         {newslettersByOrder.map((newsletter) => (
           <Fragment key={newsletter.id}>
-            <NewsletterListItem newsletter={newsletter}/>
+            <NewsletterListItem newsletter={newsletter} />
             <Divider />
           </Fragment>
         ))}
