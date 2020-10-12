@@ -50,11 +50,11 @@
         1.  [x] Fix routing
         2.  [x] Blur when user selects a post 
         3.  [x] Right now if user goes to detailed post and refresh, no results and displayed
-    2.  [ ] Dark Mode <---
+    2.  [ ] Dark Mode
         1.  [x] Fix Bug of when interacting with Nav Bar, dark moddle toggle moves.
         2.  [x] Store in local storage the preference
-        3.  [ ] Style Everywhere
-		4.  [ ] Get default system preference
+        3.  [x] Style Everywhere
+		4.  [x] Get default system preference
     3.  [ ] Hamburguer for mobile
     4.  [x] If user is in detailed page, change "Programming lines" to h2
 20. [x] CS - Login  

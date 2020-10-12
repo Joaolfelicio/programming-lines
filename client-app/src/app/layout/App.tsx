@@ -23,18 +23,19 @@ import DeletionModal from "../common/modal/DeletionModal";
 
 const App: React.FC<RouteComponentProps> = () => {
   const rootStore = useContext(RootStoreContext);
-  const { appLoading, isDarkMode, token } = rootStore.commonStore;
+  const { appLoading, isDarkMode, token, setOnInitColorMode } = rootStore.commonStore;
   const { loginAnonymousUser, getUser } = rootStore.userStore;
   const { setSearchablePosts } = rootStore.postStore;
 
   useEffect(() => {
     loginAnonymousUser();
     setSearchablePosts();
+    setOnInitColorMode();
 
     if (token) {
       getUser();
     }
-  }, [loginAnonymousUser, setSearchablePosts, token, getUser]);
+  }, [loginAnonymousUser, setSearchablePosts, token, getUser, setOnInitColorMode]);
 
   if (appLoading) {
     return <LoadingComponent inverted={isDarkMode} />;

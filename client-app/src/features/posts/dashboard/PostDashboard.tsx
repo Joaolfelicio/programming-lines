@@ -30,7 +30,7 @@ const PostDashboard = () => {
         <PostFilters />
       </GridColumn>
       <GridColumn width={13}>
-        {loadingPosts? (
+        {loadingPosts ? (
           <Fragment>
             <PostListItemPlaceholder />
             <PostListItemPlaceholder />

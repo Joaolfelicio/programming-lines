@@ -40,12 +40,9 @@ export default class CommonStore {
   }
 
   @observable appLoading = true;
-  @observable isDarkMode = localStorage.getItem("DarkMode")
-    ? localStorage.getItem("DarkMode") === "true"
-    : true;
+  @observable isDarkMode = true;
   @observable activeFilter = "Recent";
   @observable token: string | null = window.localStorage.getItem("jwt");
-
 
   @action setActiveFilter = (filter: string) => {
     this.activeFilter = filter;
@@ -62,4 +59,14 @@ export default class CommonStore {
   @action setToken(token: string | null) {
     this.token = token;
   }
+
+  @action setOnInitColorMode = () => {
+    if (localStorage.getItem("DarkMode")) {
+      this.isDarkMode = localStorage.getItem("DarkMode") === "true";
+    } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      this.isDarkMode = true;
+    } else {
+      this.isDarkMode = false;
+    }
+  };
 }
