@@ -55,7 +55,7 @@
         2.  [x] Store in local storage the preference
         3.  [x] Style Everywhere
 		4.  [x] Get default system preference
-    3.  [ ] Hamburguer for mobile
+    3.  [ ] Hamburguer for mobile <---
     4.  [x] If user is in detailed page, change "Programming lines" to h2
 20. [x] CS - Login  
 21. [x] CS - Posts
@@ -98,7 +98,7 @@
     3.  [x] Categories (Display all categories)
     4.  [x] API Side
     5.  [x] CS Side
-    6.  [ ] On Mobile put the filters inside the hamburger sidebar
+    6.  [ ] On Mobile put the filters inside the hamburger sidebar <---
     7.  [x] Filter posts
     8.  [ ] Change styling between active and hover
     9.  [x] Filer on category icon click
@@ -164,6 +164,5 @@
     1.  [x] Edit post with dropzone
     2.  [ ] Edit post even if the image doesn't change, it will reupload it
     3.  [ ] Edit post if you just change the image and/or category, it won't allow to submit
-    4.  [ ] ^ Same thing for categories
     5.  [ ] Push posts to github "Posts" folder.
     6.  [ ] Push posts to medium.

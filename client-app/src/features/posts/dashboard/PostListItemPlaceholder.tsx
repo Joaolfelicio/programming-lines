@@ -6,15 +6,21 @@ const PostListItemPlaceholder = () => {
   const rootContext = useContext(RootStoreContext);
   const { isDarkMode } = rootContext.commonStore;
 
-
   return (
     <Fragment>
-      <Placeholder fluid style={{backgroundColor: isDarkMode ? "#ccc" : ""}} >
-          <Placeholder.Header image >
-            <Placeholder.Line />
-            <Placeholder.Line />
-            <Placeholder.Line />
-          </Placeholder.Header>
+      <Placeholder
+        fluid
+        style={{
+          backgroundColor: isDarkMode ? "#ccc" : "",
+          width: "680px",
+          margin: "0 auto",
+        }}
+      >
+        <Placeholder.Header image>
+          <Placeholder.Line />
+          <Placeholder.Line />
+          <Placeholder.Line />
+        </Placeholder.Header>
       </Placeholder>
       <Divider style={{ marginTop: "20px", marginBottom: "20px" }} />
     </Fragment>
