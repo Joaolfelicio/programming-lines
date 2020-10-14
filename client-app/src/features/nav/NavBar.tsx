@@ -5,6 +5,7 @@ import { RootStoreContext } from "../../app/stores/rootStore";
 import { observer } from "mobx-react-lite";
 import { useHistory, Link, useLocation } from "react-router-dom";
 import "./style/NavBarStyle.css";
+import { useMediaQuery } from "react-responsive";
 
 const NavBar = () => {
   const history = useHistory();
@@ -21,7 +22,10 @@ const NavBar = () => {
   const [searchInput, setSearchInput] = useState("");
 
   const location = useLocation();
-
+  const isTablet = useMediaQuery({ query: "(max-width: 780px)" });
+  const isPhone = useMediaQuery({ query: "(max-width: 747px)" });
+  const isSmallerPhone = useMediaQuery({ query: "(max-width: 646px)" });
+  const isXsPhone = useMediaQuery({ query: "(max-width: 390px)" });
 
   return (
     <Fragment>
@@ -43,14 +47,40 @@ const NavBar = () => {
             setPredicate("all", "recent");
             window.scrollTo(0, 0);
           }}
-          style={{ alignItems: "center" }}
+          style={{
+            alignItems: "center",
+            paddingRight: isXsPhone ? 7 : "",
+            paddingLeft: isXsPhone ? 7 : "",
+          }}
         >
-          <img src="/assets/logo.png" alt="Programming blog logo." />
+          <img
+            src="/assets/logo.png"
+            alt="Programming blog logo."
+            style={{ margin: "center" }}
+          />
           {/* If we are seeing a detailed post, the blog name should be h2, if we are in the homepage the blog post should be h1 */}
           {history.location.pathname === "/" ? (
-            <h1 className="post-header">Programming Lines</h1>
+            <h1
+              className="post-header"
+              style={{
+                fontSize: isTablet ? 16 : "",
+                textAlign: "center",
+                display: isPhone ? "none" : "block",
+              }}
+            >
+              Programming Lines
+            </h1>
           ) : (
-            <h2 className="post-header">Programming Lines</h2>
+            <h2
+              className="post-header"
+              style={{
+                fontSize: isTablet ? 16 : "",
+                textAlign: "center",
+                display: isPhone ? "none" : "block",
+              }}
+            >
+              Programming Lines
+            </h2>
           )}
         </Menu.Item>
 
@@ -66,16 +96,22 @@ const NavBar = () => {
               document.getElementById("searchBox")!.blur();
             }}
             value={searchInput}
-            size="small"
+            size="tiny"
             placeholder="Search posts..."
             //TODO: Fix this:
-            className={isDarkMode ? "search-box search-box-darkMode" : "search-box"}
+            className={
+              isDarkMode ? "search-box search-box-darkMode" : "search-box"
+            }
             onSearchChange={(e, data) => {
               setPostsBySearchTerm(data.value!);
               setSearchInput(data.value!);
             }}
             minCharacters={2}
             noResultsDescription="Try searching by post title or topic."
+            style={{
+              paddingRight: isXsPhone ? 3 : "",
+              paddingLeft: isXsPhone ? 3 : "",
+            }}
           />
         </Menu.Item>
 
@@ -87,12 +123,14 @@ const NavBar = () => {
             active={
               location.pathname.endsWith("/post") || location.pathname === "/"
             }
+            style={{ display: isSmallerPhone ? "none" : "" }}
           />
           <Menu.Item
             as={Link}
             to="/aboutme"
             name="About me"
             active={location.pathname.endsWith("/aboutme")}
+            style={{ display: isSmallerPhone ? "none" : "" }}
           />
           {adminUser && (
             <Menu.Item
@@ -100,9 +138,15 @@ const NavBar = () => {
               to="/admindashboard"
               name="Admin"
               active={location.pathname.includes("/admin")}
+              style={{ display: isSmallerPhone ? "none" : "" }}
             />
           )}
-          <Menu.Item>
+          <Menu.Item
+            style={{
+              paddingRight: isXsPhone ? 10 : "",
+              paddingLeft: isXsPhone ? 0 : "",
+            }}
+          >
             <DarkModeToggle
               onChange={setIsDarkMode}
               checked={isDarkMode}

@@ -20,10 +20,17 @@ import AdminLogin from "../../features/admin/AdminLogin";
 import PrivateRoute from "./PrivateRoute";
 import AdminDashboard from "../../features/admin/dashboard/AdminDashboard";
 import DeletionModal from "../common/modal/DeletionModal";
+import MenuBurger from "./MenuBurger";
+import { useMediaQuery } from "react-responsive";
 
 const App: React.FC<RouteComponentProps> = () => {
   const rootStore = useContext(RootStoreContext);
-  const { appLoading, isDarkMode, token, setOnInitColorMode } = rootStore.commonStore;
+  const {
+    appLoading,
+    isDarkMode,
+    token,
+    setOnInitColorMode,
+  } = rootStore.commonStore;
   const { loginAnonymousUser, getUser } = rootStore.userStore;
   const { setSearchablePosts } = rootStore.postStore;
 
@@ -35,7 +42,13 @@ const App: React.FC<RouteComponentProps> = () => {
     if (token) {
       getUser();
     }
-  }, [loginAnonymousUser, setSearchablePosts, token, getUser, setOnInitColorMode]);
+  }, [
+    loginAnonymousUser,
+    setSearchablePosts,
+    token,
+    getUser,
+    setOnInitColorMode,
+  ]);
 
   if (appLoading) {
     return <LoadingComponent inverted={isDarkMode} />;
@@ -44,6 +57,8 @@ const App: React.FC<RouteComponentProps> = () => {
   return (
     <Fragment>
       <DeletionModal />
+      <MenuBurger />
+
       <NavBar />
       <Segment
         style={{
@@ -55,6 +70,7 @@ const App: React.FC<RouteComponentProps> = () => {
           minHeight: "100vh",
         }}
         inverted={isDarkMode}
+        id="page-wrap"
       >
         <Switch>
           <Route exact path="/" component={PostDashboard} />

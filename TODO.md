@@ -146,8 +146,12 @@
 41. [x] Footer
 42. [x] Add post title in the index.tsx title
 43. [ ] PWA
-44. [ ] Responsiveness <----
-    1.  [ ] react-media
+44. [ ] Responsiveness - react-media <----
+    1.  [ ] Navbar
+    2.  [ ] Post
+    3.  [ ] Post Details
+    2.  [ ] About me
+    2.  [ ] Filters
 45. [ ] SEO
 46. [ ] Clean client app models (more models per file)
 47. [ ] Release

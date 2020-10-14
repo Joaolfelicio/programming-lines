@@ -28,3 +28,45 @@
     width: 300px;
     border-radius: 5px !important;
 }
+
+/* Table or bigger phones */
+@media only screen and (max-width: 835px) {
+  .search-box input {
+    width: 250px;
+  }
+
+  .ui.search>.results {
+    left: -50%;
+  }
+
+}
+
+@media only screen and (max-width: 560px) {
+  .search-box input {
+    width: 300px;
+  }
+}
+
+@media only screen and (max-width: 747px) {
+  .search-box input {
+    width: 300px;
+  }
+}
+
+/* xs phones */
+@media only screen and (max-width: 490px) {
+  .search-box input {
+    width: 200px;
+  }
+  
+  .ui.search-box.search.fluid .results {
+    width: 300px;
+  }
+}
+
+@media only screen and (max-width: 410px) {
+  
+  .ui.search-box.search.fluid .results {
+    width: 250px;
+  }
+}
