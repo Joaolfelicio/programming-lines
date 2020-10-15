@@ -20,13 +20,14 @@
   height: 165px !important;
 }
 
-@media only screen and (max-width: 646px) {
-  .post-list-image img {
+@media only screen and (max-width: 767px) {
+    .ui.items:not(.unstackable)>.item>.image.post-list-image>img {
       width: 100% !important;
       margin: 0 auto;
   }
 
   .post-list-image {
       width: 100% !important;
+      margin: 0 !important;
   }
 }

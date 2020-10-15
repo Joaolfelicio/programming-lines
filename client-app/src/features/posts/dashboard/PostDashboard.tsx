@@ -20,7 +20,7 @@ const PostDashboard = () => {
 
   const isSmallerPhone = useMediaQuery({ query: "(max-width: 646px)" });
   const isXsPhone = useMediaQuery({ query: "(max-width: 375px)" });
-  const isXsPhoneBigger = useMediaQuery({ query: "(min-width: 376px)" });
+  const isTablet = useMediaQuery({ query: "(min-width: 991px)" });
 
   const { isDarkMode } = rootStore.commonStore;
 
@@ -31,7 +31,7 @@ const PostDashboard = () => {
 
   return (
     <Grid
-      container={isXsPhoneBigger}
+      container={isTablet}
       style={{
         marginLeft: isXsPhone ? "0.5em !important" : "",
         marginRight: isXsPhone ? "0.5em !important" : "",
@@ -43,7 +43,7 @@ const PostDashboard = () => {
       >
         <PostFilters />
       </GridColumn>
-      <GridColumn width={isSmallerPhone ? 16 : 13}>
+      <GridColumn width={isSmallerPhone ? 16 : 13} >
         {loadingPosts ? (
           <Fragment>
             <PostListItemPlaceholder />
