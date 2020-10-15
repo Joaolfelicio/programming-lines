@@ -21,7 +21,6 @@ import PrivateRoute from "./PrivateRoute";
 import AdminDashboard from "../../features/admin/dashboard/AdminDashboard";
 import DeletionModal from "../common/modal/DeletionModal";
 import MenuBurger from "./MenuBurger";
-import { useMediaQuery } from "react-responsive";
 
 const App: React.FC<RouteComponentProps> = () => {
   const rootStore = useContext(RootStoreContext);

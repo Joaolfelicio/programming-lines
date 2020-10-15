@@ -1,3 +1,14 @@
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+*:not(input) {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -37,12 +48,6 @@ code {
   color: rgb(196, 197, 187) !important;
 }
 
-.post-list-image img {
-  /* width: 85% !important; */
-  margin-right: 20px !important;
-  height: 165px !important;
-}
-
 .post-buttons button {
   margin-bottom: 0 !important;
 }
@@ -58,7 +63,7 @@ code {
   width: 100% !important;
 }
 
-.ui.items>.item>.content {
+.ui.items > .item > .content {
   flex: initial !important;
 }
 
@@ -102,10 +107,10 @@ i.arrow.up {
 .back-top-button {
   color: #6a737d;
   border-radius: 10px !important;
-  border: 0px!important;
+  border: 0px !important;
   padding: 8px;
 }
 
 .back-top-button:hover {
-  border: 0px!important;
+  border: 0px !important;
 }

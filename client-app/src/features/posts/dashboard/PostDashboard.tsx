@@ -5,6 +5,7 @@ import { RootStoreContext } from "../../../app/stores/rootStore";
 import { observer } from "mobx-react-lite";
 import PostListItemPlaceholder from "./PostListItemPlaceholder";
 import PostFilters from "./PostFilters";
+import { useMediaQuery } from "react-responsive";
 
 const PostDashboard = () => {
   const rootStore = useContext(RootStoreContext);
@@ -14,10 +15,14 @@ const PostDashboard = () => {
     totalPages,
     setPage,
     setChangingPage,
-    page
+    page,
   } = rootStore.postStore;
 
-  const {isDarkMode} = rootStore.commonStore;
+  const isSmallerPhone = useMediaQuery({ query: "(max-width: 646px)" });
+  const isXsPhone = useMediaQuery({ query: "(max-width: 375px)" });
+  const isXsPhoneBigger = useMediaQuery({ query: "(min-width: 376px)" });
+
+  const { isDarkMode } = rootStore.commonStore;
 
   useEffect(() => {
     getPosts();
@@ -25,11 +30,20 @@ const PostDashboard = () => {
   document.title = "Programming Lines";
 
   return (
-    <Grid container>
-      <GridColumn style={{ position: "relative" }} width={3}>
+    <Grid
+      container={isXsPhoneBigger}
+      style={{
+        marginLeft: isXsPhone ? "0.5em !important" : "",
+        marginRight: isXsPhone ? "0.5em !important" : "",
+      }}
+    >
+      <GridColumn
+        style={{ position: "relative", display: isSmallerPhone ? "none" : "" }}
+        width={3}
+      >
         <PostFilters />
       </GridColumn>
-      <GridColumn width={13}>
+      <GridColumn width={isSmallerPhone ? 16 : 13}>
         {loadingPosts ? (
           <Fragment>
             <PostListItemPlaceholder />
@@ -43,13 +57,15 @@ const PostDashboard = () => {
         <Pagination
           floated="right"
           ellipsisItem={undefined}
-          lastItem={totalPages >= 4 ?  undefined : null}
-          firstItem={totalPages >= 4 ?  undefined : null}
+          lastItem={totalPages >= 4 ? undefined : null}
+          firstItem={totalPages >= 4 ? undefined : null}
           pointing
           secondary
           activePage={page + 1}
           totalPages={totalPages ? totalPages : 1}
-          className={isDarkMode ? "pagination pagination-darkMode" : "pagination"}
+          className={
+            isDarkMode ? "pagination pagination-darkMode" : "pagination"
+          }
           onPageChange={(e, { activePage }) => {
             setChangingPage(true);
             setPage((activePage! as number) - 1);
@@ -57,7 +73,7 @@ const PostDashboard = () => {
             setChangingPage(false);
             window.scrollTo(0, 0);
           }}
-          style={{ marginTop: 35, color: isDarkMode ? "#DFDFDF" : "#121212"}}
+          style={{ marginTop: 35, color: isDarkMode ? "#DFDFDF" : "#121212" }}
         />
       </GridColumn>
     </Grid>

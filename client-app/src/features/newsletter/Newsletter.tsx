@@ -13,6 +13,7 @@ import { RootStoreContext } from "../../app/stores/rootStore";
 import { observer } from "mobx-react-lite";
 import { FORM_ERROR } from "final-form";
 import ErrorMessage from "../../app/common/form/ErrorMessage";
+import { useMediaQuery } from "react-responsive";
 
 const isValidEmail = createValidator(
   (message) => (value) => {
@@ -39,24 +40,30 @@ const Newsletter = () => {
   const { isDarkMode } = rootStore.commonStore;
   const { subscribeNewsletter } = rootStore.newsletterStore;
 
+  const isXsPhone = useMediaQuery({ query: "(max-width: 415px)" });
+
   return (
     <Segment
       inverted={isDarkMode}
       raised
       clearing
       style={{
-        width: "45%",
+        width: isXsPhone ? "98%" : "45%",
         maxWidth: 500,
-        minWidth: 420,
+        minWidth: isXsPhone ? 0 : 420,
         margin: "80px auto 10px auto",
         padding: 25,
-        border: isDarkMode ? "1px solid rgb(64,64,64)" : ""
+        border: isDarkMode ? "1px solid rgb(64,64,64)" : "",
       }}
     >
       <Header
         as="h4"
         content="Subscribe to the Newsletter"
-        style={{ textAlign: "center", marginBottom: 25, color: isDarkMode ? "#DFDFDF" : "#121212" }}
+        style={{
+          textAlign: "center",
+          marginBottom: 25,
+          color: isDarkMode ? "#DFDFDF" : "#121212",
+        }}
       />
 
       <FinalForm
@@ -90,8 +97,8 @@ const Newsletter = () => {
 
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <p style={{ width: "70%" }}>
-                <strong>No spam!</strong> Will never share your email address
-                and you can opt out at any time.
+                <strong>No spam!</strong> Will never share your email address.
+                <br /> You can opt out at any time.
               </p>
               <Button
                 loading={submitting}

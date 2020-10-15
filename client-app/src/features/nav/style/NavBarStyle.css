@@ -56,7 +56,7 @@
 /* xs phones */
 @media only screen and (max-width: 490px) {
   .search-box input {
-    width: 200px;
+    width: 180px;
   }
   
   .ui.search-box.search.fluid .results {

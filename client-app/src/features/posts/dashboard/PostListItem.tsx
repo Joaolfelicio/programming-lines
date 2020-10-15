@@ -13,6 +13,7 @@ import {
   externalUrl,
   twitterShareUrl,
 } from "../../../app/common/util/util";
+import { useMediaQuery } from "react-responsive";
 
 interface IProps {
   post: IPost;
@@ -24,8 +25,10 @@ const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
   const { reactionLoading, reactToPost, setPredicate } = rootStore.postStore;
   const { setActiveFilter, isDarkMode } = rootStore.commonStore;
 
+  const isTablet = useMediaQuery({ query: "(max-width: 766px)" });
+
   return (
-    <Item style={{ height: 165 }}>
+    <Item style={{ height: isTablet ? "" : "165 !important" }}>
       <Item.Image
         className="post-list-image"
         as={Link}
@@ -68,14 +71,23 @@ const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
                 />
               </div>
             </div>
-            <div>
+            <div style={{ marginTop: 5 }}>
               <time
                 style={{
-                  fontSize: "11px",
+                  fontSize: "13px",
                   color: isDarkMode ? "#DFDFDF" : "",
                 }}
               >
                 {moment(post.publishDate).format("MMM Do YYYY")}
+                <br />
+                <span
+                  style={{
+                    color: isDarkMode ? "#DFDFDF" : "#121212",
+                    fontStyle: "italic",
+                  }}
+                >
+                  {post.timeToRead}
+                </span>
               </time>
             </div>
           </Item.Header>
@@ -97,8 +109,7 @@ const PostListItem: React.FC<IProps> = ({ post, reactionTarget }) => {
               reactToPost(post.slug, post.id);
             }}
           />
-          <span style={{color: isDarkMode ? "#DFDFDF" : "#121212", fontStyle: "italic"}}>{post.timeToRead}</span>
-          
+
           <Popup
             style={{ transitionDuration: "0s", opactivity: "0.8" }}
             wide
