@@ -41,6 +41,7 @@ const Newsletter = () => {
   const { subscribeNewsletter } = rootStore.newsletterStore;
 
   const isXsPhone = useMediaQuery({ query: "(max-width: 415px)" });
+  const isXxsPhone = useMediaQuery({ query: "(max-width: 360px)" });
 
   return (
     <Segment
@@ -48,11 +49,11 @@ const Newsletter = () => {
       raised
       clearing
       style={{
-        width: isXsPhone ? "98%" : "45%",
+        width: isXsPhone ? "100%" : "45%",
         maxWidth: 500,
         minWidth: isXsPhone ? 0 : 420,
         margin: "80px auto 10px auto",
-        padding: 25,
+        padding: isXxsPhone? 15 : 25,
         border: isDarkMode ? "1px solid rgb(64,64,64)" : "",
       }}
     >
