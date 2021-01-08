@@ -23,7 +23,7 @@
     "@types/react-syntax-highlighter": "^11.0.4",
     "@types/react-toastify": "^4.1.0",
     "@types/revalidate": "^1.1.2",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "dateformat": "^3.0.3",
     "final-form": "^4.19.1",
     "fingerprintjs2": "^2.1.0",
