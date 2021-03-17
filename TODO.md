@@ -153,20 +153,21 @@
     2.  [ ] About me
     2.  [ ] Filters
 45. [ ] Change db from posgresql to mongodb
-46. [ ] Create repository pattern
-47. [ ] SEO
-48. [ ] Clean client app models (more models per file)
-49. [ ] Release
+46. [ ] Use Azure blob storage instead of cloudinary
+47. [ ] Create repository pattern
+48. [ ] SEO
+49. [ ] Clean client app models (more models per file)
+50. [ ] Release
     1.  [ ] Cloudinary Secrets
 	2.  [ ] Deployment Heroku
-50. [ ] Performance
+51. [ ] Performance
 	1.  [ ] Remove inline styling
 	2.  [ ] Split css file in smaller chuncks
-51. [ ] BUGS:
+52. [ ] BUGS:
     1.  [x] If filter by category, and said category has no posts, it will forever load
     2.  [ ] Not fetching categories data in the dropdown when you directly into the admin page
 	3.  [ ] Category icon in the recommend post is kinda out of the frame (Might be the image that is cropped)
-52. [ ] FUTURE RELEASES:
+53. [ ] FUTURE RELEASES:
     1.  [x] Edit post with dropzone
     2.  [ ] Edit post even if the image doesn't change, it will reupload it
     3.  [ ] Edit post if you just change the image and/or category, it won't allow to submit
